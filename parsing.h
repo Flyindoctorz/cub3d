@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/19 14:25:04 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/19 15:35:03 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,12 @@ typedef struct s_map
 	int		width;
 	int		height;
 }	t_map;
+
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	direction;
+}	t_player;
 
 #endif
