@@ -6,7 +6,7 @@
 /*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:13 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/19 17:25:24 by safuente         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:19:34 by safuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,26 @@
 # define SUCCESS 0
 # define ERROR 1
 
+# define WIDTH 360
+# define HEIGHT 480
+
 # include "../minilibx/mlx.h"
 # include <X11/keysym.h>
 
+
+typedef struct s_player
+{
+	int	x;
+	int	y;
+	int	fov;
+}				t_player;
+
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*mlx_window;
+	t_player	*player;
+	void		*mlx;
+	void		*mlx_window;
+	void		*mlx_map;
 }				t_mlx;
 
 /* event handling*/

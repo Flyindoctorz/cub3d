@@ -6,7 +6,7 @@
 /*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:23:50 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/19 17:23:58 by safuente         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:42:41 by safuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,15 @@ int	check_input(int keycode, t_mlx	*data)
 {
 	if (keycode == XK_Escape)
 		close_window(data);
+	else if (keycode == XK_Right)
+		data->player->x += 1;
+	else if (keycode == XK_Left)
+		data->player->x -= 1;
+	else if (keycode == XK_Up)
+		data->player->y -= 1;
+	else if (keycode == XK_Down)
+		data->player->y += 1;
+
+	printf("x = %d, y = %d\n", data->player->x, data->player->y);
 	return (SUCCESS);
 }
