@@ -6,7 +6,7 @@
 /*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:13 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/19 18:19:34 by safuente         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:50:51 by safuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	fov;
+	double	x;
+	double	y;
+	int		fov;
 }				t_player;
 
 typedef struct s_mlx
