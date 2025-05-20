@@ -1,10 +1,18 @@
-sources = src/main.c src/event_handler.c
+sources = src/main.c src/event_handler.c src/draw.c
 
 objects = $(sources:.c=.o)
 
-libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz -lm -lz
+# linux compile
 
-includes = -Iminilibx -I/usr/include
+# libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
+
+# includes = -Iminilibx -I/usr/include -I/opt/X11/include
+
+# macos compile
+
+libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
+
+includes = -Iminilibx -I/opt/X11/include
 
 cc = cc
 

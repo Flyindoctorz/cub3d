@@ -13,25 +13,28 @@
 #include "../include/raycasting.h"
 #include "../parsing.h"
 
-int	close_window(t_mlx	*data)
+int	close_window(t_mlx *data)
 {
 	(void)data;
 	exit(SUCCESS);
 }
 
-int	check_input(int keycode, t_mlx	*data)
+int	check_input(int keycode, t_data *data)
 {
-	if (keycode == XK_Escape)
-		close_window(data);
-	else if (keycode == XK_Right)
-		data->player->x += 1;
-	else if (keycode == XK_Left)
-		data->player->x -= 1;
-	else if (keycode == XK_Up)
-		data->player->y -= 1;
-	else if (keycode == XK_Down)
-		data->player->y += 1;
-
-	printf("x = %d, y = %d\n", data->player->x, data->player->y);
+	if (keycode == KEY_ESC)
+		close_window(&data->mlx);
+	else if (keycode == KEY_D)
+		data->player.x += 1;
+	else if (keycode == KEY_A)
+		data->player.x -= 1;
+	else if (keycode == KEY_W)
+		data->player.y -= 1;
+	else if (keycode == KEY_S)
+		data->player.y += 1;
+	else if (keycode == KEY_RIGHT)
+		data->player.angle += 1;
+	else if (keycode == KEY_LEFT)
+		data->player.angle -= 1;
+	// printf("x = %f, y = %f\n", data->player.x, data->player.y);
 	return (SUCCESS);
 }

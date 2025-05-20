@@ -13,67 +13,42 @@
 #include "../include/raycasting.h"
 #include "../parsing.h"
 
-void	find_pos(char map[5][5], t_player *player)
+int	initialize(t_data *data)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < 6)
-	{
-		x = 0;
-		while (x < 6)
-		{
-			if (map[y][x] == 'N' || map[y][x] == 'S'
-				|| map[y][x] == 'E' || map[y][x] == 'O')
-			{
-				printf("%d %d\n", x, y);
-				player->x = x;
-				player->y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-int	initialize(t_mlx *data, t_player *player, char map[5][5])
-{
-	find_pos(map, player);
-	player->fov = 70;
-	data->mlx = mlx_init();
-	if (!data->mlx)
+	data->player.x = 1;
+	data->player.y = 1;
+	data->player.angle = 0;
+	data->player.fov = 70;
+	data->mlx.mlx_ptr = mlx_init();
+	if (!data->mlx.mlx_ptr)
 		return (ERROR);
-	data->mlx_window = mlx_new_window(data->mlx, WIDTH, HEIGHT, "cub3d");
-	if (!data->mlx_window)
+	data->mlx.mlx_window = mlx_new_window(data->mlx.mlx_ptr, WIDTH, HEIGHT,
+			"cub3d");
+	if (!data->mlx.mlx_window)
 		return (ERROR);
-	data->player = player;
+	draw_block(&data->block_img, &data->mlx, BLOCK);
+	draw_block(&data->player_img, &data->mlx, BLOCK/4);
 	return (SUCCESS);
 }
 
 int	main(int ac, char **av)
 {
-	t_mlx		data;
-	t_player	player;
+	t_data	data;
 
 	char map[5][5] = {
 		{'1','1','1','1','1'},
-		{'1','S','0','0','1'},
 		{'1','0','0','0','1'},
+		{'1','0','N','0','1'},
 		{'1','0','0','0','1'},
 		{'1','1','1','1','1'}
 	};
-
-	/*map check*/
-	if (initialize(&data, &player, map) == ERROR)
+	if (initialize(&data) == ERROR)
 		return (ERROR);
+	draw_map(map, &data.block_img, &data.player_img, &data.mlx);
 	(void)ac;
 	(void)av;
-
-	mlx_key_hook(data.mlx_window, check_input, &data);
-	mlx_hook(data.mlx_window, 17, 1L << 3, close_window, &data);
-	mlx_loop(data.mlx);
-
+	mlx_key_hook(data.mlx.mlx_window, check_input, &data);
+	mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);
+	mlx_loop(data.mlx.mlx_ptr);
 	return (SUCCESS);
 }
