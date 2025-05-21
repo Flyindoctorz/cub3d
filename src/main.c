@@ -15,8 +15,8 @@
 
 int	initialize(t_data *data)
 {
-	data->player.x = 1;
-	data->player.y = 1;
+	data->player.px = 1;
+	data->player.py = 1;
 	data->player.angle = 0;
 	data->player.fov = 70;
 	data->mlx.mlx_ptr = mlx_init();
@@ -28,6 +28,7 @@ int	initialize(t_data *data)
 		return (ERROR);
 	draw_block(&data->block_img, &data->mlx, BLOCK);
 	draw_block(&data->player_img, &data->mlx, BLOCK/4);
+	draw_line(&data->line_img, BLOCK, &data->player, data);
 	return (SUCCESS);
 }
 
@@ -42,9 +43,15 @@ int	main(int ac, char **av)
 		{'1','0','0','0','1'},
 		{'1','1','1','1','1'}
 	};
+	data.map = malloc(sizeof(char *) * 5);
+	for (int i = 0; i < 5; i++)
+		data.map[i] = malloc(sizeof(char) * 5);
+	for (int i = 0; i < 5; i++)
+		for (int j = 0; j < 5; j++)
+			data.map[i][j] = map[i][j];
 	if (initialize(&data) == ERROR)
 		return (ERROR);
-	draw_map(map, &data.block_img, &data.player_img, &data.mlx);
+	draw_map(data.map, &data, &data.mlx);
 	(void)ac;
 	(void)av;
 	mlx_key_hook(data.mlx.mlx_window, check_input, &data);

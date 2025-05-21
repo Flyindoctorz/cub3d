@@ -29,13 +29,16 @@
 # define KEY_ESC 53
 
 # include "../minilibx/mlx.h"
+# include "math.h"
+# include <string.h>
+
 // # include <X11/keysym.h>
 
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	double	px;
+	double	py;
 	double	angle;
 	int		fov;
 }				t_player;
@@ -59,6 +62,8 @@ typedef struct s_data {
 	t_mlx		mlx;
 	t_image		block_img;
 	t_image		player_img;
+	t_image		line_img;
+	char		**map;
 }				t_data;
 
 /* event handling*/
@@ -68,8 +73,9 @@ int	check_input(int keycode, t_data	*data);
 
 /* drawing */
 
-void	mlx_pixel_put_v2(t_image *image, int x, int y, int color);
+void	mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void	draw_block(t_image *image, t_mlx *mlx, int size);
-void	draw_map(char map[5][5], t_image *block, t_image *player, t_mlx *mlx);
+void	draw_map(char **map, t_data *data, t_mlx *mlx);
+void	draw_line(t_image *image, int size, t_player *player, t_data *data);
 
 #endif
