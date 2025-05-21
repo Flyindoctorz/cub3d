@@ -1,36 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   color_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/21 11:48:43 by cgelgon          ###   ########.fr       */
+/*   Created: 2025/05/21 12:39:29 by cgelgon           #+#    #+#             */
+/*   Updated: 2025/05/21 12:43:05 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-//#include "cub3d.h"
-#include "stdbool.h"
-#include <stdlib.h>
-#include <stdio.h>
-
-// stucture
-typedef struct s_map
-{
-	char	**map;
-	int		width;
-	int		height;
-}	t_map;
-
-// typedef struct s_player
-// {
-// 	int		x;
-// 	int		y;
-// 	char	direction;
-// }	t_player;
-
-#endif
+bool is_colored_line

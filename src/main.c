@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/19 18:50:55 by safuente         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:50:31 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	initialize(t_data *data)
 
 int	main(int ac, char **av)
 {
+	// securiser le cas ou il n'y a pas d'argument
+	// securiser le cas ou il y a trop d'argument
+	// securiser le cas ou on retire l'environnement de force (env -i ou unset)
+	// check if the file is a .cub
+	// check if the file is a valid map
 	t_data	data;
 
 	char map[5][5] = {
