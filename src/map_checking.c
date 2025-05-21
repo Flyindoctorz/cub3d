@@ -12,11 +12,11 @@
 
 #include "parsing.h"
 
-// copy la map pour la flood fill 
-char **copy_map(char **map)
+// copy la map pour la flood fill
+char	**copy_map(char **map)
 {
-	int i;
-	char **map_copy;
+	int		i;
+	char	**map_copy;
 
 	i = 0;
 	while (map[i])
@@ -41,12 +41,12 @@ char **copy_map(char **map)
 	return (map_copy);
 }
 // free la map_copy
-void free_copy(char **map_copy)
+void	free_copy(char **map_copy)
 {
-	int i;
+	int	i;
 
 	if (!map_copy)
-		return;
+		return ;
 	i = 0;
 	while (map_copy[i])
 	{
@@ -56,10 +56,10 @@ void free_copy(char **map_copy)
 	free(map_copy);
 }
 // check si le joueur est dans la map
-bool where_player_at(char **map, int *p_x, int *p_y)
+bool	where_player_at(char **map, int *p_x, int *p_y)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])
@@ -67,8 +67,8 @@ bool where_player_at(char **map, int *p_x, int *p_y)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' ||
-				map[i][j] == 'E' || map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
 			{
 				*p_x = j;
 				*p_y = i;
@@ -81,14 +81,14 @@ bool where_player_at(char **map, int *p_x, int *p_y)
 	return (false);
 }
 
-void flood_fill(char **map, int x, int y, int *valid)
+void	flood_fill(char **map, int x, int y, int *valid)
 {
 	if (map[y][x] == '1' || map[y][x] == '2')
-		return;
-	if (map[y][x] == ' ' || x == 0 || y == 0 || !map[y+1] ||!map[y][x+1])
+		return ;
+	if (map[y][x] == ' ' || x == 0 || y == 0 || !map[y + 1] || !map[y][x + 1])
 	{
 		*valid = 0;
-		return;
+		return ;
 	}
 	map[y][x] = '2';
 	flood_fill(map, x + 1, y, valid);
@@ -97,13 +97,13 @@ void flood_fill(char **map, int x, int y, int *valid)
 	flood_fill(map, x, y - 1, valid);
 }
 
-bool check_map(char **map)
+bool	check_map(char **map)
 {
-	int **map_copy;
-	int p_x;
-	int p_y;
-	int valid;
-	bool res;
+	int		**map_copy;
+	int		p_x;
+	int		p_y;
+	int		valid;
+	bool	res;
 
 	map_copy = copy_map(map);
 	if (!map_copy)

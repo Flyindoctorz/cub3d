@@ -1,45 +1,56 @@
-// texture definition
+# texture definition
 NO ./ /*path to NO.texture*/
 SO ./ /*path to SO.texture*/
 WE ./ /*path to We.texture*/
 EA ./ /*path to EA.texture*/
 
-//  colour in rgb format 0-255 
-// (ive reversed floor and ceiling purposefully
-// as it could be funny to build a reverse world ?)
-F 135, 206, 235 // floor, blue sky
-C 100, 60, 30 // ceiling, brown walnut wood
+# colour in rgb format 0-255 
+# (ive reversed floor and ceiling purposefully
+# as it could be funny to build a reverse world ?)
 
-// MAPS INVALIDS FOR TESTING
+#  floor, blue sky
+F 135,206,235
+# ceiling, brown walnut wood
+C 100,60,30
+
+# MAPS INVALIDS FOR TESTING
+
+# Unclosed map
 
 # 111111
 # 100001
 # 1000N1
-# 10001     // not closed map 
+# 10001     
 # 11111
-# 
 
+# No player (N, S, E or W)
 
 # 111111
 # 100001
-# 100001    // No player (N, S, E or W)
+# 100001
 # 100001
 # 111111
+
+# X aint valid char
 
 # 111111
 # 1S0001
-# 10X001    // Le caractère 'X' n'est pas valide
+# 10X001
 # 100001
 # 111111
 
-// VALID MAPS
+# VALID MAPS
+
+# Kanye West side player start
 
 # 111111111
 # 100000001
 # 100000001
-# 10000N001    // Joueur orienté vers le Nord
+# 10000W001
 # 100000001
 # 111111111
+
+# Eazy-East side player start
 
 # 11111111111111111111111111111111
 # 10000000000000000000000000000001
@@ -68,7 +79,7 @@ C 100, 60, 30 // ceiling, brown walnut wood
 # 10000000000000000000000001000000001
 # 10000000000000000000000001000000001
 # 10000000000000000000000001000000001
-# 10000000000000000E00000001000000001  // Joueur orienté vers l'Est
+# 10000000000000000E00000001000000001
 # 10000000000000000000000001000000001
 # 10000000000000000000000001000000001
 # 10000000000000000000000000000000001

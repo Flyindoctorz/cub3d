@@ -27,26 +27,22 @@ int	initialize(t_data *data)
 	if (!data->mlx.mlx_window)
 		return (ERROR);
 	draw_block(&data->block_img, &data->mlx, BLOCK);
-	draw_block(&data->player_img, &data->mlx, BLOCK/4);
+	draw_block(&data->player_img, &data->mlx, BLOCK / 4);
 	return (SUCCESS);
 }
 
 int	main(int ac, char **av)
 {
+	t_data	data;
+	char	map[5][5] = {{'1', '1', '1', '1', '1'}, {'1', '0', '0', '0', '1'},
+			{'1', '0', 'N', '0', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
+			'1', '1', '1'}};
+
 	// securiser le cas ou il n'y a pas d'argument
 	// securiser le cas ou il y a trop d'argument
 	// securiser le cas ou on retire l'environnement de force (env -i ou unset)
 	// check if the file is a .cub
 	// check if the file is a valid map
-	t_data	data;
-
-	char map[5][5] = {
-		{'1','1','1','1','1'},
-		{'1','0','0','0','1'},
-		{'1','0','N','0','1'},
-		{'1','0','0','0','1'},
-		{'1','1','1','1','1'}
-	};
 	if (initialize(&data) == ERROR)
 		return (ERROR);
 	draw_map(map, &data.block_img, &data.player_img, &data.mlx);

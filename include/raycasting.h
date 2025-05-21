@@ -31,13 +31,12 @@
 # include "../minilibx/mlx.h"
 // # include <X11/keysym.h>
 
-
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	angle;
-	int		fov;
+	double		x;
+	double		y;
+	double		angle;
+	int			fov;
 }				t_player;
 
 typedef struct s_mlx
@@ -46,15 +45,17 @@ typedef struct s_mlx
 	void		*mlx_window;
 }				t_mlx;
 
-typedef struct s_image {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+typedef struct s_image
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }				t_image;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	t_player	player;
 	t_mlx		mlx;
 	t_image		block_img;
@@ -63,13 +64,14 @@ typedef struct s_data {
 
 /* event handling*/
 
-int	close_window(t_mlx	*data);
-int	check_input(int keycode, t_data	*data);
+int				close_window(t_mlx *data);
+int				check_input(int keycode, t_data *data);
 
 /* drawing */
 
-void	mlx_pixel_put_v2(t_image *image, int x, int y, int color);
-void	draw_block(t_image *image, t_mlx *mlx, int size);
-void	draw_map(char map[5][5], t_image *block, t_image *player, t_mlx *mlx);
+void			mlx_pixel_put_v2(t_image *image, int x, int y, int color);
+void			draw_block(t_image *image, t_mlx *mlx, int size);
+void			draw_map(char map[5][5], t_image *block, t_image *player,
+					t_mlx *mlx);
 
 #endif

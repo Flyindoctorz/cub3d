@@ -15,10 +15,20 @@ libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
 includes = -Iminilibx -I/opt/X11/include
 
 cc = cc
-
 cflags = -Wall -Wextra -Werror
-
 NAME = cub3D
+
+# Variables pour les maps
+MAP_SRC = maptype.cub
+MAP_NUM ?= 4  # Map par défaut (Kanye West)
+MAP_DEST = current_map.cub
+
+# Colors
+RED = \033[0;31m
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+BLUE = \033[0;34m
+RESET = \033[0m
 
 $(NAME): build_mlx $(objects)
 	$(cc) $(cflags) $(objects) $(libs) -o $(NAME)
@@ -28,19 +38,14 @@ all: $(NAME)
 %.o: %.c
 	$(cc) $(cflags) $(includes) -c $< -o $@
 
-# clean:
-# 	rm -f ${objects}
+	@echo "$(BLUE)Preprocessing map $(MAP_NUM)...$(RESET)"
+	@chmod +x uncommenting_script.sh
+	@./uncommenting_script.sh $(MAP_SRC) $(MAP_NUM) $(MAP_DEST)
+	@echo "$(GREEN)✨ Map $(MAP_NUM) activated!$(RESET)"
 
-# fclean: clean
-# 	rm -f $(NAME)
-# 	$(MAKE) -C minilibx/ clean
-
-# re: fclean all
-
-# build_mlx:
-# 	$(MAKE) -C minilibx/
-
-# .PHONY: all clean re fclean build_mlx
+run: all preprocess
+	@echo "$(BLUE)Running with map $(MAP_NUM)...$(RESET)"
+	./$(NAME) $(MAP_DEST)
 
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"
@@ -50,17 +55,18 @@ clean:
 fclean: clean
 	@echo "$(RED)Removing $(NAME)...$(RESET)"
 	@rm -f $(NAME)
+	@rm -f $(MAP_DEST)
 	@$(MAKE) -C minilibx/ clean
 	@echo "$(GREEN)✨ Everything cleaned!$(RESET)"
 
 re: fclean all
 
-leak: all
-	@echo "$(BLUE)Running valgrind leak check...$(RESET)"
+leak: all preprocess
+	@echo "$(BLUE)Running valgrind leak check with map $(MAP_NUM)...$(RESET)"
 	@valgrind --leak-check=full --show-reachable=no \
-		--errors-for-leak-kinds=definite \
-		--suppressions=ignore.supp \
-		--track-fds=yes --trace-children=yes ./$(NAME)
+	--errors-for-leak-kinds=definite \
+	--suppressions=ignore.supp \
+	--track-fds=yes --trace-children=yes ./$(NAME) $(MAP_DEST)
 
 norm:
 	@echo "$(BLUE)Running norminette check...$(RESET)"
@@ -78,7 +84,7 @@ push:
 	git push; \
 	echo "$(YELLOW)All has been pushed with '$$commit_message' in commit$(END)"
 
-debug:
+debug: preprocess
 	@echo "$(BLUE)Running lldb...$(RESET)"
 	@lldb ./$(NAME)
 
