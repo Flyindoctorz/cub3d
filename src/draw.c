@@ -12,8 +12,8 @@
 
 #include "../include/raycasting.h"
 #include "../parsing.h"
-#include <math.h>
-
+#include <stdio.h>
+#include <unistd.h>
 void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
 {
 		char	*dst;
@@ -22,40 +22,48 @@ void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
 		*(unsigned int*)dst = color;
 }
 
-void	draw_line(t_image *image, int size, t_player *player, t_data *data)
+void	draw_line(t_image *image, t_player *player, t_data *data)
 {
-	double	end_x;
-	double	end_y;
 	double	tmp_x;
 	double	tmp_y;
 	double	inc_x;
 	double	inc_y;
-	double	steps;
-	double	dx;
-	double	dy;
+	double	max_distance;
+	double	traveled;
+	double	step_size;
+	int		grid_x;
+	int		grid_y;
 
-	end_x = (player->px * BLOCK + BLOCK / 2.0) + cos(player->angle) * size;
-	end_y = (player->py * BLOCK + BLOCK / 2.0) + sin(player->angle) * size;
-	dx = end_x - (player->px * BLOCK + BLOCK / 2.0);
-	dy = end_y - (player->py * BLOCK + BLOCK / 2.0);
-	steps = fmax(fabs(dx), fabs(dy));
-	inc_x = dx / steps;
-	inc_y = dy / steps;
 	tmp_x = player->px * BLOCK + BLOCK / 2.0;
 	tmp_y = player->py * BLOCK + BLOCK / 2.0;
+
+	inc_x = cos(player->angle);
+	inc_y = sin(player->angle);
 
 	image->img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
 	image->addr = mlx_get_data_addr(image->img,
 		&image->bits_per_pixel, &image->line_length,
 		&image->endian);
 
-	for (int i = 0; i <= steps; i++)
+	max_distance = 1000.0;
+	traveled = 0.0;
+	step_size = 1.0;
+
+	while (traveled < max_distance)
 	{
-		mlx_pixel_put_v2(image, roundf(tmp_x), roundf(tmp_y), 0x0000FF00);
-		tmp_x += inc_x;
-		tmp_y += inc_y;
+		grid_x = (int)(tmp_x / BLOCK);
+		grid_y = (int)(tmp_y / BLOCK);
+		if (grid_y < 0 || grid_x < 0 || grid_y >= 5 || grid_x >= 5)
+			break;
+		if (data->map[grid_y][grid_x] == '1')
+			break;
+		mlx_pixel_put_v2(image, (int)tmp_x, (int)tmp_y, 0x0000FF00);
+		tmp_x += inc_x * step_size;
+		tmp_y += inc_y * step_size;
+		traveled += step_size;
 	}
 }
+
 
 void	draw_block(t_image *image, t_mlx *mlx, int size)
 {

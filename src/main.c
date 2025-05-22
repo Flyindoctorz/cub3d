@@ -34,7 +34,7 @@ int	initialize(t_data *data)
 	data->keys.right = 0;
 	draw_block(&data->block_img, &data->mlx, BLOCK);
 	draw_block(&data->player_img, &data->mlx, BLOCK/4);
-	draw_line(&data->line_img, BLOCK, &data->player, data);
+	draw_line(&data->line_img, &data->player, data);
 	return (SUCCESS);
 }
 
@@ -45,17 +45,17 @@ int	main(int ac, char **av)
 	char map[5][5] = {
 		{'1','1','1','1','1'},
 		{'1','0','0','0','1'},
-		{'1','0','N','0','1'},
-		{'1','0','0','0','1'},
+		{'1','0','1','0','1'},
+		{'1','0','0','1','1'},
 		{'1','1','1','1','1'}
 	};
-	data.map = malloc(sizeof(char *) * 5);
+	data.map = malloc(sizeof(char *) * 6);
+	data.map[5] = NULL;
 	for (int i = 0; i < 5; i++)
 		data.map[i] = malloc(sizeof(char) * 5);
 	for (int i = 0; i < 5; i++)
 		for (int j = 0; j < 5; j++)
 			data.map[i][j] = map[i][j];
-
 	if (initialize(&data) == ERROR)
 		return (ERROR);
 	draw_map(data.map, &data, &data.mlx);

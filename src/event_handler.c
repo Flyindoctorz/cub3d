@@ -77,7 +77,7 @@ int	update_state(t_data *data)
 
 	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
 	mlx_destroy_image(data->mlx.mlx_ptr, data->line_img.img);
-	draw_line(&data->line_img, BLOCK, &data->player, data);
+	draw_line(&data->line_img, &data->player, data);
 	draw_map(data->map, data, &data->mlx);
 	return (SUCCESS);
 }

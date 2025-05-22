@@ -88,6 +88,6 @@ int	update_state(t_data *data);
 void	mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void	draw_block(t_image *image, t_mlx *mlx, int size);
 void	draw_map(char **map, t_data *data, t_mlx *mlx);
-void	draw_line(t_image *image, int size, t_player *player, t_data *data);
+void	draw_line(t_image *image, t_player *player, t_data *data);
 
 #endif
