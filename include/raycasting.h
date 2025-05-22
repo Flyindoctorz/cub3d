@@ -34,6 +34,15 @@
 
 // # include <X11/keysym.h>
 
+typedef	struct	s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+}				t_keys;
 
 typedef struct s_player
 {
@@ -63,13 +72,16 @@ typedef struct s_data {
 	t_image		block_img;
 	t_image		player_img;
 	t_image		line_img;
+	t_keys		keys;
 	char		**map;
 }				t_data;
 
 /* event handling*/
 
-int	close_window(t_mlx	*data);
-int	check_input(int keycode, t_data	*data);
+int	close_window(t_mlx *data);
+int	key_down(int keycode, t_data *data);
+int	key_up(int keycode, t_data *data);
+int	update_state(t_data *data);
 
 /* drawing */
 

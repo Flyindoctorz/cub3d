@@ -19,21 +19,55 @@ int	close_window(t_mlx *data)
 	exit(SUCCESS);
 }
 
-int	check_input(int keycode, t_data *data)
+int	key_down(int keycode, t_data *data)
 {
-	if (keycode == KEY_ESC)
-		close_window(&data->mlx);
-	else if (keycode == KEY_D)
-		data->player.px += 1;
+	if (keycode == KEY_D)
+		data->keys.d = 1;
 	else if (keycode == KEY_A)
-		data->player.px -= 1;
+		data->keys.a = 1;
 	else if (keycode == KEY_W)
-		data->player.py -= 1;
+		data->keys.w = 1;
 	else if (keycode == KEY_S)
-		data->player.py += 1;
+		data->keys.s = 1;
 	else if (keycode == KEY_RIGHT)
-		data->player.angle += M_PI / 180.0;
+		data->keys.right = 1;
 	else if (keycode == KEY_LEFT)
+		data->keys.left = 1;
+	else if (keycode == KEY_ESC)
+		close_window(&data->mlx);
+	return (SUCCESS);
+}
+
+int	key_up(int keycode, t_data *data)
+{
+	if (keycode == KEY_D)
+		data->keys.d = 0;
+	else if (keycode == KEY_A)
+		data->keys.a = 0;
+	else if (keycode == KEY_W)
+		data->keys.w = 0;
+	else if (keycode == KEY_S)
+		data->keys.s = 0;
+	else if (keycode == KEY_RIGHT)
+		data->keys.right = 0;
+	else if (keycode == KEY_LEFT)
+		data->keys.left = 0;
+	return (SUCCESS);
+}
+
+int	update_state(t_data *data)
+{
+	if (data->keys.a == 1)
+		data->player.px -= 0.1;
+	if (data->keys.d == 1)
+		data->player.px += 0.1;
+	if (data->keys.w == 1)
+		data->player.py -= 0.1;
+	if (data->keys.s == 1)
+		data->player.py += 0.1;
+	if (data->keys.right == 1)
+		data->player.angle += M_PI / 180.0;
+	if (data->keys.left == 1)
 		data->player.angle -= M_PI / 180.0;
 
 	if (data->player.angle < 0)
@@ -41,7 +75,6 @@ int	check_input(int keycode, t_data *data)
 	else if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
 
-	// printf("%f\n",data->player.angle);
 	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
 	mlx_destroy_image(data->mlx.mlx_ptr, data->line_img.img);
 	draw_line(&data->line_img, BLOCK, &data->player, data);

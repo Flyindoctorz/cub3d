@@ -33,15 +33,16 @@ void	draw_line(t_image *image, int size, t_player *player, t_data *data)
 	double	steps;
 	double	dx;
 	double	dy;
-	end_x = (player->px * BLOCK) + cos(player->angle) * size;
-	end_y = (player->py * BLOCK) + sin(player->angle) * size;
-	dx = end_x - (player->px * BLOCK);
-	dy = end_y - (player->py * BLOCK);
+
+	end_x = (player->px * BLOCK + BLOCK / 2.0) + cos(player->angle) * size;
+	end_y = (player->py * BLOCK + BLOCK / 2.0) + sin(player->angle) * size;
+	dx = end_x - (player->px * BLOCK + BLOCK / 2.0);
+	dy = end_y - (player->py * BLOCK + BLOCK / 2.0);
 	steps = fmax(fabs(dx), fabs(dy));
 	inc_x = dx / steps;
 	inc_y = dy / steps;
-	tmp_x = player->px * BLOCK;
-	tmp_y = player->py * BLOCK;
+	tmp_x = player->px * BLOCK + BLOCK / 2.0;
+	tmp_y = player->py * BLOCK + BLOCK / 2.0;
 
 	image->img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
 	image->addr = mlx_get_data_addr(image->img,
@@ -79,8 +80,14 @@ void	draw_map(char **map, t_data *data, t_mlx *mlx)
 {
 	int	x;
 	int	y;
+	int draw_x;
+	int	draw_y;
 
 	y = 0;
+	draw_y = data->player.py * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
+	draw_x = data->player.px * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->line_img.img, 0, 0);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->player_img.img, draw_x, draw_y);
 	while (y < 5)
 	{
 		x = 0;
@@ -88,12 +95,6 @@ void	draw_map(char **map, t_data *data, t_mlx *mlx)
 		{
 			if (map[y][x] == '1')
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->block_img.img, x*BLOCK, y*BLOCK);
-			else if (map[y][x] == 'S' || map[y][x] == 'N' || map[y][x] == 'E' || map[y][x] == 'O')
-			{
-				// printf("%d %d\n", x * BLOCK + BLOCK/2, y *BLOCK - BLOCK/2);
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->player_img.img, x*BLOCK + BLOCK/2, y*BLOCK + BLOCK/2);
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->line_img.img, x*BLOCK + BLOCK/2 + BLOCK/8, y*BLOCK + BLOCK/2);
-			}
 			x++;
 		}
 		y++;
