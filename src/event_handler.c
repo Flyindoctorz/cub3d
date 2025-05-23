@@ -58,25 +58,23 @@ int	key_up(int keycode, t_data *data)
 int	update_state(t_data *data)
 {
 	if (data->keys.a == 1)
-		data->player.px -= 0.1;
+		data->player.px -= 0.05;
 	if (data->keys.d == 1)
-		data->player.px += 0.1;
+		data->player.px += 0.05;
 	if (data->keys.w == 1)
-		data->player.py -= 0.1;
+		data->player.py -= 0.05;
 	if (data->keys.s == 1)
-		data->player.py += 0.1;
+		data->player.py += 0.05;
 	if (data->keys.right == 1)
 		data->player.angle += M_PI / 180.0;
 	if (data->keys.left == 1)
 		data->player.angle -= M_PI / 180.0;
-
 	if (data->player.angle < 0)
 		data->player.angle += 2.0 * M_PI;
 	else if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
-
 	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->line_img.img);
+	memset(data->line_img.addr, 0, HEIGHT * WIDTH * sizeof(int));
 	draw_line(&data->line_img, &data->player, data);
 	draw_map(data->map, data, &data->mlx);
 	return (SUCCESS);

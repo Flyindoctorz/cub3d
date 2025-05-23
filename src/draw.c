@@ -14,12 +14,14 @@
 #include "../parsing.h"
 #include <stdio.h>
 #include <unistd.h>
+
 void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
 {
-		char	*dst;
+	char	*dst;
 
-		dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
-		*(unsigned int*)dst = color;
+	dst = image->addr + (y * image->line_length + x * (image->bits_per_pixel
+				/ 8));
+	*(unsigned int *)dst = color;
 }
 
 void	draw_line(t_image *image, t_player *player, t_data *data)
@@ -36,27 +38,19 @@ void	draw_line(t_image *image, t_player *player, t_data *data)
 
 	tmp_x = player->px * BLOCK + BLOCK / 2.0;
 	tmp_y = player->py * BLOCK + BLOCK / 2.0;
-
 	inc_x = cos(player->angle);
 	inc_y = sin(player->angle);
-
-	image->img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
-	image->addr = mlx_get_data_addr(image->img,
-		&image->bits_per_pixel, &image->line_length,
-		&image->endian);
-
 	max_distance = 1000.0;
 	traveled = 0.0;
 	step_size = 1.0;
-
 	while (traveled < max_distance)
 	{
 		grid_x = (int)(tmp_x / BLOCK);
 		grid_y = (int)(tmp_y / BLOCK);
 		if (grid_y < 0 || grid_x < 0 || grid_y >= 5 || grid_x >= 5)
-			break;
+			break ;
 		if (data->map[grid_y][grid_x] == '1')
-			break;
+			break ;
 		mlx_pixel_put_v2(image, (int)tmp_x, (int)tmp_y, 0x0000FF00);
 		tmp_x += inc_x * step_size;
 		tmp_y += inc_y * step_size;
@@ -64,16 +58,11 @@ void	draw_line(t_image *image, t_player *player, t_data *data)
 	}
 }
 
-
-void	draw_block(t_image *image, t_mlx *mlx, int size)
+void	draw_block(t_image *image, int size)
 {
 	int	y;
 	int	x;
 
-	image->img = mlx_new_image(mlx->mlx_ptr, size, size);
-	image->addr = mlx_get_data_addr(image->img,
-			&image->bits_per_pixel, &image->line_length,
-			&image->endian);
 	y = 0;
 	while (y < size)
 	{
@@ -88,21 +77,24 @@ void	draw_map(char **map, t_data *data, t_mlx *mlx)
 {
 	int	x;
 	int	y;
-	int draw_x;
+	int	draw_x;
 	int	draw_y;
 
 	y = 0;
 	draw_y = data->player.py * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
 	draw_x = data->player.px * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->line_img.img, 0, 0);
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->player_img.img, draw_x, draw_y);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->line_img.img,
+		0, 0);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->player_img.img,
+		draw_x, draw_y);
 	while (y < 5)
 	{
 		x = 0;
 		while (x < 5)
 		{
 			if (map[y][x] == '1')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->block_img.img, x*BLOCK, y*BLOCK);
+				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
+					data->block_img.img, x * BLOCK, y * BLOCK);
 			x++;
 		}
 		y++;
