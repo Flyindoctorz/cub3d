@@ -12,8 +12,6 @@
 
 #include "../include/raycasting.h"
 #include "../parsing.h"
-#include <stdio.h>
-#include <unistd.h>
 
 void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
 {

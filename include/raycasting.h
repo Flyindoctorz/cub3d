@@ -19,6 +19,10 @@
 # define WIDTH 480
 # define HEIGHT 320
 # define BLOCK 32
+# define FOV (M_PI / 3)
+# define SPEED 0.01
+# define MAX_RAY_DISTANCE 10000.0
+# define RAY_STEP_SIZE 1.0
 
 # define KEY_W 13
 # define KEY_A 0
@@ -31,6 +35,8 @@
 # include "../minilibx/mlx.h"
 # include "math.h"
 # include <string.h>
+# include <stdio.h>
+# include <unistd.h>
 
 // # include <X11/keysym.h>
 
@@ -49,7 +55,6 @@ typedef struct s_player
 	double	px;
 	double	py;
 	double	angle;
-	int		fov;
 }				t_player;
 
 typedef struct s_mlx
@@ -89,5 +94,11 @@ void	mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void	draw_block(t_image *image, int size);
 void	draw_map(char **map, t_data *data, t_mlx *mlx);
 void	draw_line(t_image *image, t_player *player, t_data *data);
+
+/*line calculation */
+
+double	ray_distance(t_player *player, t_data *data, double ray_angle);
+void	render_scene(t_image *image, t_player *player, t_data *data);
+void	draw_vertical_line(t_image *image, int x, int height);
 
 #endif

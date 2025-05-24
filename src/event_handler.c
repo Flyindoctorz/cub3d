@@ -55,16 +55,33 @@ int	key_up(int keycode, t_data *data)
 	return (SUCCESS);
 }
 
+void	update_coordinates(t_data *data)
+{
+	if (data->keys.w == 1)
+	{
+			data->player.px += cos(data->player.angle) * SPEED;
+			data->player.py += sin(data->player.angle) * SPEED;
+	}
+	if (data->keys.s == 1)
+	{
+			data->player.px -= cos(data->player.angle) * SPEED;
+			data->player.py -= sin(data->player.angle) * SPEED;
+	}
+	if (data->keys.a == 1)
+	{
+			data->player.px += cos(data->player.angle - M_PI / 2) * SPEED;
+			data->player.py += sin(data->player.angle - M_PI / 2) * SPEED;
+	}
+	if (data->keys.d == 1)
+	{
+			data->player.px += cos(data->player.angle + M_PI / 2) * SPEED;
+			data->player.py += sin(data->player.angle + M_PI / 2) * SPEED;
+	}
+}
+
 int	update_state(t_data *data)
 {
-	if (data->keys.a == 1)
-		data->player.px -= 0.05;
-	if (data->keys.d == 1)
-		data->player.px += 0.05;
-	if (data->keys.w == 1)
-		data->player.py -= 0.05;
-	if (data->keys.s == 1)
-		data->player.py += 0.05;
+	update_coordinates(data);
 	if (data->keys.right == 1)
 		data->player.angle += M_PI / 180.0;
 	if (data->keys.left == 1)
@@ -75,7 +92,6 @@ int	update_state(t_data *data)
 		data->player.angle -= 2.0 * M_PI;
 	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
 	memset(data->line_img.addr, 0, HEIGHT * WIDTH * sizeof(int));
-	draw_line(&data->line_img, &data->player, data);
-	draw_map(data->map, data, &data->mlx);
+	render_scene(&data->line_img, &data->player, data);
 	return (SUCCESS);
 }

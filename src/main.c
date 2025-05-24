@@ -19,7 +19,8 @@ void	set_images(t_data *data)
 	data->line_img.addr = mlx_get_data_addr(data->line_img.img,
 			&data->line_img.bits_per_pixel, &data->line_img.line_length,
 			&data->line_img.endian);
-	data->player_img.img = mlx_new_image(data->mlx.mlx_ptr, BLOCK / 4, BLOCK / 4);
+	data->player_img.img = mlx_new_image(data->mlx.mlx_ptr, BLOCK / 4, BLOCK
+			/ 4);
 	data->player_img.addr = mlx_get_data_addr(data->player_img.img,
 			&data->player_img.bits_per_pixel, &data->player_img.line_length,
 			&data->player_img.endian);
@@ -34,7 +35,6 @@ void	set_player(t_data *data)
 	data->player.px = 1;
 	data->player.py = 1;
 	data->player.angle = 0;
-	data->player.fov = 70;
 }
 
 void	set_keys(t_data *data)
@@ -68,9 +68,12 @@ int	initialize(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	char	map[5][5] = {{'1', '1', '1', '1', '1'}, {'1', '0', '0', '0', '1'},
-			{'1', '0', '1', '0', '1'}, {'1', '0', '0', '1', '1'}, {'1', '1',
-			'1', '1', '1'}};
+	char	map[5][5] = {
+		{'1', '1', '1', '1', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '0', '1', '1', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '1', '1', '1', '1'}};
 
 	data.map = malloc(sizeof(char *) * 6);
 	data.map[5] = NULL;
@@ -81,7 +84,8 @@ int	main(int ac, char **av)
 			data.map[i][j] = map[i][j];
 	if (initialize(&data) == ERROR)
 		return (ERROR);
-	draw_map(data.map, &data, &data.mlx);
+	render_scene(&data.line_img, &data.player, &data);
+	// draw_map(data.map, &data, &data.mlx);
 	(void)ac;
 	(void)av;
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
