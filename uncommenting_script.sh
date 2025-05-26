@@ -1,5 +1,5 @@
-#!/bin/bash
 
+#!/bin/bash
 # Premier argument : fichier source
 # Deuxième argument : numéro de la map à décommenter (1-5)
 # Troisième argument : fichier de sortie
@@ -40,11 +40,13 @@ case $MAP_NUM in
 esac
 
 # Décommenter la map sélectionnée en supprimant les # au début des lignes
-for (( i=$START_LINE; i<=$END_LINE; i++ ))
+i=$START_LINE
+while ["$i" -le "$END_LINE"]
 do
   # Supprimer le # au début de la ligne
   sed -i "${i}s/^# //" $DEST
   sed -i "${i}s/^#//" $DEST
+  i=$((i + 1))
 done
 
 echo "Map $MAP_NUM décommentée dans $DEST"

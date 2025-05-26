@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checking.c                                     :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 12:48:02 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/19 16:16:05 by cgelgon          ###   ########.fr       */
+/*   Created: 2025/05/26 13:17:50 by cgelgon           #+#    #+#             */
+/*   Updated: 2025/05/26 13:35:40 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,66 +55,39 @@ void	free_copy(char **map_copy)
 	}
 	free(map_copy);
 }
-// check si le joueur est dans la map
-bool	where_player_at(char **map, int *p_x, int *p_y)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
-			{
-				*p_x = j;
-				*p_y = i;
-				return (true);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (false);
+int	line_width(char *line)
+{
+	if (!line)
+		return (0);
+	return (ft_strlen(line));
 }
 
-void	flood_fill(char **map, int x, int y, int *valid)
+int	line_height(char **map)
 {
-	if (map[y][x] == '1' || map[y][x] == '2')
-		return ;
-	if (map[y][x] == ' ' || x == 0 || y == 0 || !map[y + 1] || !map[y][x + 1])
-	{
-		*valid = 0;
-		return ;
-	}
-	map[y][x] = '2';
-	flood_fill(map, x + 1, y, valid);
-	flood_fill(map, x - 1, y, valid);
-	flood_fill(map, x, y + 1, valid);
-	flood_fill(map, x, y - 1, valid);
+	int	h;
+
+	if (!map)
+		return (0);
+	h = 0;
+	while (map[h])
+		h++;
+	return (h);
 }
-
-bool	check_map(char **map)
+bool is_in_map(char **map, int x, int y)
 {
-	int		**map_copy;
-	int		p_x;
-	int		p_y;
-	int		valid;
-	bool	res;
+	int map_h;
+	int map_w;
 
-	map_copy = copy_map(map);
-	if (!map_copy)
+	if (y < 0 || !map[y])
 		return (false);
-	if (!where_player_at(map_copy, &p_x, &p_y))
-	{
-		free_copy(map_copy);
+	map_h = line_height(map);
+	if (y >= map_h)
 		return (false);
-	}
-	valid = 1;
-	flood_fill(map_copy, p_x, p_y, &valid);
-	res = (valid == 1);
-	free_copy(map_copy);
+	if (x < 0)
+		return (false);
+	map_w = line_width(map[y]);
+	if (x >= map_w)
+		return (false);
+	return (true);
 }
