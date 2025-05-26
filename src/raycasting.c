@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
 #include "../include/parsing.h"
+#include "../include/raycasting.h"
 
 void	draw_vertical_line(t_image *image, int x, int height)
 {

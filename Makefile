@@ -4,7 +4,7 @@ objects = $(sources:.c=.o)
 
 # linux compile
 
-libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
+libs = -Lminilibx -l:libmlx.a  -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
 
 includes = -Iminilibx -I/usr/include -I/opt/X11/include
 
@@ -87,5 +87,9 @@ push:
 debug: preprocess
 	@echo "$(BLUE)Running lldb...$(RESET)"
 	@lldb ./$(NAME)
+
+build_mlx:
+	@echo "$(BLUE)Building minilibx...$(RESET)"
+	@$(MAKE) -C minilibx/
 
 .PHONY: all clean fclean re build_mlx leak norm push debug

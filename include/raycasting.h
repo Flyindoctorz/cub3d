@@ -41,31 +41,29 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 
-
 # include "../minilibx/mlx.h"
-# include "parsing.h"
 # include "math.h"
+# include "parsing.h"
 # include <X11/keysym.h>
-# include <string.h>
 # include <stdio.h>
+# include <string.h>
 # include <unistd.h>
 
-
-typedef	struct	s_keys
+typedef struct s_keys
 {
-	int	w;
-	int	a;
-	int	s;
-	int	d;
-	int	left;
-	int	right;
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
 }				t_keys;
 
 typedef struct s_player
 {
-	double	px;
-	double	py;
-	double	angle;
+	double		px;
+	double		py;
+	double		angle;
 }				t_player;
 
 typedef struct s_mlx
@@ -87,7 +85,7 @@ typedef struct s_data
 {
 	t_player	player;
 	t_mlx		mlx;
-	t_image		line_img;
+	t_image		ray_img;
 	t_keys		keys;
 	t_map		map;
 	t_texture	texture;
@@ -97,20 +95,20 @@ typedef struct s_data
 
 /* event handling*/
 
-int	close_window(t_mlx *data);
-int	key_down(int keycode, t_data *data);
-int	key_up(int keycode, t_data *data);
-int	update_state(t_data *data);
+int				close_window(t_data *data);
+int				key_down(int keycode, t_data *data);
+int				key_up(int keycode, t_data *data);
+int				update_state(t_data *data);
 
 /* drawing */
 
-void	mlx_pixel_put_v2(t_image *image, int px, int py, int color);
-void	draw_line(t_image *image, t_player *player, t_data *data);
+void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
+void			draw_line(t_image *image, t_player *player, t_data *data);
 
 /*line calculation */
 
-double	ray_distance(t_player *player, t_data *data, double ray_angle);
-void	render_scene(t_image *image, t_player *player, t_data *data);
-void	draw_vertical_line(t_image *image, int x, int height);
+double			ray_distance(t_player *player, t_data *data, double ray_angle);
+void			render_scene(t_image *image, t_player *player, t_data *data);
+void			draw_vertical_line(t_image *image, int x, int height);
 
 #endif

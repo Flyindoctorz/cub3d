@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
 #include "../include/parsing.h"
+#include "../include/raycasting.h"
 
 void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
 {
@@ -101,7 +101,8 @@ void	draw_line(t_image *image, t_player *player, t_data *data)
 // 			{
 // 				printf("%d %d\n", x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
 // 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
-// 					data->player_img.img, x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
+// 					data->player_img.img, x * BLOCK + BLOCK / 2, y * BLOCK
+						// + BLOCK / 2);
 // 			}
 // 			x++;
 // 		}

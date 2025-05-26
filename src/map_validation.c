@@ -14,8 +14,8 @@
 
 bool	is_a_valid_char(char c)
 {
-	if (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == ' ')
+	if (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S' || c == 'E'
+		|| c == 'W' || c == ' ')
 		return (true);
 	return (false);
 }

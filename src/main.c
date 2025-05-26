@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
 #include "../include/parsing.h"
+#include "../include/raycasting.h"
 
 void	set_images(t_data *data)
 {
-	data->line_img.img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
-	data->line_img.addr = mlx_get_data_addr(data->line_img.img,
-			&data->line_img.bits_per_pixel, &data->line_img.line_length,
-			&data->line_img.endian);
+	data->ray_img.img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
+	data->ray_img.addr = mlx_get_data_addr(data->ray_img.img,
+			&data->ray_img.bits_per_pixel, &data->ray_img.line_length,
+			&data->ray_img.endian);
 }
 
 void	set_player(t_data *data)
@@ -50,16 +50,15 @@ int	initialize(t_data *data)
 	set_images(data);
 	set_player(data);
 	set_keys(data);
-	draw_line(&data->line_img, &data->player, data);
+	draw_line(&data->ray_img, &data->player, data);
 	return (SUCCESS);
 }
 
 int	main(int ac, char **av)
 {
 	t_data	data;
-
 	char	map[5][5] = {{'1', '1', '1', '1', '1'}, {'1', '0', '0', '0', '1'},
-			{'1', '0', '1', '1', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
+			{'1', '0', '1', '0', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
 			'1', '1', '1'}};
 
 	data.map.map = malloc(sizeof(char *) * 6);
@@ -69,7 +68,10 @@ int	main(int ac, char **av)
 	for (int i = 0; i < 5; i++)
 		for (int j = 0; j < 5; j++)
 			data.map.map[i][j] = map[i][j];
-
+	data.map.height = 5;
+	data.map.width = 5;
+	(void)ac;
+	(void)av;
 	// securiser le cas ou il n'y a pas d'argument
 	// securiser le cas ou il y a trop d'argument
 	// securiser le cas ou on retire l'environnement de force (env -i ou unset)
@@ -77,10 +79,7 @@ int	main(int ac, char **av)
 	// check if the file is a valid map
 	if (initialize(&data) == ERROR)
 		return (ERROR);
-	render_scene(&data.line_img, &data.player, &data);
-	// draw_map(data.map, &data, &data.mlx);
-	(void)ac;
-	(void)av;
+	render_scene(&data.ray_img, &data.player, &data);
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
 	mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);
 	mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);

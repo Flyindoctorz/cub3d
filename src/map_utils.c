@@ -74,10 +74,10 @@ int	line_height(char **map)
 		h++;
 	return (h);
 }
-bool is_in_map(char **map, int x, int y)
+bool	is_in_map(char **map, int x, int y)
 {
-	int map_h;
-	int map_w;
+	int	map_h;
+	int	map_w;
 
 	if (y < 0 || !map[y])
 		return (false);
