@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/raycasting.h"
-#include "../parsing.h"
+#include "../include/parsing.h"
 
 int	close_window(t_mlx *data)
 {

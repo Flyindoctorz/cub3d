@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/19 18:50:55 by safuente         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:50:31 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/raycasting.h"
-#include "../parsing.h"
+#include "../include/parsing.h"
 
 void	set_images(t_data *data)
 {
@@ -72,13 +72,19 @@ int	main(int ac, char **av)
 			{'1', '0', '1', '1', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
 			'1', '1', '1'}};
 
-	data.map = malloc(sizeof(char *) * 6);
-	data.map[5] = NULL;
-	for (int i = 0; i < 5; i++)
-		data.map[i] = malloc(sizeof(char) * 5);
-	for (int i = 0; i < 5; i++)
-		for (int j = 0; j < 5; j++)
-			data.map[i][j] = map[i][j];
+	// data.map = malloc(sizeof(char *) * 6);
+	// data.map[5] = NULL;
+	// for (int i = 0; i < 5; i++)
+	// 	data.map[i] = malloc(sizeof(char) * 5);
+	// for (int i = 0; i < 5; i++)
+	// 	for (int j = 0; j < 5; j++)
+	// 		data.map[i][j] = map[i][j];
+
+	// securiser le cas ou il n'y a pas d'argument
+	// securiser le cas ou il y a trop d'argument
+	// securiser le cas ou on retire l'environnement de force (env -i ou unset)
+	// check if the file is a .cub
+	// check if the file is a valid map
 	if (initialize(&data) == ERROR)
 		return (ERROR);
 	render_scene(&data.line_img, &data.player, &data);

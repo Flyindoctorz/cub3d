@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/19 14:25:04 by cgelgon          ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "mlx_int.h"
 
-//#include "cub3d.h"
-#include "stdbool.h"
-#include <stdlib.h>
-#include <stdio.h>
-
-// stucture
-typedef struct s_map
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	char	**map;
-	int		width;
-	int		height;
-}	t_map;
-
-#endif
+	XCloseDisplay(xvar->display);
+}

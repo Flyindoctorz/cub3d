@@ -61,6 +61,12 @@ void	draw_block(t_image *image, int size)
 	int	y;
 	int	x;
 
+<<<<<<< HEAD
+=======
+	image->img = mlx_new_image(mlx->mlx_ptr, BLOCK, BLOCK);
+	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel,
+			&image->line_length, &image->endian);
+>>>>>>> d3565372cf9a7bbe0acf8766996fe7c00c62f531
 	y = 0;
 	while (y < size)
 	{
@@ -92,7 +98,18 @@ void	draw_map(char **map, t_data *data, t_mlx *mlx)
 		{
 			if (map[y][x] == '1')
 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
+<<<<<<< HEAD
 					data->block_img.img, x * BLOCK, y * BLOCK);
+=======
+					block->img, x * BLOCK, y * BLOCK);
+			else if (map[y][x] == 'S' || map[y][x] == 'N' || map[y][x] == 'E'
+				|| map[y][x] == 'O')
+			{
+				printf("%d %d\n", x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
+				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
+					player->img, x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
+			}
+>>>>>>> d3565372cf9a7bbe0acf8766996fe7c00c62f531
 			x++;
 		}
 		y++;

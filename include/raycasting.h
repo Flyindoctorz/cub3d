@@ -37,6 +37,7 @@
 # include <string.h>
 # include <stdio.h>
 # include <unistd.h>
+# include "parsing.h"
 
 // # include <X11/keysym.h>
 
@@ -63,22 +64,27 @@ typedef struct s_mlx
 	void		*mlx_window;
 }				t_mlx;
 
-typedef struct s_image {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+typedef struct s_image
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }				t_image;
 
-typedef struct s_data {
+typedef struct s_data
+{
 	t_player	player;
 	t_mlx		mlx;
 	t_image		block_img;
 	t_image		player_img;
 	t_image		line_img;
 	t_keys		keys;
-	char		**map;
+	t_map		map;
+	t_texture	texture;
+	t_color		floor;
+	t_color		ceiling;
 }				t_data;
 
 /* event handling*/
