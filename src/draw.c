@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/raycasting.h"
-#include "../parsing.h"
+#include "../include/parsing.h"
 
 void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
 {
@@ -47,71 +47,11 @@ void	draw_line(t_image *image, t_player *player, t_data *data)
 		grid_y = (int)(tmp_y / BLOCK);
 		if (grid_y < 0 || grid_x < 0 || grid_y >= 5 || grid_x >= 5)
 			break ;
-		if (data->map[grid_y][grid_x] == '1')
+		if (data->map.map[grid_y][grid_x] == '1')
 			break ;
 		mlx_pixel_put_v2(image, (int)tmp_x, (int)tmp_y, 0x0000FF00);
 		tmp_x += inc_x * step_size;
 		tmp_y += inc_y * step_size;
 		traveled += step_size;
-	}
-}
-
-void	draw_block(t_image *image, int size)
-{
-	int	y;
-	int	x;
-
-<<<<<<< HEAD
-=======
-	image->img = mlx_new_image(mlx->mlx_ptr, BLOCK, BLOCK);
-	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel,
-			&image->line_length, &image->endian);
->>>>>>> d3565372cf9a7bbe0acf8766996fe7c00c62f531
-	y = 0;
-	while (y < size)
-	{
-		x = 0;
-		while (x < size)
-			mlx_pixel_put_v2(image, x++, y, 0x00FF0000);
-		y++;
-	}
-}
-
-void	draw_map(char **map, t_data *data, t_mlx *mlx)
-{
-	int	x;
-	int	y;
-	int	draw_x;
-	int	draw_y;
-
-	y = 0;
-	draw_y = data->player.py * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
-	draw_x = data->player.px * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->line_img.img,
-		0, 0);
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->player_img.img,
-		draw_x, draw_y);
-	while (y < 5)
-	{
-		x = 0;
-		while (x < 5)
-		{
-			if (map[y][x] == '1')
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
-<<<<<<< HEAD
-					data->block_img.img, x * BLOCK, y * BLOCK);
-=======
-					block->img, x * BLOCK, y * BLOCK);
-			else if (map[y][x] == 'S' || map[y][x] == 'N' || map[y][x] == 'E'
-				|| map[y][x] == 'O')
-			{
-				printf("%d %d\n", x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
-					player->img, x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
-			}
->>>>>>> d3565372cf9a7bbe0acf8766996fe7c00c62f531
-			x++;
-		}
-		y++;
 	}
 }

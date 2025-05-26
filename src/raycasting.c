@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/raycasting.h"
-#include "../parsing.h"
+#include "../include/parsing.h"
 
 void	draw_vertical_line(t_image *image, int x, int height)
 {
@@ -47,7 +47,7 @@ double	ray_distance(t_player *player, t_data *data, double ray_angle)
 		grid_x = (int)(tmp_x / BLOCK);
 		grid_y = (int)(tmp_y / BLOCK);
 		if (grid_y < 0 || grid_x < 0 || grid_y >= 5 || grid_x >= 5
-			|| data->map[grid_y][grid_x] == '1')
+			|| data->map.map[grid_y][grid_x] == '1')
 			break ;
 		tmp_x += cos(ray_angle) * RAY_STEP_SIZE;
 		tmp_y += sin(ray_angle) * RAY_STEP_SIZE;
