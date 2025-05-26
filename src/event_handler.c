@@ -18,8 +18,8 @@ int	close_window(t_data *data)
 	mlx_destroy_image(data->mlx.mlx_ptr, data->ray_img.img);
 	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
 	mlx_destroy_display(data->mlx.mlx_ptr);
-	for (int i = 0; i < data->map.height; i++)
-		free(data->map.map[i]);
+	while (0 < data->map.height--)
+		free(data->map.map[data->map.height]);
 	free(data->map.map);
 	free(data->mlx.mlx_ptr);
 	exit(SUCCESS);

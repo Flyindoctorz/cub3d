@@ -17,17 +17,19 @@ void	draw_vertical_line(t_image *image, int x, int height)
 {
 	int	start;
 	int	end;
+	int	line;
 
+	line = 0;
 	start = (HEIGHT / 2) - (height / 2);
 	end = start + height;
-	for (int y = 0; y < HEIGHT; y++)
+	while (line < HEIGHT)
 	{
-		if (y < start)
-			mlx_pixel_put_v2(image, x, y, 0x00FF0000);
-		if (y >= start && y < end)
-			mlx_pixel_put_v2(image, x, y, 0x00FFFF00);
-		else if (y >= end)
-			mlx_pixel_put_v2(image, x, y, 0x0000FF00);
+		if (line < start)
+			mlx_pixel_put_v2(image, x, line++, 0x00FF0000);
+		else if (line >= start && line < end)
+			mlx_pixel_put_v2(image, x, line++, 0x00FFFF00);
+		else if (line >= end)
+			mlx_pixel_put_v2(image, x, line++, 0x0000FF00);
 	}
 }
 
@@ -46,7 +48,7 @@ double	ray_distance(t_player *player, t_data *data, double ray_angle)
 	{
 		grid_x = (int)(tmp_x / BLOCK);
 		grid_y = (int)(tmp_y / BLOCK);
-		if (grid_y < 0 || grid_x < 0 || grid_y >= 5 || grid_x >= 5
+		if (grid_y < 0 || grid_x < 0 || grid_y >= data->map.height || grid_x >= data->map.width
 			|| data->map.map[grid_y][grid_x] == '1')
 			break ;
 		tmp_x += cos(ray_angle) * RAY_STEP_SIZE;

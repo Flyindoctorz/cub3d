@@ -57,18 +57,25 @@ int	initialize(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	char	map[5][5] = {{'1', '1', '1', '1', '1'}, {'1', '0', '0', '0', '1'},
-			{'1', '0', '1', '0', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
-			'1', '1', '1'}};
+	char	map[8][5] = {
+		{'1', '1', '1', '1', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '0', '1', '0', '1'},
+		{'1', '0', '1', '0', '1'},
+		{'1', '0','1', '0', '1'},
+		{'1', '0', '1', '0', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '1', '1', '1', '1'},
+	};
 
-	data.map.map = malloc(sizeof(char *) * 6);
-	data.map.map[5] = NULL;
-	for (int i = 0; i < 5; i++)
+	data.map.map = malloc(sizeof(char *) * 9);
+	data.map.map[8] = NULL;
+	for (int i = 0; i < 8; i++)
 		data.map.map[i] = malloc(sizeof(char) * 5);
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 5; j++)
 			data.map.map[i][j] = map[i][j];
-	data.map.height = 5;
+	data.map.height = 8;
 	data.map.width = 5;
 	(void)ac;
 	(void)av;
