@@ -13,7 +13,7 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-void	draw_vertical_line(t_image *image, int x, int height)
+void	draw_vertical_line(t_image *image, int x, double height)
 {
 	int	start;
 	int	end;
@@ -48,7 +48,8 @@ double	ray_distance(t_player *player, t_data *data, double ray_angle)
 	{
 		grid_x = (int)(tmp_x / BLOCK);
 		grid_y = (int)(tmp_y / BLOCK);
-		if (grid_y < 0 || grid_x < 0 || grid_y >= data->map.height || grid_x >= data->map.width
+		if (grid_y < 0 || grid_x < 0 || grid_y >= data->map.height
+			|| grid_x >= data->map.width
 			|| data->map.map[grid_y][grid_x] == '1')
 			break ;
 		tmp_x += cos(ray_angle) * RAY_STEP_SIZE;
@@ -60,29 +61,25 @@ double	ray_distance(t_player *player, t_data *data, double ray_angle)
 
 void	render_scene(t_image *image, t_player *player, t_data *data)
 {
-	double	fov_step;
 	double	start_angle;
 	double	ray_angle;
-	double	distance;
 	double	corrected;
 	double	wall_height;
 	int		pos_screen;
 
 	start_angle = player->angle - (FOV / 2.0);
-	fov_step = (double)FOV / (double)WIDTH;
 	pos_screen = 0;
 	while (pos_screen < WIDTH)
 	{
-		ray_angle = start_angle + (pos_screen * fov_step);
+		ray_angle = start_angle + (pos_screen * FOV_STEP);
 		if (ray_angle < 0)
 			ray_angle += 2 * M_PI;
 		if (ray_angle > 2 * M_PI)
 			ray_angle -= 2 * M_PI;
-		distance = ray_distance(player, data, ray_angle);
-		corrected = distance * cos(player->angle - ray_angle);
+		corrected = ray_distance(player, data, ray_angle)
+			* cos(player->angle - ray_angle);
 		wall_height = (BLOCK * HEIGHT) / corrected;
-		draw_vertical_line(image, pos_screen, wall_height);
-		pos_screen++;
+		draw_vertical_line(image, pos_screen++, wall_height);
 	}
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, image->img,
 		0, 0);

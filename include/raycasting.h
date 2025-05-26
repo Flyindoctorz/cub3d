@@ -16,10 +16,12 @@
 # define SUCCESS 0
 # define ERROR 1
 
-# define WIDTH 480
-# define HEIGHT 320
-# define BLOCK 32
+# define WIDTH 480.0
+# define HEIGHT 320.0
+# define BLOCK 32.0
+
 # define FOV (M_PI / 3)
+# define FOV_STEP (FOV / WIDTH)
 # define PLAYER_SPEED 0.002
 # define PLAYER_ROTATION_SPEED 0.1
 # define MAX_RAY_DISTANCE 10000.0
@@ -109,6 +111,6 @@ void			draw_line(t_image *image, t_player *player, t_data *data);
 
 double			ray_distance(t_player *player, t_data *data, double ray_angle);
 void			render_scene(t_image *image, t_player *player, t_data *data);
-void			draw_vertical_line(t_image *image, int x, int height);
+void			draw_vertical_line(t_image *image, int x, double height);
 
 #endif

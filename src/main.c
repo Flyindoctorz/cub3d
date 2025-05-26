@@ -50,7 +50,6 @@ int	initialize(t_data *data)
 	set_images(data);
 	set_player(data);
 	set_keys(data);
-	draw_line(&data->ray_img, &data->player, data);
 	return (SUCCESS);
 }
 
