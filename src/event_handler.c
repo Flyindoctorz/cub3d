@@ -83,6 +83,7 @@ void	update_coordinates(t_data *data)
 		data->player.px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
 		data->player.py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
 	}
+	printf("%f_%f\n",data->player.px, data->player.py);
 }
 
 int	update_state(t_data *data)
