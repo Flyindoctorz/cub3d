@@ -4,15 +4,15 @@ objects = $(sources:.c=.o)
 
 # linux compile
 
-# libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
+libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
 
-# includes = -Iminilibx -I/usr/include -I/opt/X11/include
+includes = -Iminilibx -I/usr/include -I/opt/X11/include
 
 # macos compile
 
-libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
+# libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
 
-includes = -Iminilibx -I/opt/X11/include
+# includes = -Iminilibx -I/opt/X11/include
 
 cc = cc
 cflags = -Wall -Wextra -Werror
@@ -89,4 +89,3 @@ debug: preprocess
 	@lldb ./$(NAME)
 
 .PHONY: all clean fclean re build_mlx leak norm push debug
-

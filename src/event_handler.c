@@ -59,23 +59,23 @@ void	update_coordinates(t_data *data)
 {
 	if (data->keys.w == 1)
 	{
-		data->player.px += cos(data->player.angle) * SPEED;
-		data->player.py += sin(data->player.angle) * SPEED;
+		data->player.px += cos(data->player.angle) * PLAYER_SPEED;
+		data->player.py += sin(data->player.angle) * PLAYER_SPEED;
 	}
 	if (data->keys.s == 1)
 	{
-		data->player.px -= cos(data->player.angle) * SPEED;
-		data->player.py -= sin(data->player.angle) * SPEED;
+		data->player.px -= cos(data->player.angle) * PLAYER_SPEED;
+		data->player.py -= sin(data->player.angle) * PLAYER_SPEED;
 	}
 	if (data->keys.a == 1)
 	{
-		data->player.px += cos(data->player.angle - M_PI / 2) * SPEED;
-		data->player.py += sin(data->player.angle - M_PI / 2) * SPEED;
+		data->player.px += cos(data->player.angle - M_PI / 2) * PLAYER_SPEED;
+		data->player.py += sin(data->player.angle - M_PI / 2) * PLAYER_SPEED;
 	}
 	if (data->keys.d == 1)
 	{
-		data->player.px += cos(data->player.angle + M_PI / 2) * SPEED;
-		data->player.py += sin(data->player.angle + M_PI / 2) * SPEED;
+		data->player.px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
+		data->player.py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
 	}
 }
 
@@ -83,9 +83,9 @@ int	update_state(t_data *data)
 {
 	update_coordinates(data);
 	if (data->keys.right == 1)
-		data->player.angle += M_PI / 180.0;
+		data->player.angle += (M_PI / 180.0) * PLAYER_ROTATION_SPEED;
 	if (data->keys.left == 1)
-		data->player.angle -= M_PI / 180.0;
+		data->player.angle -= (M_PI / 180.0) * PLAYER_ROTATION_SPEED;
 	if (data->player.angle < 0)
 		data->player.angle += 2.0 * M_PI;
 	else if (data->player.angle >= 2.0 * M_PI)

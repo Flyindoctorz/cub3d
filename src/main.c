@@ -19,15 +19,6 @@ void	set_images(t_data *data)
 	data->line_img.addr = mlx_get_data_addr(data->line_img.img,
 			&data->line_img.bits_per_pixel, &data->line_img.line_length,
 			&data->line_img.endian);
-	data->player_img.img = mlx_new_image(data->mlx.mlx_ptr, BLOCK / 4, BLOCK
-			/ 4);
-	data->player_img.addr = mlx_get_data_addr(data->player_img.img,
-			&data->player_img.bits_per_pixel, &data->player_img.line_length,
-			&data->player_img.endian);
-	data->block_img.img = mlx_new_image(data->mlx.mlx_ptr, BLOCK, BLOCK);
-	data->block_img.addr = mlx_get_data_addr(data->block_img.img,
-			&data->block_img.bits_per_pixel, &data->block_img.line_length,
-			&data->block_img.endian);
 }
 
 void	set_player(t_data *data)
@@ -59,8 +50,6 @@ int	initialize(t_data *data)
 	set_images(data);
 	set_player(data);
 	set_keys(data);
-	draw_block(&data->block_img, BLOCK);
-	draw_block(&data->player_img, BLOCK / 4);
 	draw_line(&data->line_img, &data->player, data);
 	return (SUCCESS);
 }
@@ -73,13 +62,13 @@ int	main(int ac, char **av)
 			{'1', '0', '1', '1', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
 			'1', '1', '1'}};
 
-	// data.map = malloc(sizeof(char *) * 6);
-	// data.map[5] = NULL;
-	// for (int i = 0; i < 5; i++)
-	// 	data.map[i] = malloc(sizeof(char) * 5);
-	// for (int i = 0; i < 5; i++)
-	// 	for (int j = 0; j < 5; j++)
-	// 		data.map[i][j] = map[i][j];
+	data.map.map = malloc(sizeof(char *) * 6);
+	data.map.map[5] = NULL;
+	for (int i = 0; i < 5; i++)
+		data.map.map[i] = malloc(sizeof(char) * 5);
+	for (int i = 0; i < 5; i++)
+		for (int j = 0; j < 5; j++)
+			data.map.map[i][j] = map[i][j];
 
 	// securiser le cas ou il n'y a pas d'argument
 	// securiser le cas ou il y a trop d'argument

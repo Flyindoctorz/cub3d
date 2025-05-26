@@ -20,26 +20,36 @@
 # define HEIGHT 320
 # define BLOCK 32
 # define FOV (M_PI / 3)
-# define SPEED 0.01
+# define PLAYER_SPEED 0.002
+# define PLAYER_ROTATION_SPEED 0.1
 # define MAX_RAY_DISTANCE 10000.0
 # define RAY_STEP_SIZE 1.0
 
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define KEY_ESC 53
+// # define KEY_W 13
+// # define KEY_A 0
+// # define KEY_S 1
+// # define KEY_D 2
+// # define KEY_LEFT 123
+// # define KEY_RIGHT 124
+// # define KEY_ESC 53
+
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_ESC 65307
+
 
 # include "../minilibx/mlx.h"
+# include "parsing.h"
 # include "math.h"
+# include <X11/keysym.h>
 # include <string.h>
 # include <stdio.h>
 # include <unistd.h>
-# include "parsing.h"
 
-// # include <X11/keysym.h>
 
 typedef	struct	s_keys
 {
@@ -77,8 +87,6 @@ typedef struct s_data
 {
 	t_player	player;
 	t_mlx		mlx;
-	t_image		block_img;
-	t_image		player_img;
 	t_image		line_img;
 	t_keys		keys;
 	t_map		map;
@@ -97,8 +105,6 @@ int	update_state(t_data *data);
 /* drawing */
 
 void	mlx_pixel_put_v2(t_image *image, int px, int py, int color);
-void	draw_block(t_image *image, int size);
-void	draw_map(char **map, t_data *data, t_mlx *mlx);
 void	draw_line(t_image *image, t_player *player, t_data *data);
 
 /*line calculation */
