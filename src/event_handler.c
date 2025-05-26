@@ -59,23 +59,23 @@ void	update_coordinates(t_data *data)
 {
 	if (data->keys.w == 1)
 	{
-			data->player.px += cos(data->player.angle) * SPEED;
-			data->player.py += sin(data->player.angle) * SPEED;
+		data->player.px += cos(data->player.angle) * SPEED;
+		data->player.py += sin(data->player.angle) * SPEED;
 	}
 	if (data->keys.s == 1)
 	{
-			data->player.px -= cos(data->player.angle) * SPEED;
-			data->player.py -= sin(data->player.angle) * SPEED;
+		data->player.px -= cos(data->player.angle) * SPEED;
+		data->player.py -= sin(data->player.angle) * SPEED;
 	}
 	if (data->keys.a == 1)
 	{
-			data->player.px += cos(data->player.angle - M_PI / 2) * SPEED;
-			data->player.py += sin(data->player.angle - M_PI / 2) * SPEED;
+		data->player.px += cos(data->player.angle - M_PI / 2) * SPEED;
+		data->player.py += sin(data->player.angle - M_PI / 2) * SPEED;
 	}
 	if (data->keys.d == 1)
 	{
-			data->player.px += cos(data->player.angle + M_PI / 2) * SPEED;
-			data->player.py += sin(data->player.angle + M_PI / 2) * SPEED;
+		data->player.px += cos(data->player.angle + M_PI / 2) * SPEED;
+		data->player.py += sin(data->player.angle + M_PI / 2) * SPEED;
 	}
 }
 

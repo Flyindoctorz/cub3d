@@ -15,9 +15,11 @@
 
 void	draw_vertical_line(t_image *image, int x, int height)
 {
-	int start = (HEIGHT / 2) - (height / 2);
-	int end = start + height;
+	int	start;
+	int	end;
 
+	start = (HEIGHT / 2) - (height / 2);
+	end = start + height;
 	for (int y = 0; y < HEIGHT; y++)
 	{
 		if (y < start)
@@ -80,5 +82,6 @@ void	render_scene(t_image *image, t_player *player, t_data *data)
 		draw_vertical_line(image, pos_screen, wall_height);
 		pos_screen++;
 	}
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, image->img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, image->img,
+		0, 0);
 }
