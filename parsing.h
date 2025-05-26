@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/21 17:00:30 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/26 11:54:47 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "stdbool.h"
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 // stucture
 typedef struct s_map
@@ -48,6 +49,7 @@ typedef struct s_color
 	int	red;
 	int	green;
 	int	blue;
+	int	hex;
 }	t_color;
 
 typedef struct s_data

@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:39:29 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/21 18:21:17 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/26 11:39:02 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,8 @@ bool parse_color(char *line, t_color *color)
     color->blue = components[2];
     
     return (true);
+}
+void color_to_hex(t_color *color)
+{
+	color->hex = (color->red << 16) | (color->green << 8) | color->blue;
 }

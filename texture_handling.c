@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:38:52 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/21 18:19:32 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/26 11:43:43 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ bool	is_texture_line(char *line, char *id, int *pos)
 		return (false);
 	while (line[i] && line[i] == ' ')
 		i++;
-	if (!line[i])
+	while (line[i] && line[i] != ' ' && line[i] != '#')
+		i++;
+	if (!line[i] && line[i] != '\n')
 		return (false);
 	*pos = i;
 	return (true);
