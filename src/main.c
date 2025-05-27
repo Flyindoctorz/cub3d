@@ -15,19 +15,11 @@
 
 void	set_images(t_data *data)
 {
-	data->scene_img.img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
-	if (data->scene_img.img == NULL)
-		close_window(data);
-	data->scene_img.addr = mlx_get_data_addr(data->scene_img.img,
-			&data->scene_img.bpp, &data->scene_img.line_length,
-			&data->scene_img.endian);
-	data->wallnorth_img.img = mlx_xpm_file_to_image(data->mlx.mlx_ptr,
-		"assets/wall_texture.xpm", &data->wallnorth_img.width, &data->wallnorth_img.height);
-	if (data->wallnorth_img.img == NULL)
-		close_window(data);
-	data->wallnorth_img.addr = mlx_get_data_addr(data->wallnorth_img.img,
-			&data->wallnorth_img.bpp, &data->wallnorth_img.line_length,
-			&data->wallnorth_img.endian);
+	create_image(&data->scene_img, 0, data, NULL);
+	create_image(&data->wallnorth_img, 1, data, "assets/wall_texture.xpm");
+	create_image(&data->walleast_img, 1, data, "assets/wall_texture.xpm");
+	create_image(&data->wallwest_img, 1, data, "assets/wall_texture.xpm");
+	create_image(&data->wallsouth_img, 1, data, "assets/wall_texture.xpm");
 }
 
 void	set_player(t_data *data)

@@ -21,6 +21,25 @@ void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	create_image(t_image *image, int type, t_data *data, char *path)
+{
+	if (type == 1)
+	{
+		image->img = mlx_xpm_file_to_image(data->mlx.mlx_ptr, path,
+			&image->width, &image->height);
+	}
+	else
+	{
+		image->img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
+		image->width = WIDTH;
+		image->height = HEIGHT;
+	}
+	if (image->img == NULL)
+		close_window(data);
+	image->addr = mlx_get_data_addr(image->img, &image->bpp,
+		&image->line_length, &image->endian);
+}
+
 // void	draw_line(t_image *image, t_player *player, t_data *data)
 // {
 // 	double	tmp_x;

@@ -78,31 +78,22 @@ typedef struct s_image
 {
 	void		*img;
 	char		*addr;
-	int			bpp;
-	int			line_length;
-	int			endian;
-}				t_image;
-
-typedef struct s_asset
-{
-	void		*img;
-	char		*addr;
 	int 		width;
 	int 		height;
 	int			bpp;
 	int			line_length;
 	int			endian;
-}				t_asset;
+}				t_image;
 
 typedef struct s_data
 {
 	t_player	player;
 	t_mlx		mlx;
 	t_image		scene_img;
-	t_asset		wallnorth_img;
-	t_asset		wallsouth_img;
-	t_asset		walleast_img;
-	t_asset		wallwest_img;
+	t_image		wallnorth_img;
+	t_image		wallsouth_img;
+	t_image		walleast_img;
+	t_image		wallwest_img;
 	t_keys		keys;
 	t_map		map;
 	t_texture	texture;
@@ -117,10 +108,11 @@ int				key_down(int keycode, t_data *data);
 int				key_up(int keycode, t_data *data);
 int				update_state(t_data *data);
 
-/* drawing */
+/* images/drawing */
 
 void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void			draw_line(t_image *image, t_player *player, t_data *data);
+void			create_image(t_image *image, int type, t_data *data, char *path);
 
 /*line calculation */
 
