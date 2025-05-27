@@ -15,10 +15,19 @@
 
 void	set_images(t_data *data)
 {
-	data->ray_img.img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
-	data->ray_img.addr = mlx_get_data_addr(data->ray_img.img,
-			&data->ray_img.bits_per_pixel, &data->ray_img.line_length,
-			&data->ray_img.endian);
+	data->scene_img.img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
+	if (data->scene_img.img == NULL)
+		close_window(data);
+	data->scene_img.addr = mlx_get_data_addr(data->scene_img.img,
+			&data->scene_img.bpp, &data->scene_img.line_length,
+			&data->scene_img.endian);
+	data->wallnorth_img.img = mlx_xpm_file_to_image(data->mlx.mlx_ptr,
+		"assets/wall_texture.xpm", &data->wallnorth_img.width, &data->wallnorth_img.height);
+	if (data->wallnorth_img.img == NULL)
+		close_window(data);
+	data->wallnorth_img.addr = mlx_get_data_addr(data->wallnorth_img.img,
+			&data->wallnorth_img.bpp, &data->wallnorth_img.line_length,
+			&data->wallnorth_img.endian);
 }
 
 void	set_player(t_data *data)
@@ -85,7 +94,7 @@ int	main(int ac, char **av)
 	// check if the file is a valid map
 	if (initialize(&data) == ERROR)
 		return (ERROR);
-	render_scene(&data.ray_img, &data.player, &data);
+	render_scene(&data.scene_img, &data.player, &data);
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
 	mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);
 	mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);

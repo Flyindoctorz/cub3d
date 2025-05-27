@@ -1,18 +1,18 @@
-sources = src/main.c src/event_handler.c src/draw.c src/raycasting.c
+sources = src/main.c src/event_handler.c src/images.c src/raycasting.c
 
 objects = $(sources:.c=.o)
 
 # linux compile
 
-libs = -Lminilibx -l:libmlx.a  -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
+# libs = -Lminilibx -l:libmlx.a  -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
 
-includes = -Iminilibx -I/usr/include -I/opt/X11/include
+# includes = -Iminilibx -I/usr/include -I/opt/X11/include
 
 # macos compile
 
-# libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
+libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
 
-# includes = -Iminilibx -I/opt/X11/include
+includes = -Iminilibx -I/opt/X11/include
 
 cc = cc
 cflags = -Wall -Wextra -Werror
@@ -30,10 +30,10 @@ YELLOW = \033[0;33m
 BLUE = \033[0;34m
 RESET = \033[0m
 
-$(NAME): build_mlx $(objects)
+$(NAME): $(objects)
 	$(cc) $(cflags) $(objects) $(libs) -o $(NAME)
 
-all: $(NAME)
+all: build_mlx $(NAME)
 
 %.o: %.c
 	$(cc) $(cflags) $(includes) -c $< -o $@

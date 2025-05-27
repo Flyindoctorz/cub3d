@@ -16,37 +16,37 @@
 # define SUCCESS 0
 # define ERROR 1
 
-# define WIDTH 480.0
-# define HEIGHT 320.0
-# define BLOCK 32.0
+# define WIDTH 480
+# define HEIGHT 320
+# define BLOCK 32
 
 # define FOV (M_PI / 3)
 # define FOV_STEP (FOV / WIDTH)
-# define PLAYER_SPEED 0.002
-# define PLAYER_ROTATION_SPEED 0.1
+# define PLAYER_SPEED 0.02
+# define PLAYER_ROTATION_SPEED 1
 # define MAX_RAY_DISTANCE 10000.0
 # define RAY_STEP_SIZE 1.0
 
-// # define KEY_W 13
-// # define KEY_A 0
-// # define KEY_S 1
-// # define KEY_D 2
-// # define KEY_LEFT 123
-// # define KEY_RIGHT 124
-// # define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_ESC 53
 
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_ESC 65307
+// # define KEY_W 119
+// # define KEY_A 97
+// # define KEY_S 115
+// # define KEY_D 100
+// # define KEY_LEFT 65361
+// # define KEY_RIGHT 65363
+// # define KEY_ESC 65307
 
 # include "../minilibx/mlx.h"
 # include "math.h"
 # include "parsing.h"
-# include <X11/keysym.h>
+// # include <X11/keysym.h>
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
@@ -78,16 +78,31 @@ typedef struct s_image
 {
 	void		*img;
 	char		*addr;
-	int			bits_per_pixel;
+	int			bpp;
 	int			line_length;
 	int			endian;
 }				t_image;
+
+typedef struct s_asset
+{
+	void		*img;
+	char		*addr;
+	int 		width;
+	int 		height;
+	int			bpp;
+	int			line_length;
+	int			endian;
+}				t_asset;
 
 typedef struct s_data
 {
 	t_player	player;
 	t_mlx		mlx;
-	t_image		ray_img;
+	t_image		scene_img;
+	t_asset		wallnorth_img;
+	t_asset		wallsouth_img;
+	t_asset		walleast_img;
+	t_asset		wallwest_img;
 	t_keys		keys;
 	t_map		map;
 	t_texture	texture;

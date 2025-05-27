@@ -15,9 +15,9 @@
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_image(data->mlx.mlx_ptr, data->ray_img.img);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->scene_img.img);
 	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
-	mlx_destroy_display(data->mlx.mlx_ptr);
+	// mlx_destroy_display(data->mlx.mlx_ptr);
 	while (0 < data->map.height--)
 		free(data->map.map[data->map.height]);
 	free(data->map.map);
@@ -83,7 +83,6 @@ void	update_coordinates(t_data *data)
 		data->player.px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
 		data->player.py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
 	}
-	printf("%f_%f\n",data->player.px, data->player.py);
 }
 
 int	update_state(t_data *data)
@@ -97,8 +96,8 @@ int	update_state(t_data *data)
 		data->player.angle += 2.0 * M_PI;
 	else if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
-	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
-	memset(data->ray_img.addr, 0, HEIGHT * WIDTH * sizeof(int));
-	render_scene(&data->ray_img, &data->player, data);
+	// mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
+	memset(data->scene_img.addr, 0, HEIGHT * WIDTH * sizeof(int));
+	render_scene(&data->scene_img, &data->player, data);
 	return (SUCCESS);
 }
