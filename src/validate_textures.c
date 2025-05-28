@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:47:25 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/26 13:00:20 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/28 12:39:05 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ bool	validate_single_texture(const char *path, const char *texture_name)
 		return (false);
 	if (!validate_file(path))
 	{
-		printf("Error: %s texture file not accesible \n");
+		printf("Error: %s texture file not accesible \n", texture_name);
 		return (false);
 	}
 	return (true);
