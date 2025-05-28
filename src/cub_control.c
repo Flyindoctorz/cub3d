@@ -6,11 +6,12 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:03:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/26 14:38:55 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/28 12:36:09 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
+#include "../include/raycasting.h"
 
 bool	is_a_cub(char *filename)
 {
@@ -57,8 +58,4 @@ bool	parse_a_color_line(char *line, t_data *data)
 		return (parse_color(line, &data->ceiling));
 	}
 	return (false);
-}
-bool	add_a_line(char *line, t_data *data)
-{
-	char **
 }
