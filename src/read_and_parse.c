@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:03:32 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 14:56:55 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/28 15:26:43 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,55 +74,19 @@ char	**make_it_split(char *filename)
 		return (printf("Error splitting file content"), false);
 	return (lines);
 }
-bool	parse_my_lines(char **lines, t_data *data)
-{
-	int		i;
-	bool	inside_map;
-
-	inside_map = false;
-	i = 0;
-	while (lines[i])
-	{
-		if (!is_empty_or_comment(lines[i]))
-		{
-			if (!inside_map)
-			{
-				if (parse_a_texture_line(lines[i], data->texture))
-				{
-					i++;
-					continue ;
-				}
-				if (parse_a_color_line(lines[i], data))
-				{
-					i++;
-					continue ;
-				}
-				/* code */
-				inside_map = true;
-			}
-			if (inside_map)
-				printf("Parsing map line: %s\n", lines[i]);
-		}
-		i++;
-	}
-	return (true);
-}
-}
-
-bool parse_cub_file(char *filename, t_data *data)
+bool parse_my_cub(char *filename, t_data *data)
 {
     char **lines;
+	bool res;
     
-    init_data(data);
+	if (init_data(data) != SUCCESS)
+		return (false);
     lines = make_it_split(filename);
     if (!lines)
         return (false);
-    if (!parse_my_lines(lines, data))
-    {
-        free_split(lines);
-        return (false);
-    }
-
-    free_split(lines);
+	res = parse_the_lines(lines, data);
+	free_split(lines);
+	if (!res)
+		return (false);
     return (validate_all_data(data));
 }
