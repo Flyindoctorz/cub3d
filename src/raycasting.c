@@ -13,7 +13,6 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-
 int	get_texture_pixel(t_image *texture, int x, int y)
 {
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
@@ -21,23 +20,38 @@ int	get_texture_pixel(t_image *texture, int x, int y)
 	return (*(int *)(texture->addr + y * (texture->line_length / 4) + x));
 }
 
-void	draw_vertical_line(t_image *image, int x, t_ray *ray, t_data *data)
+void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 {
 	int	start;
 	int	end;
 	int	line;
+	double	wall_hit_pos;
+	int		texture_x;
 
+	if (ray->axis == AXIS_Y)
+		wall_hit_pos = ray->y - floor(ray->y);
+	else
+		wall_hit_pos = ray->x - floor(ray->x);
+	texture_x = (int)(wall_hit_pos * ray->texture->width);
 	line = 0;
-	start = ((double)HEIGHT / 2) - (ray->height_line / 2);
+	start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
 	end = start + ray->height_line;
-	(void)data;
 	while (line < HEIGHT)
 	{
 		if (line < start)
-			mlx_pixel_put_v2(image, x, line++, 0x00FF0000);
-		else if (line >= start && line < end)
 			mlx_pixel_put_v2(image, x, line++, 0x00FFFF00);
-		else if (line >= end)
+		else if (line >= start && line <= end)
+		{
+			int d = line - start;
+			int texture_y = (int)((double)d / ray->height_line * ray->texture->height);
+			int color = get_texture_pixel(ray->texture, texture_x, texture_y);
+			// printf("%x\n", color);
+			// mlx_pixel_put_v2(image, x, line++, color);
+			(void)color;
+			(void)texture_x;
+			mlx_pixel_put_v2(image, x, line++, 0x00FFFFFF);
+		}
+		else
 			mlx_pixel_put_v2(image, x, line++, 0x0000FF00);
 	}
 }
@@ -47,17 +61,19 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 	if (axis == 0 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
 	{
 		if (ray->x > player->px * BLOCK + BLOCK / 2.0)
-			ray->direction = WEST;
+			ray->texture = &data->wallwest_img;
 		else
-			ray->direction = EAST;
+			ray->texture = &data->walleast_img;
+		ray->axis = AXIS_X;
 		return (EXIT_SUCCESS);
 	}
 	else if (axis == 1 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
 	{
 		if (ray->y > player->py * BLOCK + BLOCK / 2.0)
-			ray->direction = NORTH;
+			ray->texture = &data->wallnorth_img;
 		else
-			ray->direction = SOUTH;
+			ray->texture = &data->wallsouth_img;
+		ray->axis = AXIS_Y;
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
@@ -68,7 +84,8 @@ void	ray_distance(t_player *player, t_data *data, t_ray *ray)
 	ray->x = player->px * BLOCK + BLOCK / 2.0;
 	ray->y = player->py * BLOCK + BLOCK / 2.0;
 	ray->distance = 0.0;
-	ray->direction = NORTH;
+	ray->texture = data->wallnorth_img.img;
+	ray->axis = AXIS_X;
 	while (ray->distance < MAX_RAY_DISTANCE)
 	{
 		if ((int)(ray->y / BLOCK) < 0 || (int)(ray->x / BLOCK) < 0
@@ -104,7 +121,7 @@ void	render_scene(t_image *image, t_player *player, t_data *data)
 		ray_distance(player, data, &ray);
 		ray.corrected = ray.distance * cos(player->angle - ray.angle);
 		ray.height_line = (BLOCK * HEIGHT) / ray.corrected;
-		draw_vertical_line(image, pos_screen++, &ray, data);
+		draw_vertical_line(image, pos_screen++, &ray);
 	}
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, image->img,
 		0, 0);

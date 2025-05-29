@@ -35,7 +35,10 @@ void	create_image(t_image *image, int type, t_data *data, char *path)
 		image->height = HEIGHT;
 	}
 	if (image->img == NULL)
+	{
+		printf("Error loading texture\n");
 		close_window(data);
+	}
 	image->addr = mlx_get_data_addr(image->img, &image->bpp,
 		&image->line_length, &image->endian);
 }
