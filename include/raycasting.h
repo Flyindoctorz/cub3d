@@ -51,6 +51,14 @@
 # include <string.h>
 # include <unistd.h>
 
+enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
+
 typedef struct s_keys
 {
 	int			w;
@@ -101,6 +109,19 @@ typedef struct s_data
 	t_color		ceiling;
 }				t_data;
 
+typedef struct s_ray
+{
+	double				x;
+	double				y;
+	double				distance;
+	double				start_angle;
+	double				angle;
+	double				corrected;
+	double				height_line;
+	enum e_direction	direction;
+
+}				t_ray;
+
 /* event handling*/
 
 int				close_window(t_data *data);
@@ -116,8 +137,10 @@ void			create_image(t_image *image, int type, t_data *data, char *path);
 
 /*line calculation */
 
-double			ray_distance(t_player *player, t_data *data, double ray_angle);
+void			ray_distance(t_player *player, t_data *data, t_ray *ray);
 void			render_scene(t_image *image, t_player *player, t_data *data);
-void			draw_vertical_line(t_image *image, int x, double height);
+void			draw_vertical_line(t_image *image, int x, t_ray *ray, t_data *data);
+int				get_direction(int axis, t_ray *ray, t_player *player, t_data *data);
+
 
 #endif

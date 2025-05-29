@@ -13,15 +13,24 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-void	draw_vertical_line(t_image *image, int x, double height)
+
+int	get_texture_pixel(t_image *texture, int x, int y)
+{
+	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+		return (0);
+	return (*(int *)(texture->addr + y * (texture->line_length / 4) + x));
+}
+
+void	draw_vertical_line(t_image *image, int x, t_ray *ray, t_data *data)
 {
 	int	start;
 	int	end;
 	int	line;
 
 	line = 0;
-	start = (HEIGHT / 2) - (height / 2);
-	end = start + height;
+	start = ((double)HEIGHT / 2) - (ray->height_line / 2);
+	end = start + ray->height_line;
+	(void)data;
 	while (line < HEIGHT)
 	{
 		if (line < start)
@@ -33,53 +42,69 @@ void	draw_vertical_line(t_image *image, int x, double height)
 	}
 }
 
-double	ray_distance(t_player *player, t_data *data, double ray_angle)
+int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 {
-	double	tmp_x;
-	double	tmp_y;
-	double	traveled;
-	int		grid_x;
-	int		grid_y;
-
-	tmp_x = player->px * BLOCK + BLOCK / 2.0;
-	tmp_y = player->py * BLOCK + BLOCK / 2.0;
-	traveled = 0.0;
-	while (traveled < MAX_RAY_DISTANCE)
+	if (axis == 0 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
 	{
-		grid_x = (int)(tmp_x / BLOCK);
-		grid_y = (int)(tmp_y / BLOCK);
-		if (grid_y < 0 || grid_x < 0 || grid_y >= data->map.height
-			|| grid_x >= data->map.width
-			|| data->map.map[grid_y][grid_x] == '1')
-			break ;
-		tmp_x += cos(ray_angle) * RAY_STEP_SIZE;
-		tmp_y += sin(ray_angle) * RAY_STEP_SIZE;
-		traveled += RAY_STEP_SIZE;
+		if (ray->x > player->px * BLOCK + BLOCK / 2.0)
+			ray->direction = WEST;
+		else
+			ray->direction = EAST;
+		return (EXIT_SUCCESS);
 	}
-	return (traveled);
+	else if (axis == 1 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
+	{
+		if (ray->y > player->py * BLOCK + BLOCK / 2.0)
+			ray->direction = NORTH;
+		else
+			ray->direction = SOUTH;
+		return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
+}
+
+void	ray_distance(t_player *player, t_data *data, t_ray *ray)
+{
+	ray->x = player->px * BLOCK + BLOCK / 2.0;
+	ray->y = player->py * BLOCK + BLOCK / 2.0;
+	ray->distance = 0.0;
+	ray->direction = NORTH;
+	while (ray->distance < MAX_RAY_DISTANCE)
+	{
+		if ((int)(ray->y / BLOCK) < 0 || (int)(ray->x / BLOCK) < 0
+			|| (int)(ray->y / BLOCK) >= data->map.height
+			|| (int)(ray->x / BLOCK) >= data->map.width)
+			break ;
+		if (data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
+			break ;
+		ray->x += cos(ray->angle) * RAY_STEP_SIZE;
+		if (get_direction(0, ray, player, data) == EXIT_SUCCESS)
+			break ;
+		ray->y += sin(ray->angle) * RAY_STEP_SIZE;
+		if (get_direction(1, ray, player, data) == EXIT_SUCCESS)
+			break ;
+		ray->distance += RAY_STEP_SIZE;
+	}
 }
 
 void	render_scene(t_image *image, t_player *player, t_data *data)
 {
-	double	start_angle;
-	double	ray_angle;
-	double	corrected;
-	double	wall_height;
+	t_ray	ray;
 	int		pos_screen;
 
-	start_angle = player->angle - (FOV / 2.0);
+	ray.start_angle = player->angle - (FOV / 2.0);
 	pos_screen = 0;
 	while (pos_screen < WIDTH)
 	{
-		ray_angle = start_angle + (pos_screen * FOV_STEP);
-		if (ray_angle < 0)
-			ray_angle += 2 * M_PI;
-		if (ray_angle > 2 * M_PI)
-			ray_angle -= 2 * M_PI;
-		corrected = ray_distance(player, data, ray_angle)
-			* cos(player->angle - ray_angle);
-		wall_height = (BLOCK * HEIGHT) / corrected;
-		draw_vertical_line(image, pos_screen++, wall_height);
+		ray.angle = ray.start_angle + (pos_screen * FOV_STEP);
+		if (ray.angle < 0)
+			ray.angle += 2 * M_PI;
+		if (ray.angle > 2 * M_PI)
+			ray.angle -= 2 * M_PI;
+		ray_distance(player, data, &ray);
+		ray.corrected = ray.distance * cos(player->angle - ray.angle);
+		ray.height_line = (BLOCK * HEIGHT) / ray.corrected;
+		draw_vertical_line(image, pos_screen++, &ray, data);
 	}
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, image->img,
 		0, 0);
