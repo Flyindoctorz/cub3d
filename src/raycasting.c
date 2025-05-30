@@ -17,7 +17,7 @@ int	get_texture_pixel(t_image *texture, int x, int y)
 {
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
 		return (0);
-	return (*(int *)(texture->addr + y * (texture->line_length / 4) + x));
+	return ((unsigned int *)texture->addr)[y * (texture->line_length / 4) + x];
 }
 
 void	draw_vertical_line(t_image *image, int x, t_ray *ray)
@@ -46,10 +46,10 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 			int texture_y = (int)((double)d / ray->height_line * ray->texture->height);
 			int color = get_texture_pixel(ray->texture, texture_x, texture_y);
 			// printf("%x\n", color);
-			// mlx_pixel_put_v2(image, x, line++, color);
-			(void)color;
-			(void)texture_x;
-			mlx_pixel_put_v2(image, x, line++, 0x00FFFFFF);
+			mlx_pixel_put_v2(image, x, line++, color);
+			// (void)color;
+			// (void)texture_x;
+			// mlx_pixel_put_v2(image, x, line++, 0x00FFFFFF);
 		}
 		else
 			mlx_pixel_put_v2(image, x, line++, 0x0000FF00);
