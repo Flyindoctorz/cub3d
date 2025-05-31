@@ -31,14 +31,14 @@ void	flood_fill(char **map, int x, int y, int *valid)
 	flood_fill(map, x, y - 1, valid);
 }
 
-
-bool check_map_close(char **map)
+bool	check_map_close(char **map)
 {
-	char **map_copy;
-	int p_x;
-	int p_y;
-	int valid;
-	bool res;
+	char	**map_copy;
+	int		p_x;
+	int		p_y;
+	int		valid;
+	bool	res;
+
 	map_copy = copy_map(map);
 	if (!map_copy)
 		return (false);
@@ -54,4 +54,3 @@ bool check_map_close(char **map)
 	free_copy(map_copy);
 	return (res);
 }
-

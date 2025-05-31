@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
 #include "../include/parsing.h"
+#include "../include/raycasting.h"
 
 int	close_window(t_mlx *data)
 {

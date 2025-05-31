@@ -72,13 +72,14 @@ bool	validate_map(char **map)
 {
 	int	p_x;
 	int	p_y;
+
 	if (!map || !map[0])
 	{
 		printf("Map is empty or NULL\n");
 		return (false);
 	}
 	if (!is_valid_char(map))
-		return (printf("map syntax validation failed\n"),false);
+		return (printf("map syntax validation failed\n"), false);
 	if (!is_valid_map(map))
 		return (printf("Map validation failed\n"), false);
 	if (!where_player_at(map, &p_x, &p_y))
@@ -87,5 +88,3 @@ bool	validate_map(char **map)
 		return (printf("Map is not closed\n"), false);
 	return (true);
 }
-
-

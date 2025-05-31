@@ -74,19 +74,19 @@ char	**make_it_split(char *filename)
 		return (printf("Error splitting file content"), false);
 	return (lines);
 }
-bool parse_my_cub(char *filename, t_data *data)
+bool	parse_my_cub(char *filename, t_data *data)
 {
-    char **lines;
-	bool res;
-    
+	char	**lines;
+	bool	res;
+
 	if (init_data(data) != SUCCESS)
 		return (false);
-    lines = make_it_split(filename);
-    if (!lines)
-        return (false);
+	lines = make_it_split(filename);
+	if (!lines)
+		return (false);
 	res = parse_the_lines(lines, data);
 	free_split(lines);
 	if (!res)
 		return (false);
-    return (validate_all_data(data));
+	return (validate_all_data(data));
 }

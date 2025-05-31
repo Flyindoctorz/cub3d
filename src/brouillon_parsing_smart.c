@@ -5,20 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 15:56:13 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 15:56:14 by cgelgon          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   smart_parsing.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:00:00 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 16:00:00 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/05/31 09:53:21 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +15,8 @@
 
 static bool	is_map_char(char c)
 {
-	return (c == '1' || c == '0' || c == ' ' || c == 'N' 
-		|| c == 'S' || c == 'E' || c == 'W');
+	return (c == '1' || c == '0' || c == ' ' || c == 'N' || c == 'S' || c == 'E'
+		|| c == 'W');
 }
 
 static float	calculate_map_char_percentage(char *line)
@@ -91,7 +79,8 @@ static int	find_map_end(char **lines, int start)
 				last_map_line = i;
 			else
 			{
-				printf("Error: Non-map line found after map start: %s\n", lines[i]);
+				printf("Error: Non-map line found after map start: %s\n",
+					lines[i]);
 				return (-1);
 			}
 		}
@@ -148,11 +137,11 @@ static bool	parse_config_section(char **lines, int map_start, t_data *data)
 		if (!is_empty_or_comment(lines[i]))
 		{
 			// Vérifier si c'est une ligne de texture
-			if (lines[i][0] == 'N' || lines[i][0] == 'S' 
-				|| lines[i][0] == 'W' || lines[i][0] == 'E'
-				|| (lines[i][0] == ' ' && (ft_strchr(lines[i], 'N') 
-				|| ft_strchr(lines[i], 'S') || ft_strchr(lines[i], 'W') 
-				|| ft_strchr(lines[i], 'E'))))
+			if (lines[i][0] == 'N' || lines[i][0] == 'S' || lines[i][0] == 'W'
+				|| lines[i][0] == 'E' || (lines[i][0] == ' '
+					&& (ft_strchr(lines[i], 'N') || ft_strchr(lines[i], 'S')
+						|| ft_strchr(lines[i], 'W') || ft_strchr(lines[i],
+							'E'))))
 			{
 				if (!parse_texture(lines[i], &data->texture))
 				{
@@ -162,8 +151,8 @@ static bool	parse_config_section(char **lines, int map_start, t_data *data)
 			}
 			// Vérifier si c'est une ligne de couleur
 			else if (lines[i][0] == 'F' || lines[i][0] == 'C'
-				|| (lines[i][0] == ' ' && (ft_strchr(lines[i], 'F') 
-				|| ft_strchr(lines[i], 'C'))))
+				|| (lines[i][0] == ' ' && (ft_strchr(lines[i], 'F')
+						|| ft_strchr(lines[i], 'C'))))
 			{
 				if (!parse_a_color_line(lines[i], data))
 				{
@@ -224,39 +213,25 @@ static bool	validate_config_complete(t_data *data)
 
 bool	parse_the_lines(char **lines, t_data *data)
 {
-	int	map_start;
-	int	map_end;
+	int map_start;
+	int map_end;
 
-	// 1. Trouver le début de la map
 	map_start = find_map_start(lines);
 	if (map_start == -1)
 	{
 		printf("Error: No map found in file\n");
 		return (false);
 	}
-	
-	// 2. Parser la section de configuration avant la map
 	if (!parse_config_section(lines, map_start, data))
 		return (false);
-	
-	// 3. Vérifier que toute la configuration est présente
 	if (!validate_config_complete(data))
 		return (false);
-	
-	// 4. Trouver la fin de la map
 	map_end = find_map_end(lines, map_start);
 	if (map_end == -1)
 		return (false);
-	
-	// 5. Extraire la map
 	data->map.map = extract_map_section(lines, map_start, map_end);
 	if (!data->map.map)
-	{
-		printf("Error: Failed to extract map\n");
-		return (false);
-	}
-	
-	// 6. Calculer les dimensions
+		return (printf("Error: Failed to extract map\n"), false);
 	data->map.height = line_height(data->map.map);
 	data->map.width = 0;
 	for (int i = 0; data->map.map[i]; i++)
@@ -265,11 +240,8 @@ bool	parse_the_lines(char **lines, t_data *data)
 		if (w > data->map.width)
 			data->map.width = w;
 	}
-	
-	// 7. Valider la map
 	if (!validate_map(data->map.map))
 		return (false);
-	
-	printf("✅ Map parsed successfully: %dx%d\n", data->map.width, data->map.height);
-	return (true);
+	return (printf("✅ Map parsed successfully: %dx%d\n", data->map.width,
+		data->map.height), true);
 }

@@ -28,8 +28,8 @@ bool	validate_file(const char *path)
 
 bool	validate_textures(t_texture *texture)
 {
-	if (!texture->north.path || !texture->south.path
-		|| !texture->west.path || !texture->east.path)
+	if (!texture->north.path || !texture->south.path || !texture->west.path
+		|| !texture->east.path)
 	{
 		printf("Error: Missing texture path.\n");
 		return (false);

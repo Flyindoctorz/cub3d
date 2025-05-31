@@ -23,7 +23,7 @@ static char	*join_and_free(char *content, char *buffer)
 	return (res);
 }
 
-static char *read_loop(int fd, char *buffer, char *content)
+static char	*read_loop(int fd, char *buffer, char *content)
 {
 	ssize_t	count;
 

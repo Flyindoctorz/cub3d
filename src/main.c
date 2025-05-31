@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/raycasting.h"
 #include "../include/parsing.h"
+#include "../include/raycasting.h"
 
 void	set_images(t_data *data)
 {
@@ -57,7 +57,6 @@ int	initialize(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-
 	char	map[5][5] = {{'1', '1', '1', '1', '1'}, {'1', '0', '0', '0', '1'},
 			{'1', '0', '1', '1', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
 			'1', '1', '1'}};
@@ -69,7 +68,6 @@ int	main(int ac, char **av)
 	for (int i = 0; i < 5; i++)
 		for (int j = 0; j < 5; j++)
 			data.map.map[i][j] = map[i][j];
-
 	// securiser le cas ou il n'y a pas d'argument
 	// securiser le cas ou il y a trop d'argument
 	// securiser le cas ou on retire l'environnement de force (env -i ou unset)

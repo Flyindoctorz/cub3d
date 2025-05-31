@@ -12,4 +12,4 @@
 
 #include "../include/parsing.h"
 
-static bool 
+static bool
