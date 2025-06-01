@@ -19,9 +19,9 @@
 # define AXIS_X 0
 # define AXIS_Y 1
 
-# define WIDTH 480
-# define HEIGHT 320
-# define BLOCK 32
+# define WIDTH 1280
+# define HEIGHT 720
+# define BLOCK 64
 
 # define FOV (M_PI / 3)
 # define FOV_STEP (FOV / WIDTH)

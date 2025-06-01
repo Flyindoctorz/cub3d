@@ -16,10 +16,10 @@
 void	set_images(t_data *data)
 {
 	create_image(&data->scene_img, 0, data, NULL);
-	create_image(&data->wallnorth_img, 1, data, "assets/wall_texture.xpm");
-	create_image(&data->walleast_img, 1, data, "assets/wall_texture.xpm");
-	create_image(&data->wallwest_img, 1, data, "assets/wall_texture.xpm");
-	create_image(&data->wallsouth_img, 1, data, "assets/wall_texture.xpm");
+	create_image(&data->wallnorth_img, 1, data, "assets/wall_north.xpm");
+	create_image(&data->walleast_img, 1, data, "assets/wall_east.xpm");
+	create_image(&data->wallwest_img, 1, data, "assets/wall_west.xpm");
+	create_image(&data->wallsouth_img, 1, data, "assets/wall_south.xpm");
 }
 
 void	set_player(t_data *data)
@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 	char	map[8][5] =
 	{
 		{'1', '1', '1', '1', '1'},
-		{'1', '0', '0', '0', '1'},
+		{'1', '0', '1', '0', '1'},
 		{'1', '0', '0', '0', '1'},
 		{'1', '0', '0', '0', '1'},
 		{'1', '0', '1', '1', '1'},

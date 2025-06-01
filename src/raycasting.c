@@ -22,20 +22,37 @@ int	get_texture_pixel(t_image *texture, int x, int y)
 
 void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 {
-	int	start;
-	int	end;
-	int	line;
+	int		start;
+	int		end;
+	int		line;
 	double	wall_hit_pos;
 	int		texture_x;
 
 	if (ray->axis == AXIS_Y)
-		wall_hit_pos = ray->y - floor(ray->y);
+		wall_hit_pos = (ray->x / BLOCK) - floor(ray->x / BLOCK);
 	else
-		wall_hit_pos = ray->x - floor(ray->x);
-	texture_x = (int)(wall_hit_pos * ray->texture->width);
+		wall_hit_pos = (ray->y / BLOCK) - floor(ray->y / BLOCK);
+	texture_x = (int)(wall_hit_pos * (double)ray->texture->width);
+	if (texture_x < 0)
+		texture_x = 0;
+	if (texture_x >= ray->texture->width)
+		texture_x = ray->texture->width - 1;
+	double ray_dir_x = cos(ray->angle);
+	double ray_dir_y = sin(ray->angle);
+	if ((ray->axis == AXIS_Y && ray_dir_y > 0) ||
+		(ray->axis == AXIS_X && ray_dir_x < 0))
+		texture_x = ray->texture->width - texture_x - 1;
+	if (texture_x < 0)
+		texture_x = 0;
+	if (texture_x >= ray->texture->width)
+		texture_x = ray->texture->width - 1;
 	line = 0;
 	start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
 	end = start + ray->height_line;
+	if (start < 0)
+		start = 0;
+	if (end >= HEIGHT)
+		end = HEIGHT - 1;
 	while (line < HEIGHT)
 	{
 		if (line < start)
@@ -43,13 +60,13 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 		else if (line >= start && line <= end)
 		{
 			int d = line - start;
-			int texture_y = (int)((double)d / ray->height_line * ray->texture->height);
+			int texture_y = (int)((double)d / (double)ray->height_line * (double)ray->texture->height);
+			if (texture_y < 0)
+				texture_y = 0;
+			if (texture_y >= ray->texture->height)
+				texture_y = ray->texture->height - 1;
 			int color = get_texture_pixel(ray->texture, texture_x, texture_y);
-			// printf("%x\n", color);
 			mlx_pixel_put_v2(image, x, line++, color);
-			// (void)color;
-			// (void)texture_x;
-			// mlx_pixel_put_v2(image, x, line++, 0x00FFFFFF);
 		}
 		else
 			mlx_pixel_put_v2(image, x, line++, 0x0000FF00);
