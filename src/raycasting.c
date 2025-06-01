@@ -47,6 +47,7 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 	if (texture_x >= ray->texture->width)
 		texture_x = ray->texture->width - 1;
 	line = 0;
+	int original_start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
 	start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
 	end = start + ray->height_line;
 	if (start < 0)
@@ -59,8 +60,8 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 			mlx_pixel_put_v2(image, x, line++, 0x00FFFF00);
 		else if (line >= start && line <= end)
 		{
-			int d = line - start;
-			int texture_y = (int)((double)d / (double)ray->height_line * (double)ray->texture->height);
+			double full_wall_position = (double)(line - original_start) / ray->height_line;
+			int texture_y = (int)(full_wall_position * ray->texture->height);
 			if (texture_y < 0)
 				texture_y = 0;
 			if (texture_y >= ray->texture->height)
