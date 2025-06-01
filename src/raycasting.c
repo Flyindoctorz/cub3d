@@ -13,69 +13,55 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-int	get_texture_pixel(t_image *texture, int x, int y)
+void	set_drawing_info(t_drawing *data, t_ray *ray)
 {
-	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
-		return (0);
-	return (((unsigned int *)texture->addr)[y * (texture->line_length / 4)
-		+ x]);
+	if (ray->axis == AXIS_Y)
+		data->wall_hit_pos = (ray->x / BLOCK) - floor(ray->x / BLOCK);
+	else
+		data->wall_hit_pos = (ray->y / BLOCK) - floor(ray->y / BLOCK);
+	data->texture_x = (int)(data->wall_hit_pos * (double)ray->texture->width);
+	if (data->texture_x < 0)
+		data->texture_x = 0;
+	if (data->texture_x >= ray->texture->width)
+		data->texture_x = ray->texture->width - 1;
+	if ((ray->axis == AXIS_Y && ray->dir_y > 0) || (ray->axis == AXIS_X
+			&& ray->dir_x < 0))
+		data->texture_x = ray->texture->width - data->texture_x - 1;
+	if (data->texture_x < 0)
+		data->texture_x = 0;
+	if (data->texture_x >= ray->texture->width)
+		data->texture_x = ray->texture->width - 1;
+	data->original_start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
+	data->start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
+	data->end = data->start + ray->height_line;
+	if (data->start < 0)
+		data->start = 0;
+	if (data->end >= HEIGHT)
+		data->end = HEIGHT - 1;
 }
 
 void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 {
-	int		start;
-	int		end;
-	int		line;
-	double	wall_hit_pos;
-	int		texture_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		original_start;
-	double	full_wall_position;
-	int		texture_y;
-	int		color;
+	t_drawing	data;
+	int			line;
 
-	if (ray->axis == AXIS_Y)
-		wall_hit_pos = (ray->x / BLOCK) - floor(ray->x / BLOCK);
-	else
-		wall_hit_pos = (ray->y / BLOCK) - floor(ray->y / BLOCK);
-	texture_x = (int)(wall_hit_pos * (double)ray->texture->width);
-	if (texture_x < 0)
-		texture_x = 0;
-	if (texture_x >= ray->texture->width)
-		texture_x = ray->texture->width - 1;
-	ray_dir_x = cos(ray->angle);
-	ray_dir_y = sin(ray->angle);
-	if ((ray->axis == AXIS_Y && ray_dir_y > 0) || (ray->axis == AXIS_X
-			&& ray_dir_x < 0))
-		texture_x = ray->texture->width - texture_x - 1;
-	if (texture_x < 0)
-		texture_x = 0;
-	if (texture_x >= ray->texture->width)
-		texture_x = ray->texture->width - 1;
 	line = 0;
-	original_start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
-	start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
-	end = start + ray->height_line;
-	if (start < 0)
-		start = 0;
-	if (end >= HEIGHT)
-		end = HEIGHT - 1;
+	set_drawing_info(&data, ray);
 	while (line < HEIGHT)
 	{
-		if (line < start)
+		if (line < data.start)
 			mlx_pixel_put_v2(image, x, line++, 0x00FFFF00);
-		else if (line >= start && line <= end)
+		else if (line >= data.start && line <= data.end)
 		{
-			full_wall_position = (double)(line - original_start)
+			data.full_wall_position = (double)(line - data.original_start)
 				/ ray->height_line;
-			texture_y = (int)(full_wall_position * ray->texture->height);
-			if (texture_y < 0)
-				texture_y = 0;
-			if (texture_y >= ray->texture->height)
-				texture_y = ray->texture->height - 1;
-			color = get_texture_pixel(ray->texture, texture_x, texture_y);
-			mlx_pixel_put_v2(image, x, line++, color);
+			data.texture_y = (int)(data.full_wall_position * ray->texture->height);
+			if (data.texture_y < 0)
+				data.texture_y = 0;
+			if (data.texture_y >= ray->texture->height)
+				data.texture_y = ray->texture->height - 1;
+			data.color = get_texture_pixel(ray->texture, data.texture_x, data.texture_y);
+			mlx_pixel_put_v2(image, x, line++, data.color);
 		}
 		else
 			mlx_pixel_put_v2(image, x, line++, 0x0000FF00);
@@ -114,6 +100,8 @@ void	ray_distance(t_player *player, t_data *data, t_ray *ray)
 	ray->distance = 0.0;
 	ray->texture = data->wallnorth_img.img;
 	ray->axis = AXIS_X;
+	ray->dir_x = cos(ray->angle);
+	ray->dir_y = sin(ray->angle);
 	while (ray->distance < MAX_RAY_DISTANCE)
 	{
 		if ((int)(ray->y / BLOCK) < 0 || (int)(ray->x / BLOCK) < 0

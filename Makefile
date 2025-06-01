@@ -1,4 +1,4 @@
-sources = src/main.c src/event_handler.c src/images.c src/raycasting.c
+sources = src/main.c src/event_handler.c src/raycasting_utils.c src/raycasting.c
 
 objects = $(sources:.c=.o)
 

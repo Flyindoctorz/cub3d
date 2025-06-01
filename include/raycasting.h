@@ -108,6 +108,8 @@ typedef struct s_ray
 {
 	double				x;
 	double				y;
+	double				dir_x;
+	double				dir_y;
 	double				distance;
 	double				start_angle;
 	double				angle;
@@ -118,6 +120,19 @@ typedef struct s_ray
 
 }				t_ray;
 
+typedef struct s_drawing
+{
+	int		start;
+	int		end;
+	int		line;
+	int		texture_x;
+	int		original_start;
+	int		texture_y;
+	int		color;
+	double	wall_hit_pos;
+	double	full_wall_position;
+}				t_drawing;
+
 /* event handling*/
 
 int				close_window(t_data *data);
@@ -125,13 +140,15 @@ int				key_down(int keycode, t_data *data);
 int				key_up(int keycode, t_data *data);
 int				update_state(t_data *data);
 
-/* images/drawing */
+/* raycasting_utils */
 
 void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void			draw_line(t_image *image, t_player *player, t_data *data);
 void			create_image(t_image *image, int type, t_data *data, char *path);
+int				get_texture_pixel(t_image *texture, int x, int y);
 
-/*line calculation */
+
+/* raycasting */
 
 void			ray_distance(t_player *player, t_data *data, t_ray *ray);
 void			render_scene(t_image *image, t_player *player, t_data *data);
