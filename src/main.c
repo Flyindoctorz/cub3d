@@ -57,8 +57,8 @@ int	initialize(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	char	map[8][5] =
-	{
+
+	char map[8][5] = {
 		{'1', '1', '1', '1', '1'},
 		{'1', '0', '1', '0', '1'},
 		{'1', '0', '0', '0', '1'},
@@ -68,7 +68,6 @@ int	main(int ac, char **av)
 		{'1', '0', '0', '0', '1'},
 		{'1', '1', '1', '1', '1'},
 	};
-
 	data.map.map = malloc(sizeof(char *) * 9);
 	data.map.map[8] = NULL;
 	for (int i = 0; i < 8; i++)

@@ -17,7 +17,8 @@ int	get_texture_pixel(t_image *texture, int x, int y)
 {
 	if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
 		return (0);
-	return ((unsigned int *)texture->addr)[y * (texture->line_length / 4) + x];
+	return (((unsigned int *)texture->addr)[y * (texture->line_length / 4)
+		+ x]);
 }
 
 void	draw_vertical_line(t_image *image, int x, t_ray *ray)
@@ -27,6 +28,12 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 	int		line;
 	double	wall_hit_pos;
 	int		texture_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		original_start;
+	double	full_wall_position;
+	int		texture_y;
+	int		color;
 
 	if (ray->axis == AXIS_Y)
 		wall_hit_pos = (ray->x / BLOCK) - floor(ray->x / BLOCK);
@@ -37,17 +44,17 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 		texture_x = 0;
 	if (texture_x >= ray->texture->width)
 		texture_x = ray->texture->width - 1;
-	double ray_dir_x = cos(ray->angle);
-	double ray_dir_y = sin(ray->angle);
-	if ((ray->axis == AXIS_Y && ray_dir_y > 0) ||
-		(ray->axis == AXIS_X && ray_dir_x < 0))
+	ray_dir_x = cos(ray->angle);
+	ray_dir_y = sin(ray->angle);
+	if ((ray->axis == AXIS_Y && ray_dir_y > 0) || (ray->axis == AXIS_X
+			&& ray_dir_x < 0))
 		texture_x = ray->texture->width - texture_x - 1;
 	if (texture_x < 0)
 		texture_x = 0;
 	if (texture_x >= ray->texture->width)
 		texture_x = ray->texture->width - 1;
 	line = 0;
-	int original_start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
+	original_start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
 	start = ((double)HEIGHT / 2.0) - (ray->height_line / 2.0);
 	end = start + ray->height_line;
 	if (start < 0)
@@ -60,13 +67,14 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 			mlx_pixel_put_v2(image, x, line++, 0x00FFFF00);
 		else if (line >= start && line <= end)
 		{
-			double full_wall_position = (double)(line - original_start) / ray->height_line;
-			int texture_y = (int)(full_wall_position * ray->texture->height);
+			full_wall_position = (double)(line - original_start)
+				/ ray->height_line;
+			texture_y = (int)(full_wall_position * ray->texture->height);
 			if (texture_y < 0)
 				texture_y = 0;
 			if (texture_y >= ray->texture->height)
 				texture_y = ray->texture->height - 1;
-			int color = get_texture_pixel(ray->texture, texture_x, texture_y);
+			color = get_texture_pixel(ray->texture, texture_x, texture_y);
 			mlx_pixel_put_v2(image, x, line++, color);
 		}
 		else
@@ -76,7 +84,8 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 
 int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 {
-	if (axis == 0 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
+	if (axis == 0 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
+			/ BLOCK)] == '1')
 	{
 		if (ray->x > player->px * BLOCK + BLOCK / 2.0)
 			ray->texture = &data->wallwest_img;
@@ -85,7 +94,8 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 		ray->axis = AXIS_X;
 		return (EXIT_SUCCESS);
 	}
-	else if (axis == 1 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
+	else if (axis == 1 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
+			/ BLOCK)] == '1')
 	{
 		if (ray->y > player->py * BLOCK + BLOCK / 2.0)
 			ray->texture = &data->wallnorth_img;
@@ -107,8 +117,8 @@ void	ray_distance(t_player *player, t_data *data, t_ray *ray)
 	while (ray->distance < MAX_RAY_DISTANCE)
 	{
 		if ((int)(ray->y / BLOCK) < 0 || (int)(ray->x / BLOCK) < 0
-			|| (int)(ray->y / BLOCK) >= data->map.height
-			|| (int)(ray->x / BLOCK) >= data->map.width)
+			|| (int)(ray->y / BLOCK) >= data->map.height || (int)(ray->x
+				/ BLOCK) >= data->map.width)
 			break ;
 		if (data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x / BLOCK)] == '1')
 			break ;

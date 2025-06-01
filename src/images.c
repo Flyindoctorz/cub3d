@@ -26,7 +26,7 @@ void	create_image(t_image *image, int type, t_data *data, char *path)
 	if (type == 1)
 	{
 		image->img = mlx_xpm_file_to_image(data->mlx.mlx_ptr, path,
-			&image->width, &image->height);
+				&image->width, &image->height);
 	}
 	else
 	{
@@ -40,7 +40,7 @@ void	create_image(t_image *image, int type, t_data *data, char *path)
 		close_window(data);
 	}
 	image->addr = mlx_get_data_addr(image->img, &image->bpp,
-		&image->line_length, &image->endian);
+			&image->line_length, &image->endian);
 }
 
 // void	draw_line(t_image *image, t_player *player, t_data *data)
@@ -123,7 +123,7 @@ void	create_image(t_image *image, int type, t_data *data, char *path)
 // 				printf("%d %d\n", x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
 // 				mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
 // 					data->player_img.img, x * BLOCK + BLOCK / 2, y * BLOCK
-						// + BLOCK / 2);
+// + BLOCK / 2);
 // 			}
 // 			x++;
 // 		}
