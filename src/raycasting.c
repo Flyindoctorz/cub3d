@@ -55,7 +55,8 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 		{
 			data.full_wall_position = (double)(line - data.original_start)
 				/ ray->height_line;
-			data.texture_y = (int)(data.full_wall_position * ray->texture->height);
+			data.texture_y = (int)(data.full_wall_position
+					* ray->texture->height);
 			if (data.texture_y < 0)
 				data.texture_y = 0;
 			if (data.texture_y >= ray->texture->height)

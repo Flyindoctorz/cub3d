@@ -96,8 +96,6 @@ int	update_state(t_data *data)
 		data->player.angle += 2.0 * M_PI;
 	else if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
-	// mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
-	memset(data->scene_img.addr, 0, HEIGHT * WIDTH * sizeof(int));
 	render_scene(&data->scene_img, &data->player, data);
 	return (SUCCESS);
 }
