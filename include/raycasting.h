@@ -152,7 +152,7 @@ int				get_texture_pixel(t_image *texture, int x, int y);
 
 void			ray_distance(t_player *player, t_data *data, t_ray *ray);
 void			render_scene(t_image *image, t_player *player, t_data *data);
-void			draw_vertical_line(t_image *image, int x, t_ray *ray);
+void			draw_vertical_line(t_image *image, int column, t_ray *ray);
 int				get_direction(int axis, t_ray *ray, t_player *player, t_data *data);
 
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_math.c                                        :+:      :+:    :+:   */
+/*   data_math.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -40,20 +40,19 @@ void	set_drawing_info(t_drawing *data, t_ray *ray)
 		data->end = HEIGHT - 1;
 }
 
-void	draw_vertical_line(t_image *image, int x, t_ray *ray)
+void	draw_vertical_line(t_image *image, int column, t_ray *ray)
 {
 	t_drawing	data;
-	int			line;
 
-	line = 0;
+	data.line = 0;
 	set_drawing_info(&data, ray);
-	while (line < HEIGHT)
+	while (data.line < HEIGHT)
 	{
-		if (line < data.start)
-			mlx_pixel_put_v2(image, x, line++, 0x00FFFF00);
-		else if (line >= data.start && line <= data.end)
+		if (data.line < data.start)
+			mlx_pixel_put_v2(image, column, data.line++, 0x00FFFF00);
+		else if (data.line >= data.start && data.line <= data.end)
 		{
-			data.full_wall_position = (double)(line - data.original_start)
+			data.full_wall_position = (double)(data.line - data.original_start)
 				/ ray->height_line;
 			data.texture_y = (int)(data.full_wall_position
 					* ray->texture->height);
@@ -61,11 +60,12 @@ void	draw_vertical_line(t_image *image, int x, t_ray *ray)
 				data.texture_y = 0;
 			if (data.texture_y >= ray->texture->height)
 				data.texture_y = ray->texture->height - 1;
-			data.color = get_texture_pixel(ray->texture, data.texture_x, data.texture_y);
-			mlx_pixel_put_v2(image, x, line++, data.color);
+			data.color = get_texture_pixel(ray->texture,
+					data.texture_x, data.texture_y);
+			mlx_pixel_put_v2(image, column, data.line++, data.color);
 		}
 		else
-			mlx_pixel_put_v2(image, x, line++, 0x0000FF00);
+			mlx_pixel_put_v2(image, column, data.line++, 0x0000FF00);
 	}
 }
 
