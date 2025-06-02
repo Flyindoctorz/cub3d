@@ -63,26 +63,33 @@ int	key_up(int keycode, t_data *data)
 
 void	update_coordinates(t_data *data)
 {
+	double	next_px;
+	double	next_py;
+
+	next_px = data->player.px;
+	next_py = data->player.py;
 	if (data->keys.w == 1)
-	{
-		data->player.px += cos(data->player.angle) * PLAYER_SPEED;
-		data->player.py += sin(data->player.angle) * PLAYER_SPEED;
-	}
+		next_px += cos(data->player.angle) * PLAYER_SPEED;
 	if (data->keys.s == 1)
-	{
-		data->player.px -= cos(data->player.angle) * PLAYER_SPEED;
-		data->player.py -= sin(data->player.angle) * PLAYER_SPEED;
-	}
+		next_px -= cos(data->player.angle) * PLAYER_SPEED;
 	if (data->keys.a == 1)
-	{
-		data->player.px += cos(data->player.angle - M_PI / 2) * PLAYER_SPEED;
-		data->player.py += sin(data->player.angle - M_PI / 2) * PLAYER_SPEED;
-	}
+		next_px += cos(data->player.angle - M_PI / 2) * PLAYER_SPEED;
 	if (data->keys.d == 1)
-	{
-		data->player.px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
-		data->player.py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
-	}
+		next_px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
+	if (next_px >= 0 && next_px < data->map.width
+		&& data->map.map[(int)data->player.py][(int)next_px] != '1')
+		data->player.px = next_px;
+	if (data->keys.w == 1)
+		next_py += sin(data->player.angle) * PLAYER_SPEED;
+	if (data->keys.s == 1)
+		next_py -= sin(data->player.angle) * PLAYER_SPEED;
+	if (data->keys.a == 1)
+		next_py += sin(data->player.angle - M_PI / 2) * PLAYER_SPEED;
+	if (data->keys.d == 1)
+		next_py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
+	if (next_py >= 0 && next_py < data->map.height
+		&& data->map.map[(int)next_py][(int)data->player.px] != '1')
+		data->player.py = next_py;
 }
 
 int	update_state(t_data *data)

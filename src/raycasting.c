@@ -96,8 +96,8 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 
 void	ray_distance(t_player *player, t_data *data, t_ray *ray)
 {
-	ray->x = player->px * BLOCK + BLOCK / 2.0;
-	ray->y = player->py * BLOCK + BLOCK / 2.0;
+	ray->x = player->px * BLOCK;
+	ray->y = player->py * BLOCK;
 	ray->distance = 0.0;
 	ray->texture = data->wallnorth_img.img;
 	ray->axis = AXIS_X;

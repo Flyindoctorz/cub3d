@@ -24,8 +24,8 @@ void	set_images(t_data *data)
 
 void	set_player(t_data *data)
 {
-	data->player.px = 1;
-	data->player.py = 1;
+	data->player.px = 2;
+	data->player.py = 2;
 	data->player.angle = 0;
 }
 
@@ -60,16 +60,15 @@ int	main(int ac, char **av)
 
 	char map[8][5] = {
 		{'1', '1', '1', '1', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '1', '0', '0', '1'},
 		{'1', '0', '1', '0', '1'},
-		{'1', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1'},
-		{'1', '0', '1', '1', '1'},
-		{'1', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1'},
+		{'1', '0', '1', '0', '1'},
 		{'1', '1', '1', '1', '1'},
 	};
-	data.map.map = malloc(sizeof(char *) * 9);
-	data.map.map[8] = NULL;
+	data.map.map = malloc(sizeof(char *) * 8);
 	for (int i = 0; i < 8; i++)
 		data.map.map[i] = malloc(sizeof(char) * 5);
 	for (int i = 0; i < 8; i++)
