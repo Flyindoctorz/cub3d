@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 10:13:17 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/31 13:54:14 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/02 14:07:55 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ bool	parse_all_textures(char **lines, int end, t_data *data)
 	int	i;
 	int	j;
 	t_texture_id	*texture_ids[4];
-	bool	is_textures_line;
 	
 	texture_ids[0] = &data->texture.north;
 	texture_ids[1] = &data->texture.south;
@@ -102,29 +101,17 @@ bool	parse_all_textures(char **lines, int end, t_data *data)
 	i = 0;
 	while (i < end)
 	{
-		if (!is_empty_line(lines[i]))
+		if (!is_empty_line_or_comment(lines[i]))
 		{
-			i++;
-			continue;
+			j = 0;
+			while (j < 4 && !is_texture_line(lines[i], texture_ids[j]))
+				j++;
+			if (j == 4)
+				return (printf("Error: Unkwnown confing line: %s\n", lines[i]), false);
+			if (!parse_one_texture(lines[i], &data->texture))
+				return (false);
 		}
-		is_textures_line = false;
-		j = 0;
-		while (j < 4)
-		{
-			if (is_texture_line(lines[i], texture_ids[j]))
-			{
-				is_textures_line = true;
-				if (!parse_one_texture(lines[i], &data->texture))
-					return (false);
-				break;
-			}
-			j++;  
-		}
-		if (!is_textures_line)
-		{
-		return (printf("Error: Invalid texture line: %s\n", lines[i]), false);
-			i++;
-		}
+		i++;
 	}
 	return (true);
 }

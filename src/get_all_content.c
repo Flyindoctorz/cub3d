@@ -6,11 +6,12 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/27 16:37:04 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:51:41 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
+#include "../include/raycasting.h"
 
 static char	*join_and_free(char *content, char *buffer)
 {

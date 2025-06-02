@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/31 10:11:33 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:52:30 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+
+define BUFFER_SIZE 4096
 // stucture
 typedef struct s_map
 {

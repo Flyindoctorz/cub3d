@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:39:29 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/26 11:39:02 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/02 14:02:57 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,6 @@ bool	is_color_line(char *line, char letter, int *pos)
 		return (false);
 	*pos = i;
 	return (true);
-}
-
-int	ft_strotoi(char *str, char **endptr)
-{
-	int	i;
-	int	result;
-
-	i = 0;
-	result = 0;
-	while (str[i] && ft_isdigit(str[i]))
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
-	if (endptr)
-		*endptr = (char *)(str + i);
-	return (result);
 }
 
 bool	parse_rgb_component(char *line, int *pos, int *components,
