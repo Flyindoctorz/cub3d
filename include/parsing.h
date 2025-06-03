@@ -20,7 +20,7 @@
 # include <stdlib.h>
 
 
-define BUFFER_SIZE 4096
+# define BUFFER_SIZE 4096
 // stucture
 typedef struct s_map
 {

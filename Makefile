@@ -28,13 +28,13 @@ MINILIBX_DIR = minilibx
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Linux compile
-libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft
+# libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft
 
-includes = -Iminilibx -I/usr/include -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
+# includes = -Iminilibx -I/usr/include -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
 
 # macOS compile (commenté)
-# libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
-# includes = -Iminilibx -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
+libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
+includes = -Iminilibx -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
 
 # Compilateur et flags
 CC = cc
