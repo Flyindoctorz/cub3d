@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/02 13:52:30 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/03 12:42:06 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <stdlib.h>
 
 
-define BUFFER_SIZE 4096
-// stucture
+# define BUFFER_SIZE 4096
+
+// structures
 typedef struct s_map
 {
 	char			**map;
@@ -67,6 +68,7 @@ void				free_copy(char **map_copy);
 int					line_width(char *line);
 int					line_height(char **map);
 bool				is_in_map(char **map, int x, int y);
+char				is_map_char(char c);
 
 // map validation
 bool				is_a_valid_char(char c);
@@ -77,5 +79,18 @@ bool				validate_map(char **map);
 // map closure
 void				flood_fill(char **map, int x, int y, int *valid);
 bool				check_map_close(char **map);
+
+// texture handling
+bool				is_texture_line(char *line, t_texture_id *texture_id);
+bool				extract_texture_path(char *line, t_texture_id *texture_id);
+bool				parse_texture(char *line, t_texture *texture);
+bool				validate_xpm(const char *path);
+bool				validate_single_texture(const char *path, const char *texture_name);
+bool				validate_textures(t_texture *texture);
+bool				double_check_texture(t_texture *texture);
+
+// texture parser
+bool				parse_all_textures(char **lines, int end, t_data *data);
+bool				parse_one_texture(char *line, t_texture *texture);
 
 #endif

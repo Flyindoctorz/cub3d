@@ -1,112 +1,138 @@
-# Your Makefile must at least contain the rules $(NAME), all, clean, fclean and re
-# $(NAME) : 
-# all : 
-# clean : used to remove bin & obj files
-# fclean : 
-# re : 
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/01 00:00:00 by student           #+#    #+#              #
+#    Updated: 2025/06/02 15:02:16 by cgelgon          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# All source files you need to compile your project must be explicitly named in your Makefile.
+# Variables
+CFLAGS		=	-Wall -Werror -Wextra -g3
+CC			=	cc
 
-# Special variables
-# $@ : target name
-# $< : first prerequisite name
-# $^ : prerequisite list
-# $? : updated prerequisite name list
-# $* : filename without extension
+# Source files
+SRC			=	ft_atoi.c \
+				ft_bzero.c \
+				ft_calloc.c \
+				ft_isalnum.c \
+				ft_isalpha.c \
+				ft_isascii.c \
+				ft_isdigit.c \
+				ft_isprint.c \
+				ft_isspace.c \
+				ft_itoa.c \
+				ft_memchr.c \
+				ft_memcmp.c \
+				ft_memcpy.c \
+				ft_memmove.c \
+				ft_memset.c \
+				ft_putchar_fd.c \
+				ft_putendl_fd.c \
+				ft_putnbr_fd.c \
+				ft_putnbr_printf_fd.c \
+				ft_putstr_fd.c \
+				ft_split.c \
+				ft_strcat.c \
+				ft_strchr.c \
+				ft_strcmp.c \
+				ft_strcpy.c \
+				ft_strdup.c \
+				ft_striteri.c \
+				ft_strjoin.c \
+				ft_strlcat.c \
+				ft_strlcpy.c \
+				ft_strlen.c \
+				ft_strmapi.c \
+				ft_strncmp.c \
+				ft_strndup.c \
+				ft_strnjoin.c \
+				ft_strnstr.c \
+				ft_strrchr.c \
+				ft_strtok.c \
+				ft_strtrim.c \
+				ft_substr.c \
+				ft_tolower.c \
+				ft_toupper.c
 
-# Program name libft.a
-# Turn in files Makefile, libft.h, ft_*.c
-# Makefile NAME, all, clean, fclean, re
+# Bonus files
+BONUS		=	ft_lstadd_back.c \
+				ft_lstadd_front.c \
+				ft_lstclear.c \
+				ft_lstdelone.c \
+				ft_lstiter.c \
+				ft_lstlast.c \
+				ft_lstmap.c \
+				ft_lstnew.c \
+				ft_lstsize.c
 
-# You must use the command ar to create your library. Using the libtool command is forbidden.
-
-# gcc -c	compile source files to object files without linking
-
-CFLAGS	=	-Wall -Werror -Wextra -g3
-
-# SRC			=	ft_atoi.c				\
-# 				ft_bzero.c				\
-# 				ft_calloc.c				\
-# 				ft_isalnum.c			\
-# 				ft_isalpha.c			\
-# 				ft_isascii.c			\
-# 				ft_isdigit.c			\
-# 				ft_isprint.c			\
-# 				ft_itoa.c				\
-# 				ft_memchr.c				\
-# 				ft_memcmp.c				\
-# 				ft_memcpy.c				\
-# 				ft_memmove.c			\
-# 				ft_memset.c				\
-# 				ft_putchar_fd.c			\
-# 				ft_putendl_fd.c			\
-# 				ft_putnbr_fd.c			\
-# 				ft_putnbr_printf_fd.c	\
-# 				ft_putstr_fd.c			\
-# 				ft_split.c				\
-#				ft_strcat.c
-# 				ft_strchr.c				\
-#				ft_strcmp.c				\
-#				ft_strcpy.c				\
-# 				ft_strdup.c				\
-# 				ft_striteri.c			\
-# 				ft_strjoin.c			\
-# 				ft_strlcat.c			\
-# 				ft_strlcpy.c			\
-# 				ft_strlen.c				\
-# 				ft_strmapi.c			\
-# 				ft_strncmp.c			\
-# 				ft_strnstr.c			\
-# 				ft_strrchr.c			\
-# 				ft_strtrim.c			\
-# 				ft_substr.c				\
-# 				ft_tolower.c			\
-# 				ft_toupper.c
-
-# BONUS		=	ft_lstadd_back.c	\
-# 				ft_lstadd_front.c	\
-# 				ft_lstsize.c		\
-# 				ft_lstlast.c		\
-# 				ft_lstnew.c			\
-# 				ft_lstdelone.c		\
-# 				ft_lstclear.c		\
-# 				ft_lstiter.c		\
-# 				ft_lstmap.c
-
-SRC			= $(shell ls *.c)
-
+# Object files
 OBJ			=	$(SRC:.c=.o)
-
-
 BONUS_OBJ	=	$(BONUS:.c=.o)
 
+# Library name
 NAME		=	libft.a
 
+# Default target
 all: $(NAME)
 
-# Generate ".a" archive which is used in conjunction with the .h file
+# Create library
 $(NAME): $(OBJ)
-	ar -crs $(NAME) $(OBJ)
+	@echo "Creating library $(NAME)..."
+	@ar -crs $(NAME) $(OBJ)
+	@echo "✅ $(NAME) created successfully!"
 
-# Clean generated objects
+# Compile source files
+%.o: %.c
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean object files
 clean:
-	$(RM) $(OBJ) $(BONUS_OBJ)
+	@echo "Cleaning object files..."
+	@$(RM) $(OBJ) $(BONUS_OBJ)
+	@echo "✅ Object files cleaned!"
 
 # Clean all generated files
 fclean: clean
-	$(RM) $(NAME)
+	@echo "Cleaning library..."
+	@$(RM) $(NAME)
+	@echo "✅ All cleaned!"
 
-# redo compilation
-re: fclean $(NAME)
+# Rebuild everything
+re: fclean all
 
-norme:
-	norminette
-
+# Bonus rule
 bonus: $(OBJ) $(BONUS_OBJ)
-	ar -crs $(NAME) $(OBJ) $(BONUS_OBJ)
+	@echo "Creating library with bonus..."
+	@ar -crs $(NAME) $(OBJ) $(BONUS_OBJ)
+	@echo "✅ $(NAME) with bonus created successfully!"
 
-.PHONY: all clean fclean re bonus
+# Norminette check
+norm:
+	@echo "Running norminette..."
+	@norminette $(SRC) $(BONUS) libft.h
 
-# so:
-# 	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
-# 	gcc -nostartfiles -shared -o libft.so $(OBJ)
+# Test compilation
+test: $(NAME)
+	@echo "Testing compilation..."
+	@$(CC) $(CFLAGS) -L. -lft test_main.c -o test_libft
+	@echo "✅ Test compilation successful!"
+
+# Show help
+help:
+	@echo "Available targets:"
+	@echo "  all    - Build the library"
+	@echo "  clean  - Remove object files"
+	@echo "  fclean - Remove all generated files"
+	@echo "  re     - Rebuild everything"
+	@echo "  bonus  - Build library with bonus functions"
+	@echo "  norm   - Run norminette check"
+	@echo "  test   - Test compilation"
+	@echo "  help   - Show this help"
+
+# Phony targets
+.PHONY: all clean fclean re bonus norm test help

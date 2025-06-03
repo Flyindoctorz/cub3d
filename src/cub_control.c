@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:03:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 12:36:09 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/03 10:45:19 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ bool	is_a_cub(char *filename)
 	return (ft_strcmp(ext, ".cub") == 0);
 }
 
-bool	is_empty_or_comment(char *line)
-{
-	if (line == NULL || *line == '\0')
-		return (true);
-	while (*line && ft_isspace(*line))
-		line++;
-	if (*line == '\0' || *line == '#')
-		return (true);
-	return (false);
-}
 
 bool	parse_a_color_line(char *line, t_data *data)
 {

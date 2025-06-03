@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:03:32 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 15:26:43 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/03 11:15:10 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*make_it_content(int fd)
 	{
 		buffer[bytes_read] = '\0';
 		tmp = content;
-		content = strjoin(tmp, buffer);
+		content = ft_strjoin(tmp, buffer);
 		free(tmp);
 		if (!content)
 		{
@@ -39,40 +39,6 @@ char	*make_it_content(int fd)
 		bytes_read = read(fd, buffer, sizeof(buffer) - 1);
 	}
 	return (content);
-}
-char	*read_file_content(const char *filename)
-{
-	int		fd;
-	char	*content;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Error opening file %s\n", filename);
-		return (NULL);
-	}
-	content = make_it_content(fd);
-	if (!content)
-	{
-		close(fd);
-		return (NULL);
-	}
-	close(fd);
-	return (content);
-}
-char	**make_it_split(char *filename)
-{
-	char	*content;
-	char	**lines;
-
-	content = read_file_content(filename);
-	if (!content)
-		return (false);
-	lines = ft_split(content, '\n');
-	free(content);
-	if (!lines)
-		return (printf("Error splitting file content"), false);
-	return (lines);
 }
 bool	parse_my_cub(char *filename, t_data *data)
 {
