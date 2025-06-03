@@ -15,16 +15,17 @@
 
 void	set_images(t_data *data)
 {
-	data->line_img.img = mlx_new_image(data->mlx.mlx_ptr, WIDTH, HEIGHT);
-	data->line_img.addr = mlx_get_data_addr(data->line_img.img,
-			&data->line_img.bits_per_pixel, &data->line_img.line_length,
-			&data->line_img.endian);
+	create_image(&data->scene_img, 0, data, NULL);
+	create_image(&data->wallnorth_img, 1, data, "assets/wall_north.xpm");
+	create_image(&data->walleast_img, 1, data, "assets/wall_east.xpm");
+	create_image(&data->wallwest_img, 1, data, "assets/wall_west.xpm");
+	create_image(&data->wallsouth_img, 1, data, "assets/wall_south.xpm");
 }
 
 void	set_player(t_data *data)
 {
-	data->player.px = 1;
-	data->player.py = 1;
+	data->player.px = 2;
+	data->player.py = 2;
 	data->player.angle = 0;
 }
 
@@ -50,24 +51,33 @@ int	initialize(t_data *data)
 	set_images(data);
 	set_player(data);
 	set_keys(data);
-	draw_line(&data->line_img, &data->player, data);
 	return (SUCCESS);
 }
 
 int	main(int ac, char **av)
 {
 	t_data	data;
-	char	map[5][5] = {{'1', '1', '1', '1', '1'}, {'1', '0', '0', '0', '1'},
-			{'1', '0', '1', '1', '1'}, {'1', '0', '0', '0', '1'}, {'1', '1',
-			'1', '1', '1'}};
 
-	data.map.map = malloc(sizeof(char *) * 6);
-	data.map.map[5] = NULL;
-	for (int i = 0; i < 5; i++)
+	char map[8][5] = {
+		{'1', '1', '1', '1', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '0', '0', '0', '1'},
+		{'1', '1', '0', '0', '1'},
+		{'1', '0', '1', '0', '1'},
+		{'1', '0', '1', '0', '1'},
+		{'1', '1', '1', '1', '1'},
+	};
+	data.map.map = malloc(sizeof(char *) * 8);
+	for (int i = 0; i < 8; i++)
 		data.map.map[i] = malloc(sizeof(char) * 5);
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 5; j++)
 			data.map.map[i][j] = map[i][j];
+	data.map.height = 8;
+	data.map.width = 5;
+	(void)ac;
+	(void)av;
 	// securiser le cas ou il n'y a pas d'argument
 	// securiser le cas ou il y a trop d'argument
 	// securiser le cas ou on retire l'environnement de force (env -i ou unset)
@@ -75,10 +85,7 @@ int	main(int ac, char **av)
 	// check if the file is a valid map
 	if (initialize(&data) == ERROR)
 		return (ERROR);
-	render_scene(&data.line_img, &data.player, &data);
-	// draw_map(data.map, &data, &data.mlx);
-	(void)ac;
-	(void)av;
+	render_scene(&data.scene_img, &data.player, &data);
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
 	mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);
 	mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);

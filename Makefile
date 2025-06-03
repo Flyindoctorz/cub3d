@@ -59,7 +59,7 @@ $(NAME): build_mlx build_libft $(objects)
 	$(CC) $(CFLAGS) $(objects) $(libs) -o $(NAME)
 	@echo "$(GREEN)✨ $(NAME) compiled successfully!$(RESET)"
 
-all: $(NAME)
+all: build_mlx $(NAME)
 
 # Compilation des fichiers objets
 %.o: %.c
