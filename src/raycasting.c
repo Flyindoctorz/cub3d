@@ -74,7 +74,7 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 	if (axis == 0 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
 			/ BLOCK)] == '1')
 	{
-		if (ray->x > player->px * BLOCK + BLOCK / 2.0)
+		if (ray->x > player->px * BLOCK)
 			ray->texture = &data->wallwest_img;
 		else
 			ray->texture = &data->walleast_img;
@@ -84,7 +84,7 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 	else if (axis == 1 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
 			/ BLOCK)] == '1')
 	{
-		if (ray->y > player->py * BLOCK + BLOCK / 2.0)
+		if (ray->y > player->py * BLOCK)
 			ray->texture = &data->wallnorth_img;
 		else
 			ray->texture = &data->wallsouth_img;
