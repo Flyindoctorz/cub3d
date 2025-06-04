@@ -6,26 +6,12 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:53:32 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 13:56:21 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:13:56 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
-
-bool	parse_the_lines(char **lines, t_data *data)
-{
-	int		i;
-	bool	map_found;
-
-	map_found = false;
-	i = 0;
-	while (lines[i])
-	{
-		i++;
-	}
-	return (true);
-}
 
 bool	validate_all_datas(t_data *data)
 {

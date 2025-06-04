@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_all_content.c                                  :+:      :+:    :+:   */
+/*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/03 11:21:19 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:14:28 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,45 +108,3 @@ char	read_it_full(const char *filename)
 	printf("✅ File loaded (%zu bytes)\n", ft_strlen(content));
 	return (content);
 }
-
-// char	*get_all_content_from_file(char *file_path)
-// {
-// 	int		fd;
-// 	char	*content;
-
-// 	fd = open(file_path, O_RDONLY);
-// 	if (fd < 0)
-// 		return (NULL);
-// 	printf("📖 Reading entire file into memory...\n");
-// 	content = get_all_content(fd);
-// 	close(fd);
-// 	if (!content)
-// 	{
-// 		printf("❌ Error: Could not read file content\n");
-// 		return (NULL);
-// 	}
-// 	printf("✅ File loaded (%zu bytes)\n", ft_strlen(content));
-// 	return (content);
-// }
-// static char	*read_loop(int fd, char *buffer, char *content)
-// {
-// 	ssize_t	count;
-
-// 	count = 1;
-// 	while (count > 0)
-// 	{
-// 		count = read(fd, buffer, BUFFER_SIZE);
-// 		if (count < 0)
-// 		{
-// 			free(content);
-// 			return (NULL);
-// 		}
-// 		if (count == 0)
-// 			break ;
-// 		buffer[count] = '\0';
-// 		content = join_and_free(content, buffer);
-// 		if (!content)
-// 			return (NULL);
-// 	}
-// 	return (content);
-// }

@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:44:28 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/03 11:00:54 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:26:32 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	is_empty_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_isspace(line[i]) && line[i] != 't' && line[i] != '\n'
+		if (!ft_isspace(line[i]) && line[i] != '\t' && line[i] != '\n'
 		&& line[i] != '\r')
 			return (false);
 			i++;
@@ -69,7 +69,7 @@ bool	is_map_line(const char *line)
 	int	map_char;
 	int	total_chars;
 
-	if (is_empty_line || is_comment_line(line))
+	if (is_empty_line(line) || is_comment_line(line))
 		return (false);
 	i = 0;
 	map_char = 0;

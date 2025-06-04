@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 16:38:52 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 12:41:02 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:13:38 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,4 @@ bool	extract_texture_path(char *line, t_texture_id *texture_id)
 	if (line[i])
 		return (false);
 	return (true);
-}
-
-bool	parse_texture(char *line, t_texture *texture)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] == ' ')
-		i++;
-	if (!line[i] || line[i] == '#')
-		return (true);
-	if (extract_texture_path(line, &texture->north))
-		return (true);
-	if (extract_texture_path(line, &texture->south))
-		return (true);
-	if (extract_texture_path(line, &texture->west))
-		return (true);
-	if (extract_texture_path(line, &texture->east))
-		return (true);
-	/*if (extract_texture_path(line, &texture->door))
-		return (true);*/
-	return (false);
 }
