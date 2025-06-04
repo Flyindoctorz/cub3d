@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:43:09 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 15:32:00 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 12:30:06 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,21 @@ bool	is_a_valid_char(char c)
 	return (false);
 }
 
+bool	is_valid_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (true);
+	return (false);
+}
+
 bool	is_valid_map(char **map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if (!map || !map[0])
+		return ("Map is NULL", (false));
 	while (map[i])
 	{
 		j = 0;
@@ -50,6 +59,8 @@ bool	where_player_at(char **map, int *p_x, int *p_y)
 	int	j;
 
 	i = 0;
+	if (!map || !p_x || !p_y)
+		return (printf("incorrect parameters\n"), false);
 	while (map[i])
 	{
 		j = 0;
