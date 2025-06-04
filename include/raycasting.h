@@ -54,6 +54,12 @@
 # include <string.h>
 # include <unistd.h>
 
+typedef struct s_tuple
+{
+	int	x;
+	int	y;
+}				t_tuple;
+
 typedef struct s_keys
 {
 	int			w;
@@ -92,6 +98,7 @@ typedef struct s_data
 {
 	t_player	player;
 	t_mlx		mlx;
+	t_image		minimap_img;
 	t_image		scene_img;
 	t_image		wallnorth_img;
 	t_image		wallsouth_img;
@@ -146,12 +153,13 @@ void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void			draw_line(t_image *image, t_player *player, t_data *data);
 void			create_image(t_image *image, int type, t_data *data, char *path);
 int				get_texture_pixel(t_image *texture, int x, int y);
-
+void			draw_rectangle(t_image *image, t_tuple size, t_tuple pos);
+void			draw_map(t_map *map, t_data *data);
 
 /* raycasting */
 
 void			ray_distance(t_player *player, t_data *data, t_ray *ray);
-void			render_scene(t_image *image, t_player *player, t_data *data);
+void			render_scene(t_player *player, t_data *data);
 void			draw_vertical_line(t_image *image, int column, t_ray *ray);
 int				get_direction(int axis, t_ray *ray, t_player *player, t_data *data);
 

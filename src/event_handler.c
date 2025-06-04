@@ -103,6 +103,6 @@ int	update_state(t_data *data)
 		data->player.angle += 2.0 * M_PI;
 	else if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
-	render_scene(&data->scene_img, &data->player, data);
+	render_scene(&data->player, data);
 	return (SUCCESS);
 }

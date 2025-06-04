@@ -71,23 +71,25 @@ void	draw_vertical_line(t_image *image, int column, t_ray *ray)
 
 int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 {
-	if (axis == 0 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
+	if (axis == AXIS_X && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
 			/ BLOCK)] == '1')
 	{
 		if (ray->x > player->px * BLOCK)
 			ray->texture = &data->wallwest_img;
 		else
 			ray->texture = &data->walleast_img;
+		ray->distance += RAY_STEP_SIZE;
 		ray->axis = AXIS_X;
 		return (EXIT_SUCCESS);
 	}
-	else if (axis == 1 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
+	else if (axis == AXIS_Y && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
 			/ BLOCK)] == '1')
 	{
 		if (ray->y > player->py * BLOCK)
 			ray->texture = &data->wallnorth_img;
 		else
 			ray->texture = &data->wallsouth_img;
+		ray->distance += RAY_STEP_SIZE;
 		ray->axis = AXIS_Y;
 		return (EXIT_SUCCESS);
 	}
@@ -121,7 +123,7 @@ void	ray_distance(t_player *player, t_data *data, t_ray *ray)
 	}
 }
 
-void	render_scene(t_image *image, t_player *player, t_data *data)
+void	render_scene(t_player *player, t_data *data)
 {
 	t_ray	ray;
 	int		pos_screen;
@@ -138,8 +140,10 @@ void	render_scene(t_image *image, t_player *player, t_data *data)
 		ray_distance(player, data, &ray);
 		ray.corrected = ray.distance * cos(player->angle - ray.angle);
 		ray.height_line = (BLOCK * HEIGHT) / ray.corrected;
-		draw_vertical_line(image, pos_screen++, &ray);
+		draw_vertical_line(&data->scene_img, pos_screen++, &ray);
 	}
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, image->img,
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, data->scene_img.img,
 		0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window
+		, data->minimap_img.img, 0, 0);
 }

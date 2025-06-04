@@ -16,6 +16,7 @@
 void	set_images(t_data *data)
 {
 	create_image(&data->scene_img, 0, data, NULL);
+	create_image(&data->minimap_img, 42, data, NULL);
 	create_image(&data->wallnorth_img, 1, data, "assets/wall_north.xpm");
 	create_image(&data->walleast_img, 1, data, "assets/wall_east.xpm");
 	create_image(&data->wallwest_img, 1, data, "assets/wall_west.xpm");
@@ -85,7 +86,9 @@ int	main(int ac, char **av)
 	// check if the file is a valid map
 	if (initialize(&data) == ERROR)
 		return (ERROR);
-	render_scene(&data.scene_img, &data.player, &data);
+	// draw_block(&data.minimap_img, BLOCK);
+	draw_map(&data.map, &data);
+	render_scene(&data.player, &data);
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
 	mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);
 	mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);
