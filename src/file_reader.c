@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:14:28 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:43:00 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	**make_it_split(const char *content)
 
 
 
-char	*get_all_content(int fd)
 {
 	char	*buffer;
 	char	*content;
@@ -89,7 +88,7 @@ char	*get_all_content(int fd)
 	return (content);
 }
 
-char	read_it_full(const char *filename)
+char	*read_it_full(char *filename)
 {
 	int		fd;
 	char	*content;

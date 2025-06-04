@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:07:41 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:47:05 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include "libft.h"
 # include "raycasting.h"
 
 
@@ -35,8 +37,6 @@ typedef struct s_texture_id
 {
 	char			*path;
 	char			*id;
-	// int		width;
-	// int		height;
 }					t_texture_id;
 
 typedef struct s_texture
@@ -54,7 +54,8 @@ typedef struct s_color
 	int				green;
 	int				blue;
 	int				hex;
-}					t_color;
+}				t_color;
+
 
 typedef struct s_parser_status
 {
@@ -62,6 +63,16 @@ typedef struct s_parser_status
 	bool				rgb_valid;
 	bool				map_valid;
 }					t_parser_status;
+
+
+// included 
+int					init_data(t_data *data);
+void				init_texture (t_texture *texture);
+// file reading
+char				*read_file_content(int fd);
+char				**read_file_lines(const char *filename);
+char				*read_file_content(int fd);
+char				*read_it_full(char *filename);
 
 // map utils
 char				**copy_map(char **map);
@@ -123,6 +134,7 @@ bool	validate_all_datas(t_data *data);
 
 // parsing core II
 bool	parse_and_config_map(const char *filename, t_data *data);
+bool	parse_cub_file(char **lines, t_data *data);
 
 
 #endif

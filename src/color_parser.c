@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:39:29 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/03 13:44:16 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:46:37 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,8 @@ bool	parse_color_line(char *line, t_color *color)
 	color->blue = components[2];
 	color_to_hex(color);
 	return (true);
+}
+bool	is_valid_rgb_number(int value)
+{
+	return (value >= 0 && value <= 255);
 }
