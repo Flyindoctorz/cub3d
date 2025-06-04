@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 15:09:59 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:07:41 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "raycasting.h"
 
 
 # define BUFFER_SIZE 4096
@@ -90,7 +91,38 @@ bool				validate_textures(t_texture *texture);
 bool				double_check_texture(t_texture *texture);
 
 // texture parser
-bool				parse_all_textures(char **lines, int end, t_data *data);
+bool				try_to_parse_texture(char *line, t_texture_id *texture_id);
 bool				parse_one_texture(char *line, t_texture *texture);
+bool				parse_all_textures(char **lines, int end, t_data *data);
+bool				validate_texture_file(const char *path);
+bool				validate_all_textures(t_texture *texture);
+
+// Utils for cub. line parsing
+bool				is_empty_line(char *line);
+bool				is_comment_line(char *line);
+bool				is_config_line(char *line);
+bool				is_map_line(char *line);
+void				free_string_array(char **array);
+
+// Map parser utils
+int					find_map_start(char **lines);
+int					find_map_end(char **lines, int start);
+int					count_map_lines(char **lines, int start, int end);
+
+// Utils for parser
+bool	is_empty_or_comment(char *line);
+float	calculate_map_char_percentage(char *line);
+int		ft_strotoi(char *str, char **endptr);
+void	init_it_all(t_data *data);
+void	parse_config_section(char **lines, int map_start, t_data *data);
+
+// parsing core I
+void	clean_parsing_data(t_data *data);
+bool	parse_single_cubline(char **line, t_data *data);
+bool	validate_all_datas(t_data *data);
+
+// parsing core II
+bool	parse_and_config_map(const char *filename, t_data *data);
+
 
 #endif

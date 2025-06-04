@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:36:24 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/03 13:09:53 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 16:06:15 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../libft/libft.h"
 
 
-bool	parse_textures_line(char *line, t_texture *texture)
+bool	parse_all_textures(char *line, t_texture *texture)
 {
 	int	i;
 	t_texture_id	*texture_ids[4];
