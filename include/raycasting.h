@@ -16,35 +16,40 @@
 # define SUCCESS 0
 # define ERROR 1
 
-# define WIDTH 480
-# define HEIGHT 320
-# define BLOCK 32
+# define AXIS_X 0
+# define AXIS_Y 1
+
+# define WIDTH 1280
+# define HEIGHT 720
+# define BLOCK 64
+
 # define FOV (M_PI / 3)
-# define PLAYER_SPEED 0.002
-# define PLAYER_ROTATION_SPEED 0.1
+# define FOV_STEP (FOV / WIDTH)
+# define PLAYER_SPEED 0.02
+# define PLAYER_ROTATION_SPEED 1
 # define MAX_RAY_DISTANCE 10000.0
 # define RAY_STEP_SIZE 1.0
 
-// # define KEY_W 13
-// # define KEY_A 0
-// # define KEY_S 1
-// # define KEY_D 2
-// # define KEY_LEFT 123
-// # define KEY_RIGHT 124
-// # define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_ESC 53
 
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_ESC 65307
+// # define KEY_W 119
+// # define KEY_A 97
+// # define KEY_S 115
+// # define KEY_D 100
+// # define KEY_LEFT 65361
+// # define KEY_RIGHT 65363
+// # define KEY_ESC 65307
 
 # include "../minilibx/mlx.h"
 # include "math.h"
 # include "parsing.h"
-# include <X11/keysym.h>
+// # include <X11/keysym.h>
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
@@ -76,7 +81,9 @@ typedef struct s_image
 {
 	void		*img;
 	char		*addr;
-	int			bits_per_pixel;
+	int 		width;
+	int 		height;
+	int			bpp;
 	int			line_length;
 	int			endian;
 }				t_image;
@@ -85,7 +92,11 @@ typedef struct s_data
 {
 	t_player	player;
 	t_mlx		mlx;
-	t_image		line_img;
+	t_image		scene_img;
+	t_image		wallnorth_img;
+	t_image		wallsouth_img;
+	t_image		walleast_img;
+	t_image		wallwest_img;
 	t_keys		keys;
 	t_map		map;
 	t_texture	texture;
@@ -93,22 +104,56 @@ typedef struct s_data
 	t_color		ceiling;
 }				t_data;
 
+typedef struct s_ray
+{
+	double				x;
+	double				y;
+	double				dir_x;
+	double				dir_y;
+	double				distance;
+	double				start_angle;
+	double				angle;
+	double				corrected;
+	double				height_line;
+	int					axis;
+	t_image				*texture;
+
+}				t_ray;
+
+typedef struct s_drawing
+{
+	int		start;
+	int		end;
+	int		line;
+	int		texture_x;
+	int		original_start;
+	int		texture_y;
+	int		color;
+	double	wall_hit_pos;
+	double	full_wall_position;
+}				t_drawing;
+
 /* event handling*/
 
-int				close_window(t_mlx *data);
+int				close_window(t_data *data);
 int				key_down(int keycode, t_data *data);
 int				key_up(int keycode, t_data *data);
 int				update_state(t_data *data);
 
-/* drawing */
+/* raycasting_utils */
 
 void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void			draw_line(t_image *image, t_player *player, t_data *data);
+void			create_image(t_image *image, int type, t_data *data, char *path);
+int				get_texture_pixel(t_image *texture, int x, int y);
 
-/*line calculation */
 
-double			ray_distance(t_player *player, t_data *data, double ray_angle);
+/* raycasting */
+
+void			ray_distance(t_player *player, t_data *data, t_ray *ray);
 void			render_scene(t_image *image, t_player *player, t_data *data);
-void			draw_vertical_line(t_image *image, int x, int height);
+void			draw_vertical_line(t_image *image, int column, t_ray *ray);
+int				get_direction(int axis, t_ray *ray, t_player *player, t_data *data);
+
 
 #endif

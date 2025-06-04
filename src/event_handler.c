@@ -13,9 +13,15 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-int	close_window(t_mlx *data)
+int	close_window(t_data *data)
 {
-	(void)data;
+	mlx_destroy_image(data->mlx.mlx_ptr, data->scene_img.img);
+	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
+	// mlx_destroy_display(data->mlx.mlx_ptr);
+	while (0 < data->map.height--)
+		free(data->map.map[data->map.height]);
+	free(data->map.map);
+	free(data->mlx.mlx_ptr);
 	exit(SUCCESS);
 }
 
@@ -34,7 +40,7 @@ int	key_down(int keycode, t_data *data)
 	else if (keycode == KEY_LEFT)
 		data->keys.left = 1;
 	else if (keycode == KEY_ESC)
-		close_window(&data->mlx);
+		close_window(data);
 	return (SUCCESS);
 }
 
@@ -57,26 +63,33 @@ int	key_up(int keycode, t_data *data)
 
 void	update_coordinates(t_data *data)
 {
+	double	next_px;
+	double	next_py;
+
+	next_px = data->player.px;
+	next_py = data->player.py;
 	if (data->keys.w == 1)
-	{
-		data->player.px += cos(data->player.angle) * PLAYER_SPEED;
-		data->player.py += sin(data->player.angle) * PLAYER_SPEED;
-	}
+		next_px += cos(data->player.angle) * PLAYER_SPEED;
 	if (data->keys.s == 1)
-	{
-		data->player.px -= cos(data->player.angle) * PLAYER_SPEED;
-		data->player.py -= sin(data->player.angle) * PLAYER_SPEED;
-	}
+		next_px -= cos(data->player.angle) * PLAYER_SPEED;
 	if (data->keys.a == 1)
-	{
-		data->player.px += cos(data->player.angle - M_PI / 2) * PLAYER_SPEED;
-		data->player.py += sin(data->player.angle - M_PI / 2) * PLAYER_SPEED;
-	}
+		next_px += cos(data->player.angle - M_PI / 2) * PLAYER_SPEED;
 	if (data->keys.d == 1)
-	{
-		data->player.px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
-		data->player.py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
-	}
+		next_px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
+	if (next_px >= 0 && next_px < data->map.width
+		&& data->map.map[(int)data->player.py][(int)next_px] != '1')
+		data->player.px = next_px;
+	if (data->keys.w == 1)
+		next_py += sin(data->player.angle) * PLAYER_SPEED;
+	if (data->keys.s == 1)
+		next_py -= sin(data->player.angle) * PLAYER_SPEED;
+	if (data->keys.a == 1)
+		next_py += sin(data->player.angle - M_PI / 2) * PLAYER_SPEED;
+	if (data->keys.d == 1)
+		next_py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
+	if (next_py >= 0 && next_py < data->map.height
+		&& data->map.map[(int)next_py][(int)data->player.px] != '1')
+		data->player.py = next_py;
 }
 
 int	update_state(t_data *data)
@@ -90,8 +103,6 @@ int	update_state(t_data *data)
 		data->player.angle += 2.0 * M_PI;
 	else if (data->player.angle >= 2.0 * M_PI)
 		data->player.angle -= 2.0 * M_PI;
-	mlx_clear_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
-	memset(data->line_img.addr, 0, HEIGHT * WIDTH * sizeof(int));
-	render_scene(&data->line_img, &data->player, data);
+	render_scene(&data->scene_img, &data->player, data);
 	return (SUCCESS);
 }
