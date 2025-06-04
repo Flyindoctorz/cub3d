@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:08 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 14:15:08 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 15:27:57 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,6 @@ bool	parse_single_cubline(char **line, t_data *data)
 		return (parse_textures_line(line[0], &data->texture));
 }
 
-bool	parse_cub_file(char **lines, int map_start, t_data *data)
-{
-	int		i;
-
-	if (!lines || !data || map_start < 0)
-		return (printf("Error: Invalid input to parse_cub_file\n"), false);
-	i = 0;
-	while (i < map_start)
-	{
-		if (!parse_single_cubline(&lines[i], data))
-			return (false);
-		i++;
-	}
-	return (true);
-}
 
 bool	validate_all_datas(t_data *data)
 {

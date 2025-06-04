@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:15:33 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 15:06:41 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/04 15:51:01 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	pre_cub_parse(const char *filename, t_data *data)
 	if (map_start < 0)
 		return (printf("No map found in file: %s\n", filename),
 			free_string_array(lines), false);
-	if (!parse_cub_file(lines, map_start, data))
+	if (!parse_cub_file(lines, data))
 		return(free_string_array(lines), false);
 	if (!parse_map_section(lines, map_start, data))
 		return (free_string_array(lines), false);
@@ -56,7 +56,7 @@ static bool	pre_cub_parse(const char *filename, t_data *data)
 	return (true);
 }
 
-bool	parse_cub_file(const char *filename, t_data *data)
+bool	parse_and_config_map(const char *filename, t_data *data)
 {
 	bool	res;
 	
