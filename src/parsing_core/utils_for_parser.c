@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:58:42 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 12:19:08 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 10:55:05 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static float	calculate_map_char_percentage(char *line)
 		if (!ft_isspace(line[i]))
 		{
 			total_chars++;
-			if (is_map_char(line[i]))
+			if (is_a_valid_char(line[i]))
 				map_chars++;
 		}
 		i++;

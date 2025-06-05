@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:47:05 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 10:55:10 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				free_copy(char **map_copy);
 int					line_width(char *line);
 int					line_height(char **map);
 bool				is_in_map(char **map, int x, int y);
-char				is_map_char(char c);
+char				is_a_valid_char(char c);
 
 // map validation
 bool				is_a_valid_char(char c);

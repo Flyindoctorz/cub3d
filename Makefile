@@ -6,17 +6,17 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/02 14:30:00 by cgelgon           #+#    #+#              #
-#    Updated: 2025/06/02 15:02:04 by cgelgon          ###   ########.fr        #
+#    Updated: 2025/06/05 10:46:59 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables pour les sources
 sources = src/main.c src/event_handler.c src/draw.c src/raycasting.c \
-		  src/init.c src/texture_handling.c src/validate_all_datas.c \
+		  src/init.c src/validate_all_datas.c \
 		  src/cub_control.c src/validate_textures.c src/map_closure.c \
 		  src/validate_map.c src/color_handling.c src/map_utils.c \
 		  src/get_all_content.c src/parsing_core/utils_for_parser.c \
-		  src/parsing_core/texture_parser.c src/brouillon_parsing_smart.c
+		  src/parsing_core/texture_parser.c
 
 objects = $(sources:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:43:00 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 10:51:01 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,29 @@ char	**make_it_split(const char *content)
 	return (lines);
 }
 
-
-
+char	**read_file_lines(const char *filename)
 {
-	char	*buffer;
+	int		fd;
 	char	*content;
+	char	**lines;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	content = ft_strdup("");
+	if (!filename || ft_strlen(filename) == 0)
+		return (printf("Error: Filename is empty or NULL\n"), NULL);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (printf("Error: Could not open file %s\n", filename), NULL);
+	content = read_file_content(fd);
+	close(fd);
 	if (!content)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	content = read_loop(fd, buffer, content);
-	free(buffer);
-	if (!content || content[0] == '\0')
-	{
-		free(content);
-		return (NULL);
-	}
-	return (content);
+		return (printf("Error: Could not read file content\n"), NULL);
+	if (content[0] == '\0')
+		return (printf("Error: File is empty\n"), free(content), NULL);
+		lines = make_it_split(content);
+	free(content);
+	if (!lines)
+		return (printf("Error: Could not split file content into lines\n"), NULL);
+	return (lines);
 }
-
 char	*read_it_full(char *filename)
 {
 	int		fd;
