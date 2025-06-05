@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 12:00:47 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 13:37:15 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,15 +171,6 @@ bool				parse_single_cubline(char **line, t_data *data);
 bool				validate_all_datas(t_data *data);
 bool				parse_and_config_map(const char *filename, t_data *data);
 
-
-
-
-
-float				calculate_map_char_percentage(char *line);
-
-
-// parsing core I
-bool	parse_cub_file(char **lines, t_data *data);
-
+bool				parse_cub_file(char **lines, t_data *data);
 
 #endif

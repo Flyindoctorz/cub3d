@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:45:48 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 10:53:18 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 13:17:12 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	find_map_start(char **lines)
 	i = 0;
 	while (lines[i])
 	{
-		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i])
-			&& is_config_line(lines[i]))
+		if (is_map_line(lines[i]))
 			return (i);
 		i++;
 	}
