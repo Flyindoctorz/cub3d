@@ -15,19 +15,25 @@
 
 void	set_images(t_data *data)
 {
-	create_image(&data->scene_img, 0, data, NULL);
-	create_image(&data->minimap_img, 42, data, NULL);
-	create_image(&data->wallnorth_img, 1, data, "assets/wall_north.xpm");
-	create_image(&data->walleast_img, 1, data, "assets/wall_east.xpm");
-	create_image(&data->wallwest_img, 1, data, "assets/wall_west.xpm");
-	create_image(&data->wallsouth_img, 1, data, "assets/wall_south.xpm");
+	data->wallnorth_img.path = "assets/wall_north.xpm";
+	data->wallsouth_img.path = "assets/wall_south.xpm";
+	data->walleast_img.path = "assets/wall_east.xpm";
+	data->wallwest_img.path = "assets/wall_west.xpm";
+	create_image(&data->scene_img, data, WIDTH, HEIGHT);
+	create_image(&data->minimap_img, data, WIDTH / 8, WIDTH / 8);
+	create_image(&data->player_img, data
+		, data->minimap_img.width / 16 , data->minimap_img.width / 16);
+	create_image(&data->wallnorth_img, data, 0, 0);
+	create_image(&data->walleast_img, data, 0, 0);
+	create_image(&data->wallwest_img, data, 0, 0);
+	create_image(&data->wallsouth_img, data, 0, 0);
 }
 
 void	set_player(t_data *data)
 {
 	data->player.px = 2;
 	data->player.py = 2;
-	data->player.angle = 0;
+	data->player.angle = M_PI / 2.0 + M_PI;
 }
 
 void	set_keys(t_data *data)
@@ -86,8 +92,7 @@ int	main(int ac, char **av)
 	// check if the file is a valid map
 	if (initialize(&data) == ERROR)
 		return (ERROR);
-	// draw_block(&data.minimap_img, BLOCK);
-	draw_map(&data.map, &data);
+	draw_player(&data.player_img);
 	render_scene(&data.player, &data);
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
 	mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);

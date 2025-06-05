@@ -85,6 +85,7 @@ typedef struct s_mlx
 
 typedef struct s_image
 {
+	char		*path;
 	void		*img;
 	char		*addr;
 	int 		width;
@@ -100,6 +101,7 @@ typedef struct s_data
 	t_mlx		mlx;
 	t_image		minimap_img;
 	t_image		scene_img;
+	t_image		player_img;
 	t_image		wallnorth_img;
 	t_image		wallsouth_img;
 	t_image		walleast_img;
@@ -151,9 +153,9 @@ int				update_state(t_data *data);
 
 void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void			draw_line(t_image *image, t_player *player, t_data *data);
-void			create_image(t_image *image, int type, t_data *data, char *path);
+void			create_image(t_image *image, t_data *data, int width, int height);
 int				get_texture_pixel(t_image *texture, int x, int y);
-void			draw_rectangle(t_image *image, t_tuple size, t_tuple pos);
+void			draw_player(t_image *image);
 void			draw_map(t_map *map, t_data *data);
 
 /* raycasting */

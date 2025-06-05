@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
+#include <string.h>
 #include "../include/raycasting.h"
 
 void	set_drawing_info(t_drawing *data, t_ray *ray)
@@ -142,8 +143,13 @@ void	render_scene(t_player *player, t_data *data)
 		ray.height_line = (BLOCK * HEIGHT) / ray.corrected;
 		draw_vertical_line(&data->scene_img, pos_screen++, &ray);
 	}
+	memset(data->minimap_img.addr, 0, data->minimap_img.height * data->minimap_img.line_length);
+	draw_map(&data->map, data);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, data->scene_img.img,
 		0, 0);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window
 		, data->minimap_img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, data->player_img.img
+		, data->minimap_img.width / 2.0
+		, data->minimap_img.height / 2.0);
 }
