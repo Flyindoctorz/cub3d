@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 15:01:36 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 15:19:14 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include "libft.h"
 # include "raycasting.h"
 
-#ifndef BUFFER_SIZE 4096
+# ifndef BUFFER_SIZE
 # define BUFFER_SIZE 4096
-#endif
+#	endif
 /* ************************************************************************** */
 /*                                STRUCTURES                                  */
 /* ************************************************************************** */
@@ -129,6 +129,7 @@ bool				is_texture_line(char *line, t_texture_id *texture_id, int *pos);
 bool				extract_texture_path(char *line, int start_pos, t_texture_id *texture_id);
 bool				try_to_parse_texture_ineture(char *line, t_texture_id *texture_id);
 bool				parse_one_texture(char *line, t_texture *texture);
+bool				parse_textures_line(char *line, t_texture *texture);
 bool				parse_all_textures(char **lines, int end, t_data *data);
 
 /* ************************************************************************** */
@@ -138,6 +139,7 @@ bool				parse_all_textures(char **lines, int end, t_data *data);
 bool				is_color_line(char *line, char letter, int *pos);
 bool				parse_rgb_component(char *line, int *pos, int *components, int component_id);
 bool				parse_a_color_line(char *line, t_color *color);
+bool				parse_color_line(char *line, t_color *color);
 bool				is_valid_rgb_number(int value);
 void				color_to_hex(t_color *color);
 
@@ -171,10 +173,9 @@ bool				validate_cub_extent(const char *filename);
 /* ************************************************************************** */
 
 void				clean_parsing_data(t_data *data);
-bool				parse_single_cubline(char **line, t_data *data);
+bool				parse_single_cubline(char *line, t_data *data);
 bool				validate_all_datas(t_data *data);
 bool				parse_and_config_map(const char *filename, t_data *data);
-
 bool				parse_cub_file(char **lines, t_data *data);
 
 #endif

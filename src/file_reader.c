@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 10:51:01 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 15:05:58 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**read_file_lines(const char *filename)
 		return (printf("Error: Could not read file content\n"), NULL);
 	if (content[0] == '\0')
 		return (printf("Error: File is empty\n"), free(content), NULL);
-		lines = make_it_split(content);
+	lines = make_it_split(content);
 	free(content);
 	if (!lines)
 		return (printf("Error: Could not split file content into lines\n"), NULL);
@@ -94,7 +94,7 @@ char	*read_it_full(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error: Could not open file %s\n", filename), NULL);
-	content = get_all_content(fd);
+	content = read_file_content(fd);
 	close(fd);
 	if (!content)
 		return (printf("Error: Could not read file content\n"), NULL);

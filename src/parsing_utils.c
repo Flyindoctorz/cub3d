@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:44:28 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:26:32 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 15:10:26 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@
 
 bool	is_empty_line(char *line)
 {
-	int i;
+	int	i;
 
 	if (!line)
 		return (true);
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_isspace(line[i]) && line[i] != '\t' && line[i] != '\n'
-		&& line[i] != '\r')
+		if (!ft_isspace(line[i]) && line[i] != '\t' 
+			&& line[i] != '\n' && line[i] != '\r')
 			return (false);
-			i++;
+		i++;
 	}
 	return (true);
 }
 
 bool	is_comment_line(char *line)
 {
-	int i;
+	int	i;
 
 	if (!line)
 		return (false);
@@ -43,13 +43,15 @@ bool	is_comment_line(char *line)
 	return (line[i] == '#' || line[i] == '\0');
 }
 
-bool	is_config_line(const char *line)
+bool	is_config_line(char *line)
 {
-	int i;
-	
+	int	i;
+
 	if (!line)
 		return (false);
 	i = 0;
+	while (line[i] && ft_isspace(line[i]))
+		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O')
 		return (true);
 	if (line[i] == 'S' && line[i + 1] == 'O')
@@ -63,7 +65,7 @@ bool	is_config_line(const char *line)
 	return (false);
 }
 
-bool	is_map_line(const char *line)
+bool	is_map_line(char *line)
 {
 	int	i;
 	int	map_char;
@@ -84,17 +86,17 @@ bool	is_map_line(const char *line)
 		}
 		i++;
 	}
-		if (total_chars == 0)
-			return (false);
+	if (total_chars == 0)
+		return (false);
 	return ((float)map_char / (float)total_chars >= 0.8);
 }
 
 void	free_string_array(char **array)
 {
-	int i;
+	int	i;
 
 	if (!array)
-		return;
+		return ;
 	i = 0;
 	while (array[i])
 	{

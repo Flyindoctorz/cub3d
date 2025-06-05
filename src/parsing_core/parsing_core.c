@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:08 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 15:27:57 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 15:20:03 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,28 @@ void	clean_parsing_data(t_data *data)
 		free_string_array(data->map.map);
 }
 
-bool	parse_single_cubline(char **line, t_data *data)
+bool	parse_a_color_line(char *line, t_color *color)
 {
-	if (is_empty_line(line[0]) || is_comment_line(line[0]))
+	return (parse_color_line(line, color));
+}
+
+bool	parse_textures_line(char *line, t_texture *texture)
+{
+	return (parse_one_texture(line, texture));
+}
+
+bool	parse_single_cubline(char *line, t_data *data)
+{
+	if (is_empty_line(line) || is_comment_line(line))
 		return (true);
-	if (!is_config_line(line[0]))
-		return(printf("Error: Invalid configuration line: %s\n", line[0]), false);
-	if (line[0][0] == 'F' || ft_strchr(line, 'F'))
+	if (!is_config_line(line))
+		return(printf("Error: Invalid configuration line: %s\n", line), false);
+	if (line[0] == 'F' || ft_strchr(line, 'F'))
 		return (parse_a_color_line(line, &data->floor));
-	if (line[0][0] == 'C' || ft_strchr(line, 'C'))
+	if (line[0] == 'C' || ft_strchr(line, 'C'))
 		return (parse_a_color_line(line, &data->ceiling));
 	else
-		return (parse_textures_line(line[0], &data->texture));
+		return (parse_textures_line(line, &data->texture));
 }
 
 
