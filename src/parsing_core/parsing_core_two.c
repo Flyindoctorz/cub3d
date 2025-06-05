@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:15:33 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 15:51:01 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 14:11:35 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,12 @@
 #include "../include/raycasting.h"
 #include "../libft/libft.h"
 
-static bool	validate_cub_extent(const char *filename)
-{
-	int	len;
-
-	if (!filename)
-		return (printf("Invalid filename"), false);
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (false);
-	if (ft_strcmp(filename + len - 4, ".cub") != 0)
-		return (printf("File must have a .cub extension"), false);
-	return (true);
-}
-
 static bool	pre_cub_parse(const char *filename, t_data *data)
 {
 	char	**lines;
 	int		map_start;
 	char	*content;
 
-	if (!validate_cub_extent(filename))
-		return (false);
 	init_data(data);
 	content = read_file_content(filename);
 	if (!content)
@@ -50,7 +34,7 @@ static bool	pre_cub_parse(const char *filename, t_data *data)
 			free_string_array(lines), false);
 	if (!parse_cub_file(lines, data))
 		return(free_string_array(lines), false);
-	if (!parse_map_section(lines, map_start, data))
+	if (!parse_map_section(lines, data))
 		return (free_string_array(lines), false);
 	free_string_array(lines);
 	return (true);

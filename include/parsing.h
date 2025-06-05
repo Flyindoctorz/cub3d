@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 13:37:15 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 15:01:36 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,39 +22,42 @@
 # include "libft.h"
 # include "raycasting.h"
 
+#ifndef BUFFER_SIZE 4096
+# define BUFFER_SIZE 4096
+#endif
 /* ************************************************************************** */
 /*                                STRUCTURES                                  */
 /* ************************************************************************** */
 
-typedef struct s_map
-{
-	char			**map;
-	int				width;
-	int				height;
-}					t_map;
+// typedef struct s_map
+// {
+// 	char			**map;
+// 	int				width;
+// 	int				height;
+// }					t_map;
 
-typedef struct s_texture_id
-{
-	char			*path;
-	char			*id;
-}					t_texture_id;
+// typedef struct s_texture_id
+// {
+// 	char			*path;
+// 	char			*id;
+// }					t_texture_id;
 
-typedef struct s_texture
-{
-	t_texture_id	north;
-	t_texture_id	south;
-	t_texture_id	west;
-	t_texture_id	east;
-	// t_texture_id	door;
-}					t_texture;
+// typedef struct s_texture
+// {
+// 	t_texture_id	north;
+// 	t_texture_id	south;
+// 	t_texture_id	west;
+// 	t_texture_id	east;
+// 	// t_texture_id	door;
+// }					t_texture;
 
-typedef struct s_color
-{
-	int				red;
-	int				green;
-	int				blue;
-	int				hex;
-}				t_color;
+// typedef struct s_color
+// {
+// 	int				red;
+// 	int				green;
+// 	int				blue;
+// 	int				hex;
+// }				t_color;
 
 typedef struct s_parser_status
 {
@@ -68,7 +71,7 @@ typedef struct s_parser_status
 /* ************************************************************************** */
 
 int					init_data(t_data *data);
-void				init_texture (t_texture *texture);
+void				init_texture(t_texture *texture);
 
 /* ************************************************************************** */
 /*                               FILE READER		                          */
@@ -124,7 +127,7 @@ bool				double_check_texture(t_texture *texture);
 
 bool				is_texture_line(char *line, t_texture_id *texture_id, int *pos);
 bool				extract_texture_path(char *line, int start_pos, t_texture_id *texture_id);
-bool				try_to_parse_texture(char *line, t_texture_id *texture_id);
+bool				try_to_parse_texture_ineture(char *line, t_texture_id *texture_id);
 bool				parse_one_texture(char *line, t_texture *texture);
 bool				parse_all_textures(char **lines, int end, t_data *data);
 
@@ -134,7 +137,7 @@ bool				parse_all_textures(char **lines, int end, t_data *data);
 
 bool				is_color_line(char *line, char letter, int *pos);
 bool				parse_rgb_component(char *line, int *pos, int *components, int component_id);
-bool				parse_color_line(char *line, t_color *color);
+bool				parse_a_color_line(char *line, t_color *color);
 bool				is_valid_rgb_number(int value);
 void				color_to_hex(t_color *color);
 
@@ -161,6 +164,7 @@ void				free_string_array(char **array);
 int					ft_strotoi(char *str, char **endptr);
 void				init_it_all(t_data *data);
 void				parse_config_section(char **lines, int map_start, t_data *data);
+bool				validate_cub_extent(const char *filename);
 
 /* ************************************************************************** */
 /*                               PARSING CORE	                              */

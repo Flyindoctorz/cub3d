@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:43:09 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 10:45:56 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/05 15:00:16 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	is_valid_map(char **map)
 
 	i = 0;
 	if (!map || !map[0])
-		return ("Map is NULL", (false));
+		return (printf("Map is NULL\n\n"), false);
 	while (map[i])
 	{
 		j = 0;

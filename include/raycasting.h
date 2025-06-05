@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:13 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/19 18:50:51 by safuente         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:39:59 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,36 @@
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
+
+typedef struct s_map
+{
+	char			**map;
+	int				width;
+	int				height;
+}					t_map;
+
+typedef struct s_texture_id
+{
+	char			*path;
+	char			*id;
+}					t_texture_id;
+
+typedef struct s_texture
+{
+	t_texture_id	north;
+	t_texture_id	south;
+	t_texture_id	west;
+	t_texture_id	east;
+	// t_texture_id	door;
+}					t_texture;
+
+typedef struct s_color
+{
+	int				red;
+	int				green;
+	int				blue;
+	int				hex;
+}				t_color;
 
 typedef struct s_keys
 {

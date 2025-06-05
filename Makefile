@@ -6,35 +6,38 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/02 14:30:00 by cgelgon           #+#    #+#              #
-#    Updated: 2025/06/05 10:46:59 by cgelgon          ###   ########.fr        #
+#    Updated: 2025/06/05 14:37:28 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Variables pour les sources
-sources = src/main.c src/event_handler.c src/draw.c src/raycasting.c \
-		  src/init.c src/validate_all_datas.c \
-		  src/cub_control.c src/validate_textures.c src/map_closure.c \
-		  src/validate_map.c src/color_handling.c src/map_utils.c \
-		  src/get_all_content.c src/parsing_core/utils_for_parser.c \
-		  src/parsing_core/texture_parser.c
+sources = src/main.c src/event_handler.c src/draw.c src/raycasting.c src/raycasting_utils.c \
+		  src/init.c src/validate_all_datas.c src/validate_textures.c src/validate_map.c \
+		  src/map_closure.c src/map_utils.c src/map_parser.c src/map_parser_utils.c \
+		  src/file_reader.c src/parsing_utils.c \
+		  src/color_parser.c src/color_parser_utils.c \
+		  src/parsing_core/parsing_core.c src/parsing_core/parsing_core_two.c \
+		  src/parsing_core/texture_parser_one.c src/parsing_core/texture_parser_two.c \
+		  src/parsing_core/utils_for_parser.c \
+		  src/whole_cub_parser.c
 
 objects = $(sources:.c=.o)
 
 # Dossiers
 LIBFT_DIR = libft
-MINILIBX_DIR = minilibx
+MINILIBX_DIR = minilibx-linux
 
 # Librairies
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Linux compile
-# libs = -Lminilibx -lmlx_Linux -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft
+# Linux compile (corrigé)
+libs = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft
+includes = -I$(MINILIBX_DIR) -I$(LIBFT_DIR) -Iinclude
 
-# includes = -Iminilibx -I/usr/include -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
-
-# macOS compile (commenté)
-libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
-includes = -Iminilibx -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
+# # macOS compile (commenté)
+# libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
+# includes = -Iminilibx -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
 
 # Compilateur et flags
 CC = cc
