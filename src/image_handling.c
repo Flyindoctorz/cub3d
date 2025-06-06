@@ -17,7 +17,7 @@ void	render_scene(t_player *player, t_data *data)
 	raycast(player, data);
 	memset(data->minimap_img.addr, 0, data->minimap_img.height
 		* data->minimap_img.line_length);
-	draw_map(&data->map, data);
+	draw_map(&data->map, data, &data->minimap_img);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
 		data->scene_img.img, 0, 0);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
@@ -26,4 +26,45 @@ void	render_scene(t_player *player, t_data *data)
 		data->player_img.img, data->minimap_img.width / 2.0
 		- data->player_img.width / 2.0, data->minimap_img.height / 2.0
 		- data->player_img.height / 2.0);
+}
+
+void	draw_map(t_map *map, t_data *data, t_image *m_map)
+{
+	double	mini_x;
+	double	mini_y;
+	double	map_x;
+	double	map_y;
+
+	mini_y = 0;
+	while (mini_y < m_map->height)
+	{
+		mini_x = 0;
+		while (mini_x < data->minimap_img.width)
+		{
+			map_x = data->player.px - 1.5 + (mini_x * 3.0 / m_map->width);
+			map_y = data->player.py - 1.5 + (mini_y * 3.0 / m_map->height);
+			if (map_x < 0 || map_y < 0 || map_x > map->width
+				|| map_y > map->height)
+				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
+			else if (map->map[(int)map_y][(int)map_x] == '1')
+				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FF0000);
+			mini_x++;
+		}
+		mini_y++;
+	}
+}
+
+void	draw_player(t_image *image)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < image->height)
+	{
+		x = 0;
+		while (x < image->width)
+			mlx_pixel_put_v2(image, x++, y, 0x00FF0000);
+		y++;
+	}
 }

@@ -51,52 +51,6 @@ void	create_image(t_image *image, t_data *data, int width, int height)
 			&image->line_length, &image->endian);
 }
 
-void	draw_map(t_map *map, t_data *data)
-{
-	double	mini_x;
-	double	mini_y;
-	double	map_x;
-	double	map_y;
-
-	mini_x = 0;
-	mini_y = 0;
-	while (mini_y < data->minimap_img.height)
-	{
-		mini_x = 0;
-		while (mini_x < data->minimap_img.width)
-		{
-			map_x = data->player.px - 1.5 + (mini_x * 3.0
-					/ data->minimap_img.width);
-			map_y = data->player.py - 1.5 + (mini_y * 3.0
-					/ data->minimap_img.height);
-			if (map_x < 0 || map_y < 0 || map_x > map->width
-				|| map_y > map->height)
-				mlx_pixel_put_v2(&data->minimap_img, mini_x, mini_y,
-					0x00FFFFFF);
-			else if (map->map[(int)map_y][(int)map_x] == '1')
-				mlx_pixel_put_v2(&data->minimap_img, mini_x, mini_y,
-					0x00FF0000);
-			mini_x++;
-		}
-		mini_y++;
-	}
-}
-
-void	draw_player(t_image *image)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < image->height)
-	{
-		x = 0;
-		while (x < image->width)
-			mlx_pixel_put_v2(image, x++, y, 0x00FF0000);
-		y++;
-	}
-}
-
 /*void	draw_line(t_image *image, t_player *player, t_data *data)
 {
 	double	tmp_x;

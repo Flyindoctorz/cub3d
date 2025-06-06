@@ -54,12 +54,6 @@
 # include <string.h>
 # include <unistd.h>
 
-typedef struct s_tuple
-{
-	int	x;
-	int	y;
-}				t_tuple;
-
 typedef struct s_keys
 {
 	int			w;
@@ -159,7 +153,7 @@ int				get_texture_pixel(t_image *texture, int x, int y);
 /* image handling */
 
 void			draw_player(t_image *image);
-void			draw_map(t_map *map, t_data *data);
+void			draw_map(t_map *map, t_data *data, t_image *m_map);
 void			render_scene(t_player *player, t_data *data);
 
 /* raycasting */
