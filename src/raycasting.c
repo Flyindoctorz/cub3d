@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
-#include <string.h>
 #include "../include/raycasting.h"
+#include <string.h>
 
 void	set_drawing_info(t_drawing *data, t_ray *ray)
 {
@@ -61,8 +61,8 @@ void	draw_vertical_line(t_image *image, int column, t_ray *ray)
 				data.texture_y = 0;
 			if (data.texture_y >= ray->texture->height)
 				data.texture_y = ray->texture->height - 1;
-			data.color = get_texture_pixel(ray->texture,
-					data.texture_x, data.texture_y);
+			data.color = get_texture_pixel(ray->texture, data.texture_x,
+					data.texture_y);
 			mlx_pixel_put_v2(image, column, data.line++, data.color);
 		}
 		else
@@ -143,13 +143,15 @@ void	render_scene(t_player *player, t_data *data)
 		ray.height_line = (BLOCK * HEIGHT) / ray.corrected;
 		draw_vertical_line(&data->scene_img, pos_screen++, &ray);
 	}
-	memset(data->minimap_img.addr, 0, data->minimap_img.height * data->minimap_img.line_length);
+	memset(data->minimap_img.addr, 0, data->minimap_img.height
+		* data->minimap_img.line_length);
 	draw_map(&data->map, data);
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, data->scene_img.img,
-		0, 0);
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window
-		, data->minimap_img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, data->player_img.img
-		, data->minimap_img.width / 2.0
-		, data->minimap_img.height / 2.0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
+		data->scene_img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
+		data->minimap_img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
+		data->player_img.img, data->minimap_img.width / 2.0
+		- data->player_img.width / 2.0, data->minimap_img.height / 2.0
+		- data->player_img.height / 2.0);
 }

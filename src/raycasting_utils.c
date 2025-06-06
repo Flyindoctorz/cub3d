@@ -53,10 +53,10 @@ void	create_image(t_image *image, t_data *data, int width, int height)
 
 void	draw_map(t_map *map, t_data *data)
 {
-	double mini_x;
-	double mini_y;
-	double map_x;
-	double map_y;
+	double	mini_x;
+	double	mini_y;
+	double	map_x;
+	double	map_y;
 
 	mini_x = 0;
 	mini_y = 0;
@@ -65,17 +65,21 @@ void	draw_map(t_map *map, t_data *data)
 		mini_x = 0;
 		while (mini_x < data->minimap_img.width)
 		{
-			map_x = data->player.px - 1.5 + (mini_x * 3.0 / data->minimap_img.width) ;
-			map_y = data->player.py - 1.5 + (mini_y * 3.0 / data->minimap_img.height);
-			if (map_x < 0 || map_y < 0 || map_x > map->width || map_y > map->height)
-				mlx_pixel_put_v2(&data->minimap_img, mini_x, mini_y, 0x00FFFFFF);
+			map_x = data->player.px - 1.5 + (mini_x * 3.0
+					/ data->minimap_img.width);
+			map_y = data->player.py - 1.5 + (mini_y * 3.0
+					/ data->minimap_img.height);
+			if (map_x < 0 || map_y < 0 || map_x > map->width
+				|| map_y > map->height)
+				mlx_pixel_put_v2(&data->minimap_img, mini_x, mini_y,
+					0x00FFFFFF);
 			else if (map->map[(int)map_y][(int)map_x] == '1')
-				mlx_pixel_put_v2(&data->minimap_img, mini_x, mini_y, 0x00FF0000);
+				mlx_pixel_put_v2(&data->minimap_img, mini_x, mini_y,
+					0x00FF0000);
 			mini_x++;
 		}
 		mini_y++;
 	}
-
 }
 
 void	draw_player(t_image *image)
@@ -88,7 +92,7 @@ void	draw_player(t_image *image)
 	{
 		x = 0;
 		while (x < image->width)
-			mlx_pixel_put_v2(image, x++ , y, 0x00FF0000);
+			mlx_pixel_put_v2(image, x++, y, 0x00FF0000);
 		y++;
 	}
 }
@@ -128,21 +132,21 @@ void	draw_player(t_image *image)
 }
 */
 
-	// int	draw_x;
-	// int	draw_y;
-	// draw_y = data->player.py * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
-	// draw_x = data->player.px * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
-	// mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->line_img.img,
-	// 	0, 0);
-	// mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->player_img.img,
-	// 	draw_x, draw_y);
-			// if (map[y][x] == '1')
-			// 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
-			// 		data->block_img.img, x * BLOCK, y * BLOCK);
-			// else if (map[y][x] == 'S' || map[y][x] == 'N' || map[y][x] == 'E'
-			// 	|| map[y][x] == 'O')
-			// {
-			// 	// printf("%d %d\n", x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
-			// 	// mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
-			// 	// 	data->player_img.img, x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
-			// }
+// int	draw_x;
+// int	draw_y;
+// draw_y = data->player.py * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
+// draw_x = data->player.px * BLOCK + ((BLOCK - BLOCK / 4.0) / 2);
+// mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->line_img.img,
+// 	0, 0);
+// mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, data->player_img.img,
+// 	draw_x, draw_y);
+// if (map[y][x] == '1')
+// 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
+// 		data->block_img.img, x * BLOCK, y * BLOCK);
+// else if (map[y][x] == 'S' || map[y][x] == 'N' || map[y][x] == 'E'
+// 	|| map[y][x] == 'O')
+// {
+// 	// printf("%d %d\n", x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
+// 	// mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
+// 	// 	data->player_img.img, x * BLOCK + BLOCK / 2, y * BLOCK + BLOCK / 2);
+// }

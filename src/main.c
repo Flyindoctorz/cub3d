@@ -21,8 +21,8 @@ void	set_images(t_data *data)
 	data->wallwest_img.path = "assets/wall_west.xpm";
 	create_image(&data->scene_img, data, WIDTH, HEIGHT);
 	create_image(&data->minimap_img, data, WIDTH / 8, WIDTH / 8);
-	create_image(&data->player_img, data
-		, data->minimap_img.width / 16 , data->minimap_img.width / 16);
+	create_image(&data->player_img, data, data->minimap_img.width / 32,
+		data->minimap_img.width / 32);
 	create_image(&data->wallnorth_img, data, 0, 0);
 	create_image(&data->walleast_img, data, 0, 0);
 	create_image(&data->wallwest_img, data, 0, 0);
