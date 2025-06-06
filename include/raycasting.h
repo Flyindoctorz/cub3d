@@ -155,11 +155,16 @@ void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
 void			draw_line(t_image *image, t_player *player, t_data *data);
 void			create_image(t_image *image, t_data *data, int width, int height);
 int				get_texture_pixel(t_image *texture, int x, int y);
+
+/* image handling */
+
 void			draw_player(t_image *image);
 void			draw_map(t_map *map, t_data *data);
+void			render_scene(t_player *player, t_data *data);
 
 /* raycasting */
 
+void			raycast(t_player *player, t_data *data);
 void			ray_distance(t_player *player, t_data *data, t_ray *ray);
 void			render_scene(t_player *player, t_data *data);
 void			draw_vertical_line(t_image *image, int column, t_ray *ray);
