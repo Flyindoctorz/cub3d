@@ -142,11 +142,12 @@ int				close_window(t_data *data);
 int				key_down(int keycode, t_data *data);
 int				key_up(int keycode, t_data *data);
 int				update_state(t_data *data);
+void			check_coordinates(t_data *data, double next_px, double next_py);
 
 /* raycasting_utils */
 
 void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
-void			draw_line(t_image *image, t_player *player, t_data *data);
+void			draw_line(t_image *image, t_data *data);
 void			create_image(t_image *image, t_data *data, int width, int height);
 int				get_texture_pixel(t_image *texture, int x, int y);
 

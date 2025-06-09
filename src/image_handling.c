@@ -52,6 +52,7 @@ void	draw_map(t_map *map, t_data *data, t_image *m_map)
 		}
 		mini_y++;
 	}
+	draw_line(m_map, data);
 }
 
 void	draw_player(t_image *image)
@@ -66,5 +67,27 @@ void	draw_player(t_image *image)
 		while (x < image->width)
 			mlx_pixel_put_v2(image, x++, y, 0x00FF0000);
 		y++;
+	}
+}
+
+void	draw_line(t_image *m_map, t_data *data)
+{
+	double	inc_x;
+	double	inc_y;
+	double	distance;
+	double	mini_x;
+	double	mini_y;
+
+	inc_x = cos(data->player.angle) * RAY_STEP_SIZE;
+	inc_y = sin(data->player.angle) * RAY_STEP_SIZE;
+	distance = 0.0;
+	mini_x = data->minimap_img.width / 2.0;
+	mini_y = data->minimap_img.height / 2.0;
+	while (distance < 20.0)
+	{
+		mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x0000FF00);
+		mini_x += inc_x;
+		mini_y += inc_y;
+		distance += RAY_STEP_SIZE;
 	}
 }

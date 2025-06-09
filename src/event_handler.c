@@ -62,7 +62,25 @@ int	key_up(int keycode, t_data *data)
 	return (SUCCESS);
 }
 
-void	update_coordinates(t_data *data)
+void	check_coordinates(t_data *data, double next_px, double next_py)
+{
+	if (next_py >= 0 && next_py < data->map.height
+		&& data->map.map[(int)next_py][(int)data->player.px] != '1')
+		data->player.py = next_py;
+	if (next_px >= 0 && next_px < data->map.width
+		&& data->map.map[(int)data->player.py][(int)next_px] != '1')
+		data->player.px = next_px;
+	if (data->keys.right == 1)
+		data->player.angle += (M_PI / 180.0) * PLAYER_ROTATION_SPEED;
+	if (data->keys.left == 1)
+		data->player.angle -= (M_PI / 180.0) * PLAYER_ROTATION_SPEED;
+	if (data->player.angle < 0)
+		data->player.angle += 2.0 * M_PI;
+	else if (data->player.angle >= 2.0 * M_PI)
+		data->player.angle -= 2.0 * M_PI;
+}
+
+int	update_state(t_data *data)
 {
 	double	next_px;
 	double	next_py;
@@ -77,9 +95,6 @@ void	update_coordinates(t_data *data)
 		next_px += cos(data->player.angle - M_PI / 2) * PLAYER_SPEED;
 	if (data->keys.d == 1)
 		next_px += cos(data->player.angle + M_PI / 2) * PLAYER_SPEED;
-	if (next_px >= 0 && next_px < data->map.width
-		&& data->map.map[(int)data->player.py][(int)next_px] != '1')
-		data->player.px = next_px;
 	if (data->keys.w == 1)
 		next_py += sin(data->player.angle) * PLAYER_SPEED;
 	if (data->keys.s == 1)
@@ -88,22 +103,6 @@ void	update_coordinates(t_data *data)
 		next_py += sin(data->player.angle - M_PI / 2) * PLAYER_SPEED;
 	if (data->keys.d == 1)
 		next_py += sin(data->player.angle + M_PI / 2) * PLAYER_SPEED;
-	if (next_py >= 0 && next_py < data->map.height
-		&& data->map.map[(int)next_py][(int)data->player.px] != '1')
-		data->player.py = next_py;
-}
-
-int	update_state(t_data *data)
-{
-	update_coordinates(data);
-	if (data->keys.right == 1)
-		data->player.angle += (M_PI / 180.0) * PLAYER_ROTATION_SPEED;
-	if (data->keys.left == 1)
-		data->player.angle -= (M_PI / 180.0) * PLAYER_ROTATION_SPEED;
-	if (data->player.angle < 0)
-		data->player.angle += 2.0 * M_PI;
-	else if (data->player.angle >= 2.0 * M_PI)
-		data->player.angle -= 2.0 * M_PI;
-	render_scene(&data->player, data);
-	return (SUCCESS);
+	check_coordinates(data, next_px, next_py);
+	return (render_scene(&data->player, data), EXIT_SUCCESS);
 }
