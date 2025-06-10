@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 11:33:10 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 15:14:02 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ bool				double_check_texture(t_texture *texture);
 /* ************************************************************************** */
 
 bool				is_texture_line(char *line, t_texture_id *texture_id, int *pos);
-bool				extract_texture_path(char *line, int start_pos, t_texture_id *texture_id);
+bool				extract_texture_path(char *line, int start, t_texture_id *texture_id);
 bool				try_to_parse_texture(char *line, t_texture_id *texture_id);
 bool				parse_one_texture(char *line, t_texture *texture);
 bool				parse_textures_line(char *line, t_texture *texture);

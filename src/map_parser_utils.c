@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:45:48 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 12:40:57 by safuente         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:31:02 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_map_end(char **lines, int start)
 	i = start;
 	while (lines[i])
 	{
-		if (is_empty_line(lines[i]) || is_comment_line(lines[i]))
+		if (is_empty_line(lines[i]) && !is_comment_line(lines[i]))
 		{
 			if (is_map_line(lines[i]))
 				last_map_line = i;

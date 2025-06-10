@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:08 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 11:38:33 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 15:36:53 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,30 @@ void	clean_parsing_data(t_data *data)
 	if (!data)
 		return;
 	if (data->texture.north.path)
+	{
 		free(data->texture.north.path);
+		data->texture.north.path = NULL;
+	}
 	if (data->texture.south.path)
+	{
 		free(data->texture.south.path);
+		data->texture.south.path = NULL;
+	}
 	if (data->texture.west.path)
+	{
 		free(data->texture.west.path);
+		data->texture.west.path = NULL;
+	}
 	if (data->texture.east.path)
+	{
 		free(data->texture.east.path);
+		data->texture.east.path = NULL;
+	}
 	if (data->map.map)
+	{
 		free_string_array(data->map.map);
+		data->map.map = NULL;
+	}
 }
 
 bool	parse_a_color_line(char *line, t_color *color)
@@ -40,21 +55,35 @@ bool	parse_textures_line(char *line, t_texture *texture)
 	return (parse_one_texture(line, texture));
 }
 
+bool	is_floor_or_ceiling_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && ft_isspace(line[i]))
+		i++;
+	return (line[i] == 'F' || line[i] == 'C');
+}
+
 bool	parse_single_cubline(char *line, t_data *data)
 {
+	int	i;
+
 	if (is_empty_line(line) || is_comment_line(line))
 		return (true);
+	
 	if (!is_config_line(line))
-		return(printf("Error: Invalid configuration line: %s\n", line), false);
-	if (line[0] == 'F' || ft_strchr(line, 'F'))
+		return (printf("Error: Invalid configuration line: %s\n", line), false);
+	
+	// Ignorer les espaces au début pour détecter le type de ligne
+	i = 0;
+	while (line[i] && ft_isspace(line[i]))
+		i++;
+	
+	if (line[i] == 'F')
 		return (parse_a_color_line(line, &data->floor));
-	if (line[0] == 'C' || ft_strchr(line, 'C'))
+	else if (line[i] == 'C')
 		return (parse_a_color_line(line, &data->ceiling));
 	else
 		return (parse_textures_line(line, &data->texture));
 }
-
-
-
-
-

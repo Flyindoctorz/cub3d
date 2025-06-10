@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/06/10 12:41:52 by safuente         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:06:19 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ static bool	validate_args(int ac, char **av)
 		return (printf("Error: No map file provided.\nUsage: %s <map.cub>\n",
 				av[0]), false);
 	if (ac > 2)
-		printf("Error: Too many arguments provided.\n");
-	return (printf("Usage: %s <map.cub>\n", av[0]), false);
+return (printf("Error: Too many arguments provided.\n"
+				"Usage: %s <map.cub>\n", av[0]), false);
 	return (validate_cub_extent(av[1]));
 }
 int	main(int ac, char **av)

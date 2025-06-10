@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:52:35 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:32:11 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 14:40:51 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ char	**extract_map_lines(char **lines, int start, int end)
 		return (printf("Map malloc extraction faild"), NULL);
 	i = start;
 	map_lines_count = 0;
-	while (i <= end && map_lines_count >= 0)
+	while (i <= end && lines[i])
 	{
-		if (!is_empty_line(lines[i]) || !is_comment_line(lines[i]))
+		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i]) && is_map_line(lines[i]))
 		{
 			dup = ft_strdup(lines[i]);
 			if (!dup)
-				return (free_string_array(map), printf("Invalid map line"), NULL);
+				return (free_string_array(map), printf("Invalid map dup"), NULL);
 			map[map_lines_count++] = dup;
 		}
 		i++;
