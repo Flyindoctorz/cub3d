@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
+#include <math.h>
 #include "../include/raycasting.h"
 
 void	set_drawing_info(t_drawing *data, t_ray *ray)
@@ -78,7 +79,6 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 			ray->texture = &data->wallwest_img;
 		else
 			ray->texture = &data->walleast_img;
-		ray->distance += RAY_STEP_SIZE;
 		ray->axis = AXIS_X;
 		return (EXIT_SUCCESS);
 	}
@@ -89,7 +89,6 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 			ray->texture = &data->wallnorth_img;
 		else
 			ray->texture = &data->wallsouth_img;
-		ray->distance += RAY_STEP_SIZE;
 		ray->axis = AXIS_Y;
 		return (EXIT_SUCCESS);
 	}
@@ -119,8 +118,9 @@ void	ray_distance(t_player *player, t_data *data, t_ray *ray)
 		ray->y += sin(ray->angle) * RAY_STEP_SIZE;
 		if (get_direction(1, ray, player, data) == EXIT_SUCCESS)
 			break ;
-		ray->distance += RAY_STEP_SIZE;
 	}
+	ray->distance = sqrt(pow((fabs(ray->y) - fabs(player->py * BLOCK)), 2)
+			+ pow((fabs(ray->x) - fabs(player->px * BLOCK)), 2));
 }
 
 void	raycast(t_player *player, t_data *data)
