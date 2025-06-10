@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 12:57:43 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 11:35:21 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 17:29:57 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 bool	parse_cub_file(char **lines, t_data *data)
 {
-	int map_start;
-	int i;
+	int	map_start;
+	int	i;
 
 	if (!lines || !data)
 		return (printf("Invalid input to parse_cub_file"), false);

@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 10:13:17 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 16:26:57 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 17:19:49 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,51 +33,23 @@ bool	is_texture_line(char *line, t_texture_id *texture_id, int *pos)
 	return (true);
 }
 
-// bool	extract_texture_path(char *line, int start, t_texture_id *texture_id)
-// {
-// 	int	end;
-// 	int	len;
-
-// 	if (!line[start] || ft_isspace(line[start]) || line[start] == '#')
-// 		return (printf("Error: Invalid texture path start in line: %s\n", line),
-			false);
-// 	end = start;
-// 	while (line[end] && !ft_isspace(line[end]) && line[end] != '\t'
-// 		&& line[end] != '\n' && line[end] != '#')
-// 		end++;
-// 	len = end - start;
-// 	if (len <= 0)
-// 		return (printf("Error: Empty texture path in line: %s\n", line), false);
-// 	texture_id->path = ft_substr(line, start, len);
-// 	if (!texture_id->path)
-// 		return (printf("Error: Memory allocation failed for texture path\n"),
-			false);
-// 	return (true);
-// }
 bool	extract_texture_path(char *line, int start, t_texture_id *texture_id)
 {
 	int	end;
 	int	len;
-
-	printf("Debug: extract_texture_path - line[%d] = '%c' (ASCII %d)\n", start,
-		line[start], (int)line[start]);
+	
 	if (!line[start] || ft_isspace(line[start]) || line[start] == '#')
-	{
-		printf("Debug: Invalid start character at position %d\n", start);
-		return (false);
-	}
+		return (printf("Error: Invalid texture path start in line: %s\n", line), false);
 	end = start;
 	while (line[end] && !ft_isspace(line[end]) && line[end] != '\t'
 		&& line[end] != '\n' && line[end] != '#')
 		end++;
 	len = end - start;
-	printf("Debug: Path from position %d to %d (length %d)\n", start, end, len);
 	if (len <= 0)
-		return (false);
+		return (printf("Error: Empty texture path in line: %s\n", line), false);
 	texture_id->path = ft_substr(line, start, len);
 	if (!texture_id->path)
-		return (false);
-	printf("Debug: Extracted texture path: '%s'\n", texture_id->path);
+		return (printf("Error: Memory allocation failed for texture path\n"), false);
 	return (true);
 }
 
@@ -91,8 +63,6 @@ bool	try_to_parse_texture(char *line, t_texture_id *texture_id)
 	if (texture_id->path != NULL)
 		return (printf("Error: Duplicate texture definition for %s\n",
 				texture_id->id), false);
-	printf("Debug: Parsing texture %s from line: %s\n", texture_id->id, line);
-	printf("Debug: Path starts at position %d\n", pos);
 	return (extract_texture_path(line, pos, texture_id));
 }
 
@@ -110,13 +80,8 @@ bool	parse_one_texture(char *line, t_texture *texture)
 	i = 0;
 	while (i < 4)
 	{
-		printf("Debug: Testing texture ID: %s\n", texture_ids[i]->id);
 		if (try_to_parse_texture(line, texture_ids[i]))
-		{
-			printf("Debug: Successfully parsed texture %s\n",
-				texture_ids[i]->id);
 			return (true);
-		}
 		i++;
 	}
 	return (printf("Error: Line doesn't match any texture format: %s\n", line),

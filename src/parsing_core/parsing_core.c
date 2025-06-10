@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:08 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 15:36:53 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 17:25:57 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ bool	parse_single_cubline(char *line, t_data *data)
 
 	if (!is_config_line(line))
 		return (printf("Error: Invalid configuration line: %s\n", line), false);
-
-	// Ignorer les espaces au début pour détecter le type de ligne
 	i = 0;
 	while (line[i] && ft_isspace(line[i]))
 		i++;

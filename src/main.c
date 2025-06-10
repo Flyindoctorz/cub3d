@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/06/10 16:34:17 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 17:33:51 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,37 +133,3 @@ int	main(int ac, char **av)
 	mlx_loop(data.mlx.mlx_ptr);
 	return (SUCCESS);
 }
-// char		map[8][5] = {
-// 	{'1', '1', '1', '1', '1'},
-// 	{'1', '0', '0', '0', '1'},
-// 	{'1', '0', '0', '0', '1'},
-// 	{'1', '0', '0', '0', '1'},
-// 	{'1', '1', '0', '0', '1'},
-// 	{'1', '0', '1', '0', '1'},
-// 	{'1', '0', '1', '0', '1'},
-// 	{'1', '1', '1', '1', '1'},
-// };
-// data.map.map = malloc(sizeof(char *) * 8);
-// for (int i = 0; i < 8; i++)
-// 	data.map.map[i] = malloc(sizeof(char) * 5);
-// for (int i = 0; i < 8; i++)
-// 	for (int j = 0; j < 5; j++)
-// 		data.map.map[i][j] = map[i][j];
-// data.map.height = 8;
-// data.map.width = 5;
-// (void)ac;
-// (void)av;
-// // securiser le cas ou il n'y a pas d'argument
-// // securiser le cas ou il y a trop d'argument
-// // securiser le cas ou on retire l'environnement de force (env -i ou unset)
-// // check if the file is a .cub
-// // check if the file is a valid map
-// if	(initialize(&data) == ERROR)
-// 	return (ERROR);
-// render_scene(&data.scene_img, &data.player, &data);
-// mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
-// mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);
-// mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);
-// mlx_loop_hook(data.mlx.mlx_ptr, update_state, &data);
-// mlx_loop(data.mlx.mlx_ptr);
-// return (SUCCESS);

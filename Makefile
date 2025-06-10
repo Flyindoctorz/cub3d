@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: safuente <safuente@student.42.fr>          +#+  +:+       +#+         #
+#    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/02 14:30:00 by cgelgon           #+#    #+#              #
-#    Updated: 2025/06/10 12:37:10 by safuente         ###   ########.fr        #
+#    Updated: 2025/06/10 17:33:42 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 sources = src/main.c src/event_handler.c src/raycasting.c src/raycasting_utils.c \
 		  src/init.c src/validate_all_datas.c src/validate_textures.c src/validate_map.c \
 		  src/map_closure.c src/map_utils.c src/map_parser.c src/map_parser_utils.c \
-		  src/file_reader.c src/parsing_utils.c \
+		  src/file_reader.c src/parsing_utils.c  \
 		  src/color_parser.c src/color_parser_utils.c \
 		  src/parsing_core/parsing_core.c src/parsing_core/parsing_core_two.c \
 		  src/parsing_core/texture_parser_one.c src/parsing_core/texture_parser_two.c \

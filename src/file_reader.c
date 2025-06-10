@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 16:59:18 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 17:27:30 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,3 @@ char	*read_it_full(char *filename)
 	printf("✅ File loaded (%zu bytes)\n", ft_strlen(content));
 	return (content);
 }
-
