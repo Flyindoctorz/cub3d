@@ -14,7 +14,6 @@
 #include "../../include/raycasting.h"
 #include "../../libft/libft.h"
 
-
 bool	parse_all_textures(char **line, int end, t_data *data)
 {
 	int	i;
@@ -59,7 +58,8 @@ bool	validate_all_textures(t_texture *texture)
 {
 	if (!texture || !texture->north.path || !texture->south.path
 		|| !texture->west.path || !texture->east.path)
-		return(printf("Error: One or more texture paths are not set.\n"), false);
+		return (printf("Error: One or more texture paths are not set.\n"),
+			false);
 	if (!validate_texture_file(texture->north.path)
 		|| !validate_texture_file(texture->south.path)
 		|| !validate_texture_file(texture->west.path)

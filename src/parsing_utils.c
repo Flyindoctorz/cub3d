@@ -23,8 +23,8 @@ bool	is_empty_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_isspace(line[i]) && line[i] != '\t' 
-			&& line[i] != '\n' && line[i] != '\r')
+		if (!ft_isspace(line[i]) && line[i] != '\t' && line[i] != '\n'
+			&& line[i] != '\r')
 			return (false);
 		i++;
 	}
@@ -105,4 +105,3 @@ void	free_string_array(char **array)
 	}
 	free(array);
 }
-

@@ -18,13 +18,13 @@
  * 				Allowed funciton(s) : malloc
  * @param s1	The prefix string.
  * @param s2	The suffix string.
- * 
+ *
  * @return		The new string. NULL if the allocation fails.
  * @version 0.1
  * @date 2023-12-05
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

@@ -23,9 +23,9 @@
  * 				NULL if the allocation fails.
  * @version 0.1
  * @date 2023-11-27
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"
@@ -77,7 +77,7 @@ void	ft_free_arr(char *arr[], int nb_elmt)
 char	**ft_split(char const *s, char c)
 {
 	int				elmt;
-	unsigned int	i;	
+	unsigned int	i;
 	unsigned int	j;
 	int				k;
 	char			**arr_of_elmts;
@@ -112,8 +112,8 @@ char	**ft_split(char const *s, char c)
 // 	const char	to_be_splitted_3[] = ",";
 // 	const char	to_be_splitted_4[] = "\0aa\0bbb";
 // 	const char	to_be_splitted_5[] = "salut";
-// 	const char	to_be_splitted_6[] = 
-// 				 "      split       this for   me  !       ";
+// 	const char	to_be_splitted_6[] =
+// 					"      split       this for   me  !       ";
 // 	const char	to_be_splitted_7[] = "                  ";
 // 	char		**splitted;
 // 	int			i;

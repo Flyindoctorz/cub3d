@@ -20,9 +20,9 @@
  * @return	The string representing the integer. NULL if the allocation fails.
  * @version 0.1
  * @date 2023-11-28
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"
@@ -71,9 +71,9 @@ static void	ft_putnbr_to_str(int n, char *dst, int *i)
 
 char	*ft_itoa(int n)
 {
-	char			*str;
-	int				digits;
-	int				i;
+	char	*str;
+	int		digits;
+	int		i;
 
 	digits = ft_count_digits(n);
 	str = malloc(sizeof(*str) * digits + 1);

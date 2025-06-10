@@ -20,9 +20,9 @@
  * @return		None
  * @version 0.1
  * @date 2023-12-05
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

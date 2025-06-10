@@ -18,13 +18,13 @@
  * @param n		The integer to output.
  * @param fd	The file descriptor on which to write.
  * @param count	Address to int counter to be incremented.
- * 
+ *
  * @return	None
  * @version 0.1
  * @date 2023-11-30
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

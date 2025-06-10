@@ -18,9 +18,9 @@
  * @return 		The length of the list
  * @version 0.1
  * @date 2023-12-03
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

@@ -33,7 +33,7 @@
  * 			they tried to create. For strlcat() that means the initial length
  * 			of dst plus the length of src. While this may seem somewhat
  * 			confusing, it was done to make truncation detection simple.
- * 
+ *
  * 			Note, however, that if strlcat() traverses size characters
  * 			without finding a NUL, the length of the string is considered to
  * 			be size and the destination string will not be NUL-terminated
@@ -44,9 +44,9 @@
  * 			security problems in incorrect code.
  * @version 0.1
  * @date 2023-11-28
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

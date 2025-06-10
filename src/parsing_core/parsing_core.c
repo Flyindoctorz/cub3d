@@ -17,7 +17,7 @@
 void	clean_parsing_data(t_data *data)
 {
 	if (!data)
-		return;
+		return ;
 	if (data->texture.north.path)
 	{
 		free(data->texture.north.path);
@@ -67,19 +67,19 @@ bool	is_floor_or_ceiling_line(char *line)
 
 bool	parse_single_cubline(char *line, t_data *data)
 {
-	int	i;
+	int i;
 
 	if (is_empty_line(line) || is_comment_line(line))
 		return (true);
-	
+
 	if (!is_config_line(line))
 		return (printf("Error: Invalid configuration line: %s\n", line), false);
-	
+
 	// Ignorer les espaces au début pour détecter le type de ligne
 	i = 0;
 	while (line[i] && ft_isspace(line[i]))
 		i++;
-	
+
 	if (line[i] == 'F')
 		return (parse_a_color_line(line, &data->floor));
 	else if (line[i] == 'C')

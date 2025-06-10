@@ -13,21 +13,20 @@
 /**
  * @file ft_isalnum.c
  * @author Ziyad A. Dev (zakchouc@student.42.fr)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2023-12-05
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"
 
 int	ft_isalnum(int c)
 {
-	if (((c >= 'a') && (c <= 'z'))
-		|| ((c >= 'A') && (c <= 'Z'))
-		|| ((c >= '0') && (c <= '9')))
+	if (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')) || ((c >= '0')
+			&& (c <= '9')))
 		return (1);
 	else
 		return (0);

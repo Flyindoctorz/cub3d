@@ -16,9 +16,9 @@
  * @brief  Allocate NMEMB elements of SIZE bytes each, all initialized to 0.
  * @version 0.1
  * @date 2023-11-23
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"
@@ -65,5 +65,5 @@ void	*ft_calloc(size_t nmemb, size_t size)
 //
 //     /* On libère le bloc de mémoire alloué dynamiquement */
 //     free(pointer);
-//     return 0;
+//     return (0);
 // }

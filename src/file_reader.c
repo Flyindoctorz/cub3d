@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 15:05:58 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 16:59:18 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*read_file_content(int fd)
 
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
-		return(printf("Error allocating memory for buffer\n"), NULL);
+		return (printf("Error allocating memory for buffer\n"), NULL);
 	content = ft_strdup("");
 	byte_read = read(fd, buff, BUFFER_SIZE);
 	while (byte_read > 0)
@@ -40,7 +40,7 @@ char	*read_file_content(int fd)
 		buff[byte_read] = '\0';
 		content = join_and_free(content, buff);
 		if (!content)
-			return(free(buff), NULL);
+			return (free(buff), NULL);
 		byte_read = read(fd, buff, BUFFER_SIZE);
 	}
 	free(buff);
@@ -81,9 +81,11 @@ char	**read_file_lines(const char *filename)
 	lines = make_it_split(content);
 	free(content);
 	if (!lines)
-		return (printf("Error: Could not split file content into lines\n"), NULL);
+		return (printf("Error: Could not split file content into lines\n"),
+			NULL);
 	return (lines);
 }
+
 char	*read_it_full(char *filename)
 {
 	int		fd;
@@ -103,3 +105,4 @@ char	*read_it_full(char *filename)
 	printf("✅ File loaded (%zu bytes)\n", ft_strlen(content));
 	return (content);
 }
+

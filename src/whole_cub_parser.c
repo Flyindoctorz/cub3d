@@ -16,8 +16,8 @@
 
 bool	parse_cub_file(char **lines, t_data *data)
 {
-	int				map_start;
-	int				i;
+	int map_start;
+	int i;
 
 	if (!lines || !data)
 		return (printf("Invalid input to parse_cub_file"), false);
@@ -28,7 +28,7 @@ bool	parse_cub_file(char **lines, t_data *data)
 	while (i < map_start && lines[i])
 	{
 		if (!parse_single_cubline(lines[i], data))
-			return(printf("Failed to parse line: %s\n", lines[i]), false);
+			return (printf("Failed to parse line: %s\n", lines[i]), false);
 		i++;
 	}
 	return (true);

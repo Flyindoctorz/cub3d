@@ -22,24 +22,24 @@
  * @param big
  * @param little
  * @param len
- * @return 	If little is an empty string, big is returned;
+ * @return (If little is an empty string, big is returned);
  * 			if little occurs nowhere in big, NULL is returned;
  * 			otherwise a pointer to the first character of the first
  * 			occurrence of little is returned.
  * @version 0.1
  * @date 2023-11-10
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t		i;
-	char		*bptr;
-	char		*lptr;
+	size_t	i;
+	char	*bptr;
+	char	*lptr;
 
 	if (!*little)
 		return ((char *)big);

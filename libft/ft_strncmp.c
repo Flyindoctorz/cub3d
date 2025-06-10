@@ -31,9 +31,9 @@
  * 				to be less than, to match, or be greater than s2.
  * @version 0.1
  * @date 2023-11-26
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

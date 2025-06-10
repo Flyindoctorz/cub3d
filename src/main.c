@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/06/10 13:06:19 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 16:34:17 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	set_images(t_data *data)
 {
-	data->wallnorth_img.path = "assets/wall_north.xpm";
-	data->wallsouth_img.path = "assets/wall_south.xpm";
-	data->walleast_img.path = "assets/wall_east.xpm";
-	data->wallwest_img.path = "assets/wall_west.xpm";
+	data->wallnorth_img.path = data->texture.north.path;
+	data->wallsouth_img.path = data->texture.south.path;
+	data->walleast_img.path = data->texture.east.path;
+	data->wallwest_img.path = data->texture.west.path;
 	create_image(&data->scene_img, data, WIDTH, HEIGHT);
 	create_image(&data->minimap_img, data, WIDTH / 8, WIDTH / 8);
 	create_image(&data->player_img, data, data->minimap_img.width / 32,
@@ -100,8 +100,10 @@ static bool	validate_args(int ac, char **av)
 		return (printf("Error: No map file provided.\nUsage: %s <map.cub>\n",
 				av[0]), false);
 	if (ac > 2)
-return (printf("Error: Too many arguments provided.\n"
-				"Usage: %s <map.cub>\n", av[0]), false);
+		return (printf("Error: Too many arguments provided.\n"
+						"Usage: %s <map.cub>\n",
+						av[0]),
+				false);
 	return (validate_cub_extent(av[1]));
 }
 int	main(int ac, char **av)

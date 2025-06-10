@@ -18,14 +18,14 @@
  * 			is passed by address to ’f’ to be modified if necessary.
  * @param s	The string on which to iterate.
  * @param f	The function to apply to each character.
- * 
+ *
  * @return	None
- * 
+ *
  * @version 0.1
  * @date 2023-11-29
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

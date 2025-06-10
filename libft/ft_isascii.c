@@ -13,12 +13,12 @@
 /**
  * @file ft_isascii.c
  * @author Ziyad A. Dev (zakchouc@student.42.fr)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2023-12-05
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

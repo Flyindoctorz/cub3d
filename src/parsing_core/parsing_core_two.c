@@ -30,7 +30,7 @@ static bool	pre_cub_parse(const char *filename, t_data *data)
 		return (printf("No map found in file: %s\n", filename),
 			free_string_array(lines), false);
 	if (!parse_cub_file(lines, data))
-		return(free_string_array(lines), false);
+		return (free_string_array(lines), false);
 	if (!parse_map_section(lines, data))
 		return (free_string_array(lines), false);
 	free_string_array(lines);
@@ -40,7 +40,7 @@ static bool	pre_cub_parse(const char *filename, t_data *data)
 bool	parse_and_config_map(const char *filename, t_data *data)
 {
 	bool	res;
-	
+
 	if (!pre_cub_parse(filename, data))
 		return (false);
 	res = validate_all_datas(data) && validate_map(data->map.map);

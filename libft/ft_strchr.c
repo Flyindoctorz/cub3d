@@ -25,9 +25,9 @@
  * 			as '\0', these functions return a pointer to the terminator.
  * @version 0.1
  * @date 2023-12-05
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"
@@ -39,11 +39,11 @@ char	*ft_strchr(const char *s, int c)
 	str_ptr = (char *)s;
 	while (*str_ptr)
 	{
-		if (*str_ptr == (char) c)
+		if (*str_ptr == (char)c)
 			return (str_ptr);
 		str_ptr++;
 	}
-	if (*str_ptr == (char) c)
+	if (*str_ptr == (char)c)
 		return (str_ptr);
 	return (NULL);
 }

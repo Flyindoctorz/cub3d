@@ -18,15 +18,15 @@
  * 			place as though the bytes in src are first copied into a temporary
  * 			array that does not overlap src or dest, and the bytes are then
  * 			copied from the temporary array to dest.
- * @param dest	: Destination memory area 
+ * @param dest	: Destination memory area
  * @param src	: Memory area from which to copy
  * @param n		: Number of byte to move
  * @return	Pointer to dest.
  * @version 0.1
  * @date 2023-12-05
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

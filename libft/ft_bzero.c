@@ -15,16 +15,16 @@
  * @author Ziyad A. Dev (zakchouc@student.42.fr)
  * @brief Erases the data in the n bytes of the memory starting at the location
  * pointed to by s, by writing zeros to that area
- * 
+ *
  * @param s Pointer to the memory to be erased
  * @param n Size of the memory space to be erased in bytes
- * 
+ *
  * @return None
  * @version 0.1
  * @date 2023-11-10
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

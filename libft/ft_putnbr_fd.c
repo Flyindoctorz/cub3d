@@ -17,13 +17,13 @@
  * 			Allowed function(s) : write
  * @param n		The integer to output.
  * @param fd	The file descriptor on which to write.
- * 
+ *
  * @return	None
  * @version 0.1
  * @date 2023-11-30
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

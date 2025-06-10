@@ -19,13 +19,13 @@
  * @param s1	The prefix string.
  * @param s2	The suffix string.
  * @param n		The lenght of s2.
- * 
+ *
  * @return		The new string. NULL if the allocation fails.
  * @version 0.1
  * @date 2024-03-04
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 
 #include "libft.h"

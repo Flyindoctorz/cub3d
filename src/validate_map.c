@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:43:09 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 15:00:16 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 17:04:02 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,32 @@ bool	is_valid_player(char c)
 	return (false);
 }
 
+// bool	is_valid_map(char **map)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	if (!map || !map[0])
+// 		return (printf("Map is NULL\n\n"), false);
+// 	while (map[i])
+// 	{
+// 		j = 0;
+// 		while (map[i][j])
+// 		{
+// 			if (!is_a_valid_char(map[i][j]))
+// 			{
+// 				printf("Invalid character '%c' in map at line %d, column %d\n",
+// 					map[i][j], i, j);
+// 				return (false);
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (true);
+// }
+
 bool	is_valid_map(char **map)
 {
 	int	i;
@@ -35,15 +61,18 @@ bool	is_valid_map(char **map)
 	i = 0;
 	if (!map || !map[0])
 		return (printf("Map is NULL\n\n"), false);
+	printf("Debug: Starting map validation\n");
+	printf("Debug: First line of map: '%s'\n", map[0]);
 	while (map[i])
 	{
 		j = 0;
+		printf("Debug: Checking line %d: '%s'\n", i, map[i]);
 		while (map[i][j])
 		{
 			if (!is_a_valid_char(map[i][j]))
 			{
-				printf("Invalid character '%c' in map at line %d, column %d\n",
-					map[i][j], i, j);
+				printf(" Invalid character '%c' in map at line %d, column %d\n",
+					map[i][j], i, j);;
 				return (false);
 			}
 			j++;
@@ -52,6 +81,7 @@ bool	is_valid_map(char **map)
 	}
 	return (true);
 }
+
 // check si le joueur est dans la map
 bool	where_player_at(char **map, int *p_x, int *p_y)
 {

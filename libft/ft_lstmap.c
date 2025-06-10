@@ -25,9 +25,9 @@
  * @return		The new list. NULL if the allocation fails.
  * @version 0.1
  * @date 2023-12-20
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

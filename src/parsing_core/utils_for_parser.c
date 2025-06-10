@@ -16,7 +16,7 @@
 bool	is_empty_or_comment(char *line)
 {
 	int	i;
-	
+
 	if (!line || !*line)
 		return (true);
 	i = 0;
@@ -65,25 +65,27 @@ void	init_it_all(t_data *data)
 	data->map.height = 0;
 	data->player.px = 0.0;
 	data->player.py = 0.0;
-	data->player.angle = 0.0;	
+	data->player.angle = 0.0;
 }
-
 
 bool	parse_config_section(char **lines, int map_start, t_data *data)
 {
 	int	i;
 
 	if (!lines || !data || map_start < 0)
-		return (printf("Error: Invalid input to parse_config_section\n"), false);
+		return (printf("Error: Invalid input to parse_config_section\n"),
+			false);
 	i = 0;
 	while (i < map_start)
 	{
 		if (is_empty_or_comment(lines[i]))
 		{
-			if (lines[i][0] == 'F' && !parse_a_color_line(lines[i], &data->floor))
-				return(false);
-			else if (lines[i][0] == 'C' && !parse_a_color_line(lines[i], &data->ceiling))
-				return(false);
+			if (lines[i][0] == 'F' && !parse_a_color_line(lines[i],
+					&data->floor))
+				return (false);
+			else if (lines[i][0] == 'C' && !parse_a_color_line(lines[i],
+					&data->ceiling))
+				return (false);
 			else if (!parse_one_texture(lines[i], &data->texture))
 				return (false);
 		}
@@ -91,5 +93,3 @@ bool	parse_config_section(char **lines, int map_start, t_data *data)
 	}
 	return (true);
 }
-
-

@@ -42,6 +42,6 @@ bool	is_valid_rgb_number(int value)
 void	color_to_hex(t_color *color)
 {
 	if (!color)
-		return;
+		return ;
 	color->hex = (color->red << 16) | (color->green << 8) | color->blue;
 }

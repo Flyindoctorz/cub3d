@@ -18,14 +18,14 @@
  * @param s	Memory area to be set
  * @param c	Byte used to fill memory area
  * @param n	Number of byte to set
- * 
+ *
  * @return	The memset() function returns a pointer to the memory area s.
- * 
+ *
  * @version 0.1
  * @date 2023-11-29
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"

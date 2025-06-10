@@ -25,19 +25,19 @@
  * 			NUL-terminated.
  * 			The strlcpy() function copies up to size - 1 characters from
  * 			the NUL-terminated string src to dst, NUL-terminating the result.
- * 
+ *
  * @param	dst		Pointer to which the copy operates
  * @param	src		Pointer from which the copy operates
  * @param	size	Amount of character that need to be copied
- * 
+ *
  * @return	The strlcpy() function return the total length of the string
  * 			they tried to create. For strlcpy() that means the length of src.
- * 
+ *
  * @version 0.1
  * @date 2023-11-27
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 
 #include "libft.h"
