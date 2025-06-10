@@ -13,10 +13,15 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-
 int	close_window(t_data *data)
 {
 	mlx_destroy_image(data->mlx.mlx_ptr, data->scene_img.img);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->player_img.img);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->minimap_img.img);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->wallnorth_img.img);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->walleast_img.img);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->wallsouth_img.img);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->wallwest_img.img);
 	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
 	while (0 < data->map.height--)
 		free(data->map.map[data->map.height]);

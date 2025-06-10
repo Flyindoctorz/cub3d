@@ -14,8 +14,8 @@
 
 void	render_scene(t_player *player, t_data *data)
 {
-	raycast(player, data);
 	draw_map(&data->map, data, &data->minimap_img);
+	raycast(player, data);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
 		data->scene_img.img, 0, 0);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
