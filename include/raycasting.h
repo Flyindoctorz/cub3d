@@ -49,9 +49,9 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
+# include "../libft/libft.h"
 # include "math.h"
-# include "parsing.h"
 // # include <X11/keysym.h>
 # include <stdio.h>
 # include <string.h>

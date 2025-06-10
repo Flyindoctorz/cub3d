@@ -4,7 +4,7 @@ SO ./ /*path to SO.texture*/
 WE ./ /*path to We.texture*/
 EA ./ /*path to EA.texture*/
 
-# colour in rgb format 0-255 
+# colour in rgb format 0-255
 # (ive reversed floor and ceiling purposefully
 # as it could be funny to build a reverse world ?)
 
@@ -20,7 +20,7 @@ C 100,60,30
 # 111111
 # 100001
 # 1000N1
-# 10001     
+# 10001
 # 11111
 
 # No player (N, S, E or W)
@@ -43,15 +43,15 @@ C 100,60,30
 
 # Kanye West side player start
 
-# 111111111
-# 100000001
-# 100000001
-# 10000W001
-# 100000001
-# 111111111
+111111111
+100000001
+100000001
+10000W001
+100000001
+111111111
 
 # Eazy-East side player start
- 
+
 # 1111111111111   1111111111111111111
 1111111111111111111111111111111111
 # 10000000000000000000000000000001

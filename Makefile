@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # Variables pour les sources
-sources = src/main.c src/event_handler.c src/draw.c src/raycasting.c src/raycasting_utils.c \
+sources = src/main.c src/event_handler.c src/raycasting.c src/raycasting_utils.c \
 		  src/init.c src/validate_all_datas.c src/validate_textures.c src/validate_map.c \
 		  src/map_closure.c src/map_utils.c src/map_parser.c src/map_parser_utils.c \
 		  src/file_reader.c src/parsing_utils.c \

@@ -19,7 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
 # include "raycasting.h"
 
 # ifndef BUFFER_SIZE
