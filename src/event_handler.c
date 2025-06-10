@@ -13,7 +13,6 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-/*mlx_destroy_display(data->mlx.mlx_ptr);*/
 
 int	close_window(t_data *data)
 {
@@ -22,6 +21,7 @@ int	close_window(t_data *data)
 	while (0 < data->map.height--)
 		free(data->map.map[data->map.height]);
 	free(data->map.map);
+	mlx_destroy_display(data->mlx.mlx_ptr);
 	free(data->mlx.mlx_ptr);
 	exit(SUCCESS);
 }

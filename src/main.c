@@ -93,7 +93,6 @@ int	main(int ac, char **av)
 	if (initialize(&data) == ERROR)
 		return (ERROR);
 	draw_player(&data.player_img);
-	render_scene(&data.player, &data);
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
 	mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);
 	mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);

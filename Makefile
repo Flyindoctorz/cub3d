@@ -4,15 +4,15 @@ objects = $(sources:.c=.o)
 
 # linux compile
 
-# libs = -Lminilibx -l:libmlx.a  -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
+libs = -Lminilibx -l:libmlx.a  -L/usr/lib -Iminilibx -lXext -lX11 -lm -lz
 
-# includes = -Iminilibx -I/usr/include -I/opt/X11/include
+includes = -Iminilibx -I/usr/include -I/opt/X11/include
 
 # macos compile
 
-libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
+# libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit
 
-includes = -Iminilibx -I/opt/X11/include
+# includes = -Iminilibx -I/opt/X11/include
 
 cc = cc
 cflags = -Wall -Wextra -Werror

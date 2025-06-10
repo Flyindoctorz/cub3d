@@ -12,7 +12,6 @@
 
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
-#include <string.h>
 
 void	set_drawing_info(t_drawing *data, t_ray *ray)
 {

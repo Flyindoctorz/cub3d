@@ -15,8 +15,6 @@
 void	render_scene(t_player *player, t_data *data)
 {
 	raycast(player, data);
-	memset(data->minimap_img.addr, 0, data->minimap_img.height
-		* data->minimap_img.line_length);
 	draw_map(&data->map, data, &data->minimap_img);
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
 		data->scene_img.img, 0, 0);
@@ -48,6 +46,8 @@ void	draw_map(t_map *map, t_data *data, t_image *m_map)
 				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
 			else if (map->map[(int)map_y][(int)map_x] == '1')
 				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FF0000);
+			else
+				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00000000);
 			mini_x++;
 		}
 		mini_y++;
