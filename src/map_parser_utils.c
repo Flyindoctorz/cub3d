@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:45:48 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 13:17:12 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 12:40:57 by safuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	find_map_end(char **lines, int start)
 				last_map_line = i;
 			else
 				return(printf("Error: Invalid map line at %d\n", i), -1);
-		}	
+		}
 		i++;
 	}
 	return (last_map_line);

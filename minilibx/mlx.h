@@ -2,10 +2,17 @@
 ** mlx.h for MinilibX in 
 ** 
 ** Made by Charlie Root
+<<<<<<< HEAD
 ** Login   <ol@staff.42.fr>
 ** 
 ** Started on  Mon Jul 31 16:37:50 2000 Charlie Root
 ** Last update Tue Oct 01 16:23:28 2014 Olivier Crouzet
+=======
+** Login   <ol@epitech.net>
+** 
+** Started on  Mon Jul 31 16:37:50 2000 Charlie Root
+** Last update Tue May 15 16:23:28 2007 Olivier Crouzet
+>>>>>>> santi
 */
 
 /*
@@ -16,18 +23,22 @@
 /*
 ** FR msg - FR msg - FR msg
 **
+<<<<<<< HEAD
 ** MacOSX
 ** La MinilibX utilise 2 frameworks Mac : OpenGL et AppKit
 **    qu'il faut ajouter a la compilation :
 **   -framework OpenGL -framework AppKit
 **
 ** UNIX / Linux
+=======
+>>>>>>> santi
 ** La MinilibX utilise 2 librairies supplementaires qu'il
 **      est necessaire de rajouter a la compilation :
 **   -lmlx -lXext -lX11
 **
 ** La MinilibX permet le chargement des images de type Xpm.
 ** Notez que cette implementation est incomplete.
+<<<<<<< HEAD
 **
 ** Il y a des differences entre X11 et MacOS.
 ** les numeros des touches ne sont pas les memes,
@@ -39,6 +50,10 @@
 ** Sous MacOS, l'octet Alpha est pris en compte dans toutes les
 ** images, et represente la transparence et non l'opacite comme
 ** c'est normalement le cas.
+=======
+** Merci de communiquer tout probleme de chargement d'image
+** de ce type.
+>>>>>>> santi
 */
 
 
@@ -78,16 +93,29 @@ int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
 void	*mlx_new_image(void *mlx_ptr,int width,int height);
 /*
 **  return void *0 if failed
+<<<<<<< HEAD
+=======
+**  obsolete : image2 data is stored using bit planes
+**  void	*mlx_new_image2(void *mlx_ptr,int width,int height);
+>>>>>>> santi
 */
 char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
 			   int *size_line, int *endian);
 /*
 **  endian : 0 = sever X is little endian, 1 = big endian
+<<<<<<< HEAD
 **  endian : useless on macos, client and graphical framework have the same endian
 */
 int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
 				int x, int y);
 unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
+=======
+**  for mlx_new_image2, 2nd arg of mlx_get_data_addr is number_of_planes
+*/
+int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
+				int x, int y);
+int	mlx_get_color_value(void *mlx_ptr, int color);
+>>>>>>> santi
 
 
 /*
@@ -100,7 +128,11 @@ int	mlx_expose_hook (void *win_ptr, int (*funct_ptr)(), void *param);
 
 int	mlx_loop_hook (void *mlx_ptr, int (*funct_ptr)(), void *param);
 int	mlx_loop (void *mlx_ptr);
+<<<<<<< HEAD
 
+=======
+int mlx_loop_end (void *mlx_ptr);
+>>>>>>> santi
 
 /*
 **  hook funct are called as follow :
@@ -119,16 +151,28 @@ int	mlx_loop (void *mlx_ptr);
 
 int	mlx_string_put(void *mlx_ptr, void *win_ptr, int x, int y, int color,
 		       char *string);
+<<<<<<< HEAD
+=======
+void	mlx_set_font(void *mlx_ptr, void *win_ptr, char *name);
+>>>>>>> santi
 void	*mlx_xpm_to_image(void *mlx_ptr, char **xpm_data,
 			  int *width, int *height);
 void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
 			       int *width, int *height);
+<<<<<<< HEAD
 void    *mlx_png_file_to_image(void *mlx_ptr, char *file, int *width, int *height);
 
+=======
+>>>>>>> santi
 int	mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 
 int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 
+<<<<<<< HEAD
+=======
+int	mlx_destroy_display(void *mlx_ptr);
+
+>>>>>>> santi
 /*
 **  generic hook system for all events, and minilibX functions that
 **    can be hooked. Some macro and defines from X11/X.h are needed here.
@@ -137,13 +181,26 @@ int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 int	mlx_hook(void *win_ptr, int x_event, int x_mask,
                  int (*funct)(), void *param);
 
+<<<<<<< HEAD
 int     mlx_mouse_hide();
 int     mlx_mouse_show();
 int     mlx_mouse_move(void *win_ptr, int x, int y);
 int     mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
 
+=======
+>>>>>>> santi
 int	mlx_do_key_autorepeatoff(void *mlx_ptr);
 int	mlx_do_key_autorepeaton(void *mlx_ptr);
 int	mlx_do_sync(void *mlx_ptr);
 
+<<<<<<< HEAD
+=======
+int	mlx_mouse_get_pos(void *mlx_ptr, void *win_ptr, int *x, int *y);
+int	mlx_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+int	mlx_mouse_hide(void *mlx_ptr, void *win_ptr);
+int	mlx_mouse_show(void *mlx_ptr, void *win_ptr);
+
+int	mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
+
+>>>>>>> santi
 #endif /* MLX_H */

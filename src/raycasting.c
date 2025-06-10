@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_math.c                                        :+:      :+:    :+:   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:53:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/24 18:53:29 by safuente         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:41:12 by safuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	draw_vertical_line(t_image *image, int column, t_ray *ray)
 				data.texture_y = 0;
 			if (data.texture_y >= ray->texture->height)
 				data.texture_y = ray->texture->height - 1;
-			data.color = get_texture_pixel(ray->texture,
-					data.texture_x, data.texture_y);
+			data.color = get_texture_pixel(ray->texture, data.texture_x,
+					data.texture_y);
 			mlx_pixel_put_v2(image, column, data.line++, data.color);
 		}
 		else
@@ -71,7 +71,7 @@ void	draw_vertical_line(t_image *image, int column, t_ray *ray)
 
 int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 {
-	if (axis == 0 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
+	if (axis == AXIS_X && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
 			/ BLOCK)] == '1')
 	{
 		if (ray->x > player->px * BLOCK)
@@ -81,7 +81,7 @@ int	get_direction(int axis, t_ray *ray, t_player *player, t_data *data)
 		ray->axis = AXIS_X;
 		return (EXIT_SUCCESS);
 	}
-	else if (axis == 1 && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
+	else if (axis == AXIS_Y && data->map.map[(int)(ray->y / BLOCK)][(int)(ray->x
 			/ BLOCK)] == '1')
 	{
 		if (ray->y > player->py * BLOCK)
@@ -117,11 +117,12 @@ void	ray_distance(t_player *player, t_data *data, t_ray *ray)
 		ray->y += sin(ray->angle) * RAY_STEP_SIZE;
 		if (get_direction(1, ray, player, data) == EXIT_SUCCESS)
 			break ;
-		ray->distance += RAY_STEP_SIZE;
 	}
+	ray->distance = sqrt(pow((fabs(ray->y) - fabs(player->py * BLOCK)), 2)
+			+ pow((fabs(ray->x) - fabs(player->px * BLOCK)), 2));
 }
 
-void	render_scene(t_image *image, t_player *player, t_data *data)
+void	raycast(t_player *player, t_data *data)
 {
 	t_ray	ray;
 	int		pos_screen;
@@ -138,8 +139,6 @@ void	render_scene(t_image *image, t_player *player, t_data *data)
 		ray_distance(player, data, &ray);
 		ray.corrected = ray.distance * cos(player->angle - ray.angle);
 		ray.height_line = (BLOCK * HEIGHT) / ray.corrected;
-		draw_vertical_line(image, pos_screen++, &ray);
+		draw_vertical_line(&data->scene_img, pos_screen++, &ray);
 	}
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window, image->img,
-		0, 0);
 }

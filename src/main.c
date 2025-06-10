@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/06/05 14:54:19 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 12:41:52 by safuente         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 
 void	set_images(t_data *data)
 {
-	create_image(&data->scene_img, 0, data, NULL);
-	create_image(&data->wallnorth_img, 1, data, "assets/wall_north.xpm");
-	create_image(&data->walleast_img, 1, data, "assets/wall_east.xpm");
-	create_image(&data->wallwest_img, 1, data, "assets/wall_west.xpm");
-	create_image(&data->wallsouth_img, 1, data, "assets/wall_south.xpm");
+	data->wallnorth_img.path = "assets/wall_north.xpm";
+	data->wallsouth_img.path = "assets/wall_south.xpm";
+	data->walleast_img.path = "assets/wall_east.xpm";
+	data->wallwest_img.path = "assets/wall_west.xpm";
+	create_image(&data->scene_img, data, WIDTH, HEIGHT);
+	create_image(&data->minimap_img, data, WIDTH / 8, WIDTH / 8);
+	create_image(&data->player_img, data, data->minimap_img.width / 32,
+		data->minimap_img.width / 32);
+	create_image(&data->wallnorth_img, data, 0, 0);
+	create_image(&data->walleast_img, data, 0, 0);
+	create_image(&data->wallwest_img, data, 0, 0);
+	create_image(&data->wallsouth_img, data, 0, 0);
 }
 
 bool	set_player(t_data *data)
@@ -34,7 +41,7 @@ bool	set_player(t_data *data)
 	data->player.py = (double)p_y + 0.5;
 	angle = data->map.map[p_y][p_x];
 	if (angle == 'N')
-		data->player.angle = 3 * M_PI_2;
+		data->player.angle = M_PI + M_PI / 2;
 	else if (angle == 'S')
 		data->player.angle = M_PI / 2;
 	else if (angle == 'E')
@@ -116,7 +123,7 @@ int	main(int ac, char **av)
 	printf("👤 Player: (%.1f, %.1f) facing %.2f rad\n", data.player.px,
 		data.player.py, data.player.angle);
 	printf("🎮 Starting game...\n");
-	render_scene(&data.scene_img, &data.player, &data);
+	draw_player(&data.player_img);
 	mlx_hook(data.mlx.mlx_window, 2, 1L << 0, key_down, &data);
 	mlx_hook(data.mlx.mlx_window, 3, 1L << 1, key_up, &data);
 	mlx_hook(data.mlx.mlx_window, 17, 1L << 3, close_window, &data);

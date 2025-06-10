@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
+#    By: safuente <safuente@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/02 14:30:00 by cgelgon           #+#    #+#              #
-#    Updated: 2025/06/05 14:37:28 by cgelgon          ###   ########.fr        #
+#    Updated: 2025/06/10 12:37:10 by safuente         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ sources = src/main.c src/event_handler.c src/draw.c src/raycasting.c src/raycast
 		  src/parsing_core/parsing_core.c src/parsing_core/parsing_core_two.c \
 		  src/parsing_core/texture_parser_one.c src/parsing_core/texture_parser_two.c \
 		  src/parsing_core/utils_for_parser.c \
-		  src/whole_cub_parser.c
+		  src/whole_cub_parser.c \
+		  src/image_handling.c
 
 objects = $(sources:.c=.o)
 
@@ -113,6 +114,7 @@ fclean: clean
 re: fclean all
 
 # Test de fuites mémoire avec valgrind
+
 leak: all preprocess
 	@echo "$(BLUE)Running valgrind leak check with map $(MAP_NUM)...$(RESET)"
 	@valgrind --leak-check=full --show-reachable=no \

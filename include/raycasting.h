@@ -30,6 +30,7 @@
 # define MAX_RAY_DISTANCE 10000.0
 # define RAY_STEP_SIZE 1.0
 
+/* MACOS
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -37,14 +38,16 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_ESC 53
+*/
 
-// # define KEY_W 119
-// # define KEY_A 97
-// # define KEY_S 115
-// # define KEY_D 100
-// # define KEY_LEFT 65361
-// # define KEY_RIGHT 65363
-// # define KEY_ESC 65307
+/* LINUX */
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_ESC 65307
 
 # include "../minilibx/mlx.h"
 # include "math.h"
@@ -109,6 +112,7 @@ typedef struct s_mlx
 
 typedef struct s_image
 {
+	char		*path;
 	void		*img;
 	char		*addr;
 	int 		width;
@@ -122,7 +126,9 @@ typedef struct s_data
 {
 	t_player	player;
 	t_mlx		mlx;
+	t_image		minimap_img;
 	t_image		scene_img;
+	t_image		player_img;
 	t_image		wallnorth_img;
 	t_image		wallsouth_img;
 	t_image		walleast_img;
@@ -169,19 +175,26 @@ int				close_window(t_data *data);
 int				key_down(int keycode, t_data *data);
 int				key_up(int keycode, t_data *data);
 int				update_state(t_data *data);
+void			check_coordinates(t_data *data, double next_px, double next_py);
 
 /* raycasting_utils */
 
 void			mlx_pixel_put_v2(t_image *image, int px, int py, int color);
-void			draw_line(t_image *image, t_player *player, t_data *data);
-void			create_image(t_image *image, int type, t_data *data, char *path);
+void			draw_line(t_image *image, t_data *data);
+void			create_image(t_image *image, t_data *data, int width, int height);
 int				get_texture_pixel(t_image *texture, int x, int y);
 
+/* image handling */
+
+void			draw_player(t_image *image);
+void			draw_map(t_map *map, t_data *data, t_image *m_map);
+void			render_scene(t_player *player, t_data *data);
 
 /* raycasting */
 
+void			raycast(t_player *player, t_data *data);
 void			ray_distance(t_player *player, t_data *data, t_ray *ray);
-void			render_scene(t_image *image, t_player *player, t_data *data);
+void			render_scene(t_player *player, t_data *data);
 void			draw_vertical_line(t_image *image, int column, t_ray *ray);
 int				get_direction(int axis, t_ray *ray, t_player *player, t_data *data);
 
