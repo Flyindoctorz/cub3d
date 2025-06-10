@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:43:15 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 14:57:39 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 11:38:55 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,15 @@ int	init_data(t_data *data)
 	data->ceiling.hex = -1;
 	init_texture(&data->texture);
 	return (SUCCESS);
+}
+void	init_texture(t_texture *texture)
+{
+	texture->north.path = NULL;
+	texture->north.id = "NO";
+	texture->south.path = NULL;
+	texture->south.id = "SO";
+	texture->west.path = NULL;
+	texture->west.id = "WE";
+	texture->east.path = NULL;
+	texture->east.id = "EA";
 }

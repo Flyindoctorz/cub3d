@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 12:57:43 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 13:36:53 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 11:35:21 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	parse_cub_file(char **lines, t_data *data)
 	i = 0;
 	while (i < map_start && lines[i])
 	{
-		if (!parse_single_cubline(&lines[i], data))
+		if (!parse_single_cubline(lines[i], data))
 			return(printf("Failed to parse line: %s\n", lines[i]), false);
 		i++;
 	}

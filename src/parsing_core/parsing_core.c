@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 12:37:08 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 15:20:03 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 11:38:33 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,6 @@ bool	parse_single_cubline(char *line, t_data *data)
 		return (parse_textures_line(line, &data->texture));
 }
 
-
-bool	validate_all_datas(t_data *data)
-{
-	if (!data)
-		return (printf("Error: Data is NULL\n"), false);
-	if (!data->texture.north.path || !data->texture.south.path
-		|| !data->texture.west.path || !data->texture.east.path)
-		return(printf("Error: texture paths not set.\n"));
-	if (data->floor.hex == -1 || data->ceiling.hex == -1)
-		return (printf("Error: Floor or ceiling color not set.\n"), false);
-	return (validate_all_textures(&data->texture));
-}
 
 
 

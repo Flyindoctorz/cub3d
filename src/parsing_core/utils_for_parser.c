@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:58:42 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 10:55:05 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 11:34:12 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,6 @@ bool	is_empty_or_comment(char *line)
 	while (line[i] && ft_isspace(line[i]))
 		i++;
 	return (line[i] == '\0' || *line == '#');
-}
-
-static float	calculate_map_char_percentage(char *line)
-{
-	int	total_chars;
-	int	map_chars;
-	int	i;
-
-	if (!line || !*line)
-		return (0.0);
-	total_chars = 0;
-	map_chars = 0;
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_isspace(line[i]))
-		{
-			total_chars++;
-			if (is_a_valid_char(line[i]))
-				map_chars++;
-		}
-		i++;
-	}
-	if (total_chars == 0)
-		return (0.0);
-	return ((float)map_chars / (float)total_chars);
 }
 
 int	ft_strotoi(char *str, char **endptr)
@@ -95,7 +69,7 @@ void	init_it_all(t_data *data)
 }
 
 
-void	parse_config_section(char **lines, int map_start, t_data *data)
+bool	parse_config_section(char **lines, int map_start, t_data *data)
 {
 	int	i;
 
@@ -106,16 +80,16 @@ void	parse_config_section(char **lines, int map_start, t_data *data)
 	{
 		if (is_empty_or_comment(lines[i]))
 		{
-			i++;
-			continue;
+			if (lines[i][0] == 'F' && !parse_a_color_line(lines[i], &data->floor))
+				return(false);
+			else if (lines[i][0] == 'C' && !parse_a_color_line(lines[i], &data->ceiling))
+				return(false);
+			else if (!parse_one_texture(lines[i], &data->texture))
+				return (false);
 		}
-		if (!parse_a_color_line(lines[i], data))
-			parse_texture(lines[i], data);
 		i++;
 	}
-	if (data->texture.north.path == NULL || data->texture.south.path == NULL
-		|| data->texture.west.path == NULL || data->texture.east.path == NULL)
-		printf("Error: Missing texture paths\n");
+	return (true);
 }
 
 

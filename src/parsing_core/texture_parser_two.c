@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 12:36:24 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:06:15 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 11:23:46 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@
 #include "../../libft/libft.h"
 
 
-bool	parse_all_textures(char *line, t_texture *texture)
+bool	parse_all_textures(char **line, int end, t_data *data)
 {
 	int	i;
-	t_texture_id	*texture_ids[4];
-	
-	if (!line || !texture)
+
+	if (!line || !data || end < 0)
 		return (printf("Error: Invalid input to parse_all_textures\n"), false);
-	texture_ids[0] = &texture->north;
-	texture_ids[1] = &texture->south;
-	texture_ids[2] = &texture->west;
-	texture_ids[3] = &texture->east;
 	i = 0;
-	while (i < 4)
+	while (i < end && line[i])
 	{
-		if (try_to_parse_texture(line, texture_ids[i]))
-			return (true);
+		if (is_empty_or_comment(line[i]) && !is_comment_line(line[i]))
+		{
+			if (!parse_one_texture(line[i], &data->texture))
+				return (false);
+		}
 		i++;
 	}
-	return (false);
+	return (true);
 }
 
 bool	validate_texture_file(const char *path)
@@ -48,7 +46,7 @@ bool	validate_texture_file(const char *path)
 	if (len < 4)
 		return (printf("Error: Texture path is too short\n"), false);
 	ext = (char *)(path + len - 4);
-	if (ft_strncmp(ext, ".xpm") != 0)
+	if (ft_strncmp(ext, ".xpm", 4) != 0)
 		return (printf("Error: Texture file must be a .xpm file\n"), false);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)

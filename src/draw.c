@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: safuente <safuente@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 20:50:15 by safuente          #+#    #+#             */
-/*   Updated: 2025/05/20 20:50:16 by safuente         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:37:31 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parsing.h"
-#include "../include/raycasting.h"
+// #include "../include/parsing.h"
+// #include "../include/raycasting.h"
 
-void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
-{
-	char	*dst;
+// void	mlx_pixel_put_v2(t_image *image, int x, int y, int color)
+// {
+// 	char	*dst;
 
-	dst = image->addr + (y * image->line_length + x * (image->bpp
-				/ 8));
-	*(unsigned int *)dst = color;
-}
+// 	dst = image->addr + (y * image->line_length + x * (image->bpp
+// 				/ 8));
+// 	*(unsigned int *)dst = color;
+// }
 
 // void	draw_line(t_image *image, t_player *player, t_data *data)
 // {

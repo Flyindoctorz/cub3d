@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 15:19:14 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 11:33:10 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ bool				double_check_texture(t_texture *texture);
 
 bool				is_texture_line(char *line, t_texture_id *texture_id, int *pos);
 bool				extract_texture_path(char *line, int start_pos, t_texture_id *texture_id);
-bool				try_to_parse_texture_ineture(char *line, t_texture_id *texture_id);
+bool				try_to_parse_texture(char *line, t_texture_id *texture_id);
 bool				parse_one_texture(char *line, t_texture *texture);
 bool				parse_textures_line(char *line, t_texture *texture);
 bool				parse_all_textures(char **lines, int end, t_data *data);
@@ -165,7 +165,7 @@ bool				is_empty_or_comment(char *line);
 void				free_string_array(char **array);
 int					ft_strotoi(char *str, char **endptr);
 void				init_it_all(t_data *data);
-void				parse_config_section(char **lines, int map_start, t_data *data);
+bool				parse_config_section(char **lines, int map_start, t_data *data);
 bool				validate_cub_extent(const char *filename);
 
 /* ************************************************************************** */
@@ -177,5 +177,6 @@ bool				parse_single_cubline(char *line, t_data *data);
 bool				validate_all_datas(t_data *data);
 bool				parse_and_config_map(const char *filename, t_data *data);
 bool				parse_cub_file(char **lines, t_data *data);
+
 
 #endif

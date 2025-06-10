@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 10:13:17 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/04 16:36:08 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/10 11:15:19 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	is_texture_line(char *line, t_texture_id *texture_id, int *pos)
 		return (false);
 	while (line[i] && (ft_isspace(line[i]) || line[i] == '\t'))
 		i++;
-	pos = i;
+	*pos = i;
 	return (true);
 }
 
