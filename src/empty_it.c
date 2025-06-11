@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pre_main_validation.c                              :+:      :+:    :+:   */
+/*   empty_it.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:30:52 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 17:31:45 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:54:23 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-
-bool	validate_cub_extent(const char *filename)
+char	*is_truly_empty_line(char *line)
 {
-	int	len;
-
-	if (!filename)
-		return (printf("Invalid filename"), false);
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (false);
-	if (ft_strcmp(filename + len - 4, ".cub") != 0)
-		return (printf("File must have a .cub extension"), false);
-	return (true);
+	if (!line)
+		return (line);
+	if (line[0] == '\0')
+		return (line);
+	if (line[0] == '\n' && line[1] == '\0')
+		return (line);
+	return (NULL);
 }
 
-bool	validate_args(int ac, char **av)
+bool	is_bad(char *line)
 {
-	if (ac < 2)
-		return (printf("Error: No map file provided.\nUsage: %s <map.cub>\n",
-				av[0]), false);
-	if (ac > 2)
-		return (printf("Error: Too many arguments provided.\n"
-						"Usage: %s <map.cub>\n",
-						av[0]),
-				false);
-	return (validate_cub_extent(av[1]));
+	if (!line || line[0] == '\0')
+		return (true);
+	return (is_truly_empty_line(line));
 }
