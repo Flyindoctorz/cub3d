@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:44:28 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/05 15:10:26 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:40:52 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ bool	is_map_line(char *line)
 	int	map_char;
 	int	total_chars;
 
+		i = 0;
+	while ((line[i] == ' ') || (line[i] == '\t'))
+		i++;
 	if (is_empty_line(line) || is_comment_line(line))
 		return (false);
-	i = 0;
 	map_char = 0;
 	total_chars = 0;
 	while (line[i])

@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:15:33 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 11:13:56 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:32:05 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ static bool	pre_cub_parse(const char *filename, t_data *data)
 		return (printf("Invalid file extension: %s\n", filename), false);
 	init_data(data);
 	lines = read_file_lines(filename);
+	if (lines) {
+    int i = 0;
+    while (lines[i]) {
+        printf("RAW line %d: '%s'\n", i, lines[i]);
+        i++;
+    }
+}
 	if (!lines)
 		return (printf("Failed to read file: %s\n", filename), false);
 	map_start = find_map_start(lines);

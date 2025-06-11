@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 10:13:17 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 17:19:49 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 14:13:31 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ bool	try_to_parse_texture(char *line, t_texture_id *texture_id)
 	int	pos;
 
 	if (!is_texture_line(line, texture_id, &pos))
-		return (printf("Error: Invalid texture line format: %s\n", line),
-			false);
+		return (false);
 	if (texture_id->path != NULL)
 		return (printf("Error: Duplicate texture definition for %s\n",
 				texture_id->id), false);
