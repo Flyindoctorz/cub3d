@@ -37,8 +37,8 @@ libs = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft
 includes = -I$(MINILIBX_DIR) -I$(LIBFT_DIR) -Iinclude
 
 # # macOS compile (commenté)
-# libs = -lmlx -Lminilibx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
-# includes = -Iminilibx -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
+# libs = -lmlx -L$(MINILIBX_DIR) -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
+# includes = -I$(MINILIBX_DIR) -I/opt/X11/include -I$(LIBFT_DIR) -Iinclude
 
 # Compilateur et flags
 CC = cc
