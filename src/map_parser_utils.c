@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:45:48 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 15:26:43 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:16:10 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,26 @@ int	find_map_start(char **lines)
 // 	return (true);
 // }
 
-bool	check_after_map(char **lines, int map_end)
-{
-	int	i;
+// bool	check_after_map(char **lines, int map_end)
+// {
+// 	int	i;
 
-	printf("DEBUG: check_after_map starting from line %d\n", map_end + 1);
-	i = map_end + 1;
-	while (lines[i])
-	{
-		printf("DEBUG: checking line %d: '%s'\n", i, lines[i]);
-		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i]))
-		{
-			if (is_map_line(lines[i]))
-				return (printf("Error: Map continues after empty line at %d '%s'\n", i, lines[i]), false);
-			else
-				return (printf("Error: Invalid line after map at %d '%s'\n", i, lines[i]), false);
-		}
-		i++;
-	}
-	return (true);
-}
+// 	printf("DEBUG: check_after_map starting from line %d\n", map_end + 1);
+// 	i = map_end + 1;
+// 	while (lines[i])
+// 	{
+// 		printf("DEBUG: checking line %d: '%s'\n", i, lines[i]);
+// 		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i]))
+// 		{
+// 			if (is_map_line(lines[i]))
+// 				return (printf("Error: Map continues after empty line at %d '%s'\n", i, lines[i]), false);
+// 			else
+// 				return (printf("Error: Invalid line after map at %d '%s'\n", i, lines[i]), false);
+// 		}
+// 		i++;
+// 	}
+// 	return (true);
+// }
 
 // int	find_map_end(char **lines, int start)
 // {
@@ -94,37 +94,37 @@ bool	check_after_map(char **lines, int map_end)
 // 	return (last_map_line);
 // }
 
-int find_map_end(char **lines, int start)
-{
-    int i;
-    int last_map_line;
+// int find_map_end(char **lines, int start)
+// {
+//     int i;
+//     int last_map_line;
     
-    if (!lines || start < 0)
-        return (-1);
-    last_map_line = start;
-    i = start;
+//     if (!lines || start < 0)
+//         return (-1);
+//     last_map_line = start;
+//     i = start;
     
-    while (lines[i])
-    {
-        printf("DEBUG: line %d: '%s' - empty=%d, comment=%d, map=%d\n", 
-               i, lines[i], 
-               is_empty_line(lines[i]), 
-               is_comment_line(lines[i]), 
-               is_map_line(lines[i]));
+//     while (lines[i])
+//     {
+//         printf("DEBUG: line %d: '%s' - empty=%d, comment=%d, map=%d\n", 
+//                i, lines[i], 
+//                is_empty_line(lines[i]), 
+//                is_comment_line(lines[i]), 
+//                is_map_line(lines[i]));
                
-        if (is_empty_line(lines[i]) || is_comment_line(lines[i]))
-        {
-            printf("DEBUG: Breaking at line %d (empty or comment)\n", i);
-            break;
-        }
-        else if (!is_map_line(lines[i]))
-            return (printf("Error: Invalid map line at %d '%s'\n", i, lines[i]), -1);
-        else
-            last_map_line = i;
-        i++;
-    }
-    return (last_map_line);
-}
+//         if (is_empty_line(lines[i]) || is_comment_line(lines[i]))
+//         {
+//             printf("DEBUG: Breaking at line %d (empty or comment)\n", i);
+//             break;
+//         }
+//         else if (!is_map_line(lines[i]))
+//             return (printf("Error: Invalid map line at %d '%s'\n", i, lines[i]), -1);
+//         else
+//             last_map_line = i;
+//         i++;
+//     }
+//     return (last_map_line);
+// }
 
 int	count_map_lines(char **lines, int start, int end)
 {
@@ -143,4 +143,74 @@ int	count_map_lines(char **lines, int start, int end)
 		i++;
 	}
 	return (count);
+}
+
+// Version corrigée de check_after_map
+bool	check_after_map(char **lines, int map_end)
+{
+	int	i;
+
+	printf("DEBUG: check_after_map starting from line %d\n", map_end + 1);
+	i = map_end + 1;
+	while (lines[i])
+	{
+		printf("DEBUG: checking line %d: '%s'\n", i, lines[i]);
+		
+		// Une ligne vraiment vide ou commentaire est OK
+		if (is_truly_empty_line(lines[i]) || is_comment_line(lines[i]))
+		{
+			i++;
+			continue;
+		}
+		
+		// Si ce n'est ni vide ni commentaire, c'est un problème
+		if (is_map_line(lines[i]))
+			return (printf("Error: Map continues after empty line at %d '%s'\n", i, lines[i]), false);
+		else
+			return (printf("Error: Invalid line after map at %d '%s'\n", i, lines[i]), false);
+	}
+	return (true);
+}
+
+// Version corrigée de find_map_end
+int find_map_end(char **lines, int start)
+{
+	int i;
+	int last_map_line;
+	
+	if (!lines || start < 0)
+		return (-1);
+	
+	last_map_line = start;
+	i = start;
+	
+	while (lines[i])
+	{
+		printf("DEBUG: line %d: '%s'\n", i, lines[i]);
+		
+		// Si ligne vraiment vide (pas juste des espaces), on s'arrête
+		if (is_truly_empty_line(lines[i]))
+		{
+			printf("DEBUG: Breaking at truly empty line %d\n", i);
+			break;
+		}
+		// Si commentaire, on s'arrête
+		else if (is_comment_line(lines[i]))
+		{
+			printf("DEBUG: Breaking at comment line %d\n", i);
+			break;
+		}
+		// Si ce n'est pas une ligne de map valide, erreur
+		else if (!is_map_line(lines[i]))
+		{
+			return (printf("Error: Invalid map line at %d '%s'\n", i, lines[i]), -1);
+		}
+		// Sinon, c'est une ligne de map valide
+		else
+		{
+			last_map_line = i;
+		}
+		i++;
+	}
+	return (last_map_line);
 }

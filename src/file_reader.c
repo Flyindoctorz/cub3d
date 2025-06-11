@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:02:37 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:20:42 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,48 +49,15 @@ char	*read_file_content(int fd)
 	return (content);
 }
 
-/// @brief 
-/// Covered cases:
-/// - Empty line
-/// @param line 
-/// @return 
-bool	is_bad(char *line)
-{
-	char *trimmed_line;
-
-	if (!line || line[0] == '\0' || line[0] == '\n')
-		return (true);
-	trimmed_line = space_trimer(line);		
-	if (!trimmed_line || trimmed_line[0] == '\0')
-	{
-		if (trimmed_line)
-			free(trimmed_line);
-		return (true);
-	}
-	return (false);
-}
-
 char	**make_it_split(const char *content)
 {
 	char	**lines;
-	int	i;
 
 	if (!content)
 		return (printf("Nothing to split"), NULL);
 	lines = split_keep_empty((char *)content, '\n');
 	if (!lines)
-		return (printf("Error splitting file content"), NULL);
-	i = 0;
-	while (lines[i])
-	{
-		if (is_bad(lines[i]) == true)
-		{
-			free_string_array(lines);
-			return (printf("Error: Invalid character in line %d: '%s'\n", i, lines[i]), NULL);
-		}
-		i++;
-	}
-
+		return (printf("Error splitting content into lines\n"), NULL);
 	return (lines);
 }
 

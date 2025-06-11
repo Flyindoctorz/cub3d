@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:44:28 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 15:40:52 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:11:23 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,31 @@ bool	is_map_line(char *line)
 	int	i;
 	int	map_char;
 	int	total_chars;
+	bool has_content;
 
-		i = 0;
-	while ((line[i] == ' ') || (line[i] == '\t'))
+	if (!line)
+		return (false);
+	i = 0;
+	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		i++;
-	if (is_empty_line(line) || is_comment_line(line))
+	if (line[i] == '\0' || line[i] == '\n' || line[i] == '#')
 		return (false);
 	map_char = 0;
 	total_chars = 0;
-	while (line[i])
+	has_content = false;
+	while (line[i] && line[i] != '\n')
 	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+		if (line[i] != ' ' && line[i] != '\t')
 		{
 			total_chars++;
+			has_content = true;
 			if (is_a_valid_char(line[i]))
 				map_char++;
 		}
 		i++;
 	}
-	if (total_chars == 0)
+	
+	if (!has_content || total_chars == 0)
 		return (false);
 	return ((float)map_char / (float)total_chars >= 0.8);
 }

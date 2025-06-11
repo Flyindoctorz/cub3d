@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:52:35 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 15:51:09 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:15:22 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 char *space_trimer(char *line)
 {
 	int start;
+	int end;
+	int len;
 
 	if (!line)
 		return (NULL);
@@ -25,7 +27,14 @@ char *space_trimer(char *line)
 		start++;
 	if (line[start] == '\0' || line[start] == '\n')
 		return (ft_strdup(""));
-	return (ft_strdup(line + start));
+	end = start;
+	while (line[end] && line[end] != '\n')
+		end++;
+	len = end - start;
+	if (len <= 0)
+		return (ft_strdup(""));
+		
+	return (ft_substr(line, start, len));
 }
 
 // char	**extract_map_lines(char **lines, int start, int end)

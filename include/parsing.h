@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:03:28 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:15:59 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,6 @@ char		*space_trimer(char *line);
 bool		check_after_map(char **lines, int end);
 bool		is_bad(char *line);
 char		**split_keep_empty(char *str, char sep);
-
+char		*is_truly_empty_line(char *line);
 #endif
+
