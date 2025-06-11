@@ -39,9 +39,11 @@ int	find_map_start(char **lines)
 // 		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i]))
 // 		{
 // 			if (is_map_line(lines[i]))
-// 				return (printf("Error: Map continues after empty line at %d '%s'\n", i, lines[i]), false);
+// 				return (printf("Error: Map continues after empty line at
+						%d '%s'\n", i, lines[i]), false);
 // 			else
-// 				return (printf("Error: Invalid line after map at %d '%s'\n", i, lines[i]), false);
+// 				return (printf("Error: Invalid line after map at %d '%s'\n", i,
+						lines[i]), false);
 // 		}
 // 		i++;
 // 	}
@@ -60,9 +62,11 @@ int	find_map_start(char **lines)
 // 		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i]))
 // 		{
 // 			if (is_map_line(lines[i]))
-// 				return (printf("Error: Map continues after empty line at %d '%s'\n", i, lines[i]), false);
+// 				return (printf("Error: Map continues after empty line at
+						%d '%s'\n", i, lines[i]), false);
 // 			else
-// 				return (printf("Error: Invalid line after map at %d '%s'\n", i, lines[i]), false);
+// 				return (printf("Error: Invalid line after map at %d '%s'\n", i,
+						lines[i]), false);
 // 		}
 // 		i++;
 // 	}
@@ -74,7 +78,6 @@ int	find_map_start(char **lines)
 // 	int		i;
 // 	int		last_map_line;
 
-
 // 	if (!lines || start < 0)
 // 		return (-1);
 // 	last_map_line = start;
@@ -82,7 +85,7 @@ int	find_map_start(char **lines)
 // 	while (lines[i])
 // 	{
 // 		if (is_empty_line(lines[i]) || is_comment_line(lines[i]))
-// 			break;
+// 			break ;
 // 		else if (!is_map_line(lines[i]))
 // 			return (printf("Error: Invalid map line at %d '%s'\n", i, lines[i]),
 // 				-1);
@@ -98,27 +101,28 @@ int	find_map_start(char **lines)
 // {
 //     int i;
 //     int last_map_line;
-    
+
 //     if (!lines || start < 0)
 //         return (-1);
 //     last_map_line = start;
 //     i = start;
-    
+
 //     while (lines[i])
 //     {
-//         printf("DEBUG: line %d: '%s' - empty=%d, comment=%d, map=%d\n", 
-//                i, lines[i], 
-//                is_empty_line(lines[i]), 
-//                is_comment_line(lines[i]), 
+//         printf("DEBUG: line %d: '%s' - empty=%d, comment=%d, map=%d\n",
+//                i, lines[i],
+//                is_empty_line(lines[i]),
+//                is_comment_line(lines[i]),
 //                is_map_line(lines[i]));
-               
+
 //         if (is_empty_line(lines[i]) || is_comment_line(lines[i]))
 //         {
 //             printf("DEBUG: Breaking at line %d (empty or comment)\n", i);
-//             break;
+//             break ;
 //         }
 //         else if (!is_map_line(lines[i]))
-//             return (printf("Error: Invalid map line at %d '%s'\n", i, lines[i]), -1);
+//             return (printf("Error: Invalid map line at %d '%s'\n", i,
+		lines[i]), -1);
 //         else
 //             last_map_line = i;
 //         i++;
@@ -155,55 +159,56 @@ bool	check_after_map(char **lines, int map_end)
 	while (lines[i])
 	{
 		printf("DEBUG: checking line %d: '%s'\n", i, lines[i]);
-		
 		// Une ligne vraiment vide ou commentaire est OK
 		if (is_truly_empty_line(lines[i]) || is_comment_line(lines[i]))
 		{
 			i++;
-			continue;
+			continue ;
 		}
-		
 		// Si ce n'est ni vide ni commentaire, c'est un problème
 		if (is_map_line(lines[i]))
-			return (printf("Error: Map continues after empty line at %d '%s'\n", i, lines[i]), false);
+			return (printf("Error: Map continues after empty line at %d '%s'\n",
+					i, lines[i]), false);
 		else
-			return (printf("Error: Invalid line after map at %d '%s'\n", i, lines[i]), false);
+			return (printf("Error: Invalid line after map at %d '%s'\n", i,
+					lines[i]), false);
 	}
 	return (true);
 }
 
 // Version corrigée de find_map_end
-int find_map_end(char **lines, int start)
+int	find_map_end(char **lines, int start)
 {
 	int i;
 	int last_map_line;
-	
+
 	if (!lines || start < 0)
 		return (-1);
-	
+
 	last_map_line = start;
 	i = start;
-	
+
 	while (lines[i])
 	{
 		printf("DEBUG: line %d: '%s'\n", i, lines[i]);
-		
+
 		// Si ligne vraiment vide (pas juste des espaces), on s'arrête
 		if (is_truly_empty_line(lines[i]))
 		{
 			printf("DEBUG: Breaking at truly empty line %d\n", i);
-			break;
+			break ;
 		}
 		// Si commentaire, on s'arrête
 		else if (is_comment_line(lines[i]))
 		{
 			printf("DEBUG: Breaking at comment line %d\n", i);
-			break;
+			break ;
 		}
 		// Si ce n'est pas une ligne de map valide, erreur
 		else if (!is_map_line(lines[i]))
 		{
-			return (printf("Error: Invalid map line at %d '%s'\n", i, lines[i]), -1);
+			return (printf("Error: Invalid map line at %d '%s'\n", i, lines[i]),
+				-1);
 		}
 		// Sinon, c'est une ligne de map valide
 		else

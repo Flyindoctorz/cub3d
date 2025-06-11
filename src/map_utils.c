@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:17:50 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/26 13:35:40 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:27:41 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	**copy_map(char **map)
 	}
 	return (map_copy);
 }
+
 // free la map_copy
 void	free_copy(char **map_copy)
 {

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
+#include "libft.h"
 
 int	ft_isspace(int c)
 {
@@ -30,7 +30,8 @@ bool	is_truly_empty_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n' && line[i] != '\r')
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n'
+			&& line[i] != '\r')
 			return (false);
 		i++;
 	}

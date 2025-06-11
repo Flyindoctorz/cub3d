@@ -108,7 +108,7 @@ static bool	validate_args(int ac, char **av)
 }
 int	main(int ac, char **av)
 {
-	t_data	data;
+	t_data data;
 
 	if (!validate_args(ac, av))
 		return (ERROR);

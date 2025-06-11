@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 11:47:25 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/05/28 12:39:05 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:25:14 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,17 @@ bool	validate_single_texture(const char *path, const char *texture_name)
 	return (true);
 }
 
-bool	double_check_texture(t_texture *texture)
-{
-	if (!validate_textures(texture))
-		return (false);
-	if (!validate_single_texture(texture->north.path, "North"))
-		return (false);
-	if (!validate_single_texture(texture->south.path, "South"))
-		return (false);
-	if (!validate_single_texture(texture->west.path, "West"))
-		return (false);
-	if (!validate_single_texture(texture->east.path, "East"))
-		return (false);
-	return (true);
-}
+// bool	double_check_texture(t_texture *texture)
+// {
+// 	if (!validate_textures(texture))
+// 		return (false);
+// 	if (!validate_single_texture(texture->north.path, "North"))
+// 		return (false);
+// 	if (!validate_single_texture(texture->south.path, "South"))
+// 		return (false);
+// 	if (!validate_single_texture(texture->west.path, "West"))
+// 		return (false);
+// 	if (!validate_single_texture(texture->east.path, "East"))
+// 		return (false);
+// 	return (true);
+// }

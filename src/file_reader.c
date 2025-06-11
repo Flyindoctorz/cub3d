@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:07:04 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:20:42 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:24:57 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ char	**make_it_split(const char *content)
 	return (lines);
 }
 
-
-
 char	**read_file_lines(const char *filename)
 {
 	int		fd;
@@ -88,22 +86,22 @@ char	**read_file_lines(const char *filename)
 	return (lines);
 }
 
-char	*read_it_full(char *filename)
-{
-	int		fd;
-	char	*content;
+// char	*read_it_full(char *filename)
+// {
+// 	int		fd;
+// 	char	*content;
 
-	if (!filename || ft_strlen(filename) == 0)
-		return (printf("Error: Filename is empty or NULL\n"), NULL);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (printf("Error: Could not open file %s\n", filename), NULL);
-	content = read_file_content(fd);
-	close(fd);
-	if (!content)
-		return (printf("Error: Could not read file content\n"), NULL);
-	if (content[0] == '\0')
-		return (printf("Error: File is empty\n"), free(content), NULL);
-	printf("✅ File loaded (%zu bytes)\n", ft_strlen(content));
-	return (content);
-}
+// 	if (!filename || ft_strlen(filename) == 0)
+// 		return (printf("Error: Filename is empty or NULL\n"), NULL);
+// 	fd = open(filename, O_RDONLY);
+// 	if (fd < 0)
+// 		return (printf("Error: Could not open file %s\n", filename), NULL);
+// 	content = read_file_content(fd);
+// 	close(fd);
+// 	if (!content)
+// 		return (printf("Error: Could not read file content\n"), NULL);
+// 	if (content[0] == '\0')
+// 		return (printf("Error: File is empty\n"), free(content), NULL);
+// 	printf("✅ File loaded (%zu bytes)\n", ft_strlen(content));
+// 	return (content);
+// }

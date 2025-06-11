@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PARSING_H
-#	define PARSING_H
+#ifndef PARSING_H
+# define PARSING_H
 
 //#include "cub3d.h"
 # include "raycasting.h"
@@ -155,4 +155,3 @@ bool		is_bad(char *line);
 char		**split_keep_empty(char *str, char sep);
 char		*is_truly_empty_line(char *line);
 #endif
-

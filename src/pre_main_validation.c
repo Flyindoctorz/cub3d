@@ -13,7 +13,6 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-
 bool	validate_cub_extent(const char *filename)
 {
 	int	len;

@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:39:29 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/10 17:12:51 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/11 16:26:42 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ bool	parse_color_line(char *line, t_color *color)
 
 	if (!line || !color)
 		return (printf("Error: Invalid input to parse_color\n"), false);
-	// Déterminer si c'est F ou C
 	pos = 0;
 	while (line[pos] && (line[pos] == ' ' || line[pos] == '\t'))
 		pos++;
@@ -73,4 +72,3 @@ bool	parse_color_line(char *line, t_color *color)
 	color_to_hex(color);
 	return (true);
 }
-

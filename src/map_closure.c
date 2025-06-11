@@ -49,10 +49,11 @@ static bool	check_map_borders(char **map)
 				if (i == 0 || i == height - 1 || j == 0
 					|| j == line_width(map[i]) - 1)
 					return (false);
-				if ((j > 0 && map[i][j - 1] == ' ')
-					|| (map[i][j + 1] && map[i][j + 1] == ' ')
-					|| (i > 0 && j < line_width(map[i - 1]) && map[i - 1][j] == ' ')
-					|| (map[i + 1] && j < line_width(map[i + 1]) && map[i + 1][j] == ' '))
+				if ((j > 0 && map[i][j - 1] == ' ') || (map[i][j + 1]
+						&& map[i][j + 1] == ' ') || (i > 0
+						&& j < line_width(map[i - 1]) && map[i - 1][j] == ' ')
+					|| (map[i + 1] && j < line_width(map[i + 1]) && map[i
+						+ 1][j] == ' '))
 					return (false);
 			}
 		}
