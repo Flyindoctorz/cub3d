@@ -188,6 +188,7 @@ int					get_texture_pixel(t_image *texture, int x, int y);
 
 /* image handling */
 
+void				set_images(t_data *data);
 void				draw_player(t_image *image);
 void				draw_map(t_map *map, t_data *data, t_image *m_map);
 void				render_scene(t_player *player, t_data *data);
@@ -197,7 +198,7 @@ void				render_scene(t_player *player, t_data *data);
 void				raycast(t_player *player, t_data *data);
 void				ray_distance(t_player *player, t_data *data, t_ray *ray);
 void				render_scene(t_player *player, t_data *data);
-void				draw_vertical_line(t_image *image, int column, t_ray *ray);
+void				draw_vertical_line(t_image *image, int column, t_ray *ray, t_data *info);
 int					get_direction(int axis, t_ray *ray, t_player *player,
 						t_data *data);
 

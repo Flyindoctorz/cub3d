@@ -162,4 +162,7 @@ bool		check_after_map(char **lines, int end);
 bool		is_bad(char *line);
 char		**split_keep_empty(char *str, char sep);
 char		*is_truly_empty_line(char *line);
+
+bool		validate_cub_extent(const char *filename);
+
 #endif

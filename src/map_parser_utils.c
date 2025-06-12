@@ -40,10 +40,10 @@ int	find_map_start(char **lines)
 // 		{
 // 			if (is_map_line(lines[i]))
 // 				return (printf("Error: Map continues after empty line at
-						%d '%s'\n", i, lines[i]), false);
+						// %d '%s'\n", i, lines[i]), false);
 // 			else
 // 				return (printf("Error: Invalid line after map at %d '%s'\n", i,
-						lines[i]), false);
+						// lines[i]), false);
 // 		}
 // 		i++;
 // 	}
@@ -63,10 +63,10 @@ int	find_map_start(char **lines)
 // 		{
 // 			if (is_map_line(lines[i]))
 // 				return (printf("Error: Map continues after empty line at
-						%d '%s'\n", i, lines[i]), false);
+						// %d '%s'\n", i, lines[i]), false);
 // 			else
 // 				return (printf("Error: Invalid line after map at %d '%s'\n", i,
-						lines[i]), false);
+						// lines[i]), false);
 // 		}
 // 		i++;
 // 	}
@@ -122,7 +122,7 @@ int	find_map_start(char **lines)
 //         }
 //         else if (!is_map_line(lines[i]))
 //             return (printf("Error: Invalid map line at %d '%s'\n", i,
-		lines[i]), -1);
+// lines[i]), -1);
 //         else
 //             last_map_line = i;
 //         i++;

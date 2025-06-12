@@ -40,7 +40,7 @@ void	set_drawing_info(t_drawing *data, t_ray *ray)
 		data->end = HEIGHT - 1;
 }
 
-void	draw_vertical_line(t_image *image, int column, t_ray *ray)
+void	draw_vertical_line(t_image *image, int column, t_ray *ray, t_data *info)
 {
 	t_drawing	data;
 
@@ -49,7 +49,7 @@ void	draw_vertical_line(t_image *image, int column, t_ray *ray)
 	while (data.line < HEIGHT)
 	{
 		if (data.line < data.start)
-			mlx_pixel_put_v2(image, column, data.line++, 0x00FFFF00);
+			mlx_pixel_put_v2(image, column, data.line++, info->ceiling.hex);
 		else if (data.line >= data.start && data.line <= data.end)
 		{
 			data.full_wall_position = (double)(data.line - data.original_start)
@@ -65,7 +65,7 @@ void	draw_vertical_line(t_image *image, int column, t_ray *ray)
 			mlx_pixel_put_v2(image, column, data.line++, data.color);
 		}
 		else
-			mlx_pixel_put_v2(image, column, data.line++, 0x0000FF00);
+			mlx_pixel_put_v2(image, column, data.line++, info->floor.hex);
 	}
 }
 
@@ -139,6 +139,6 @@ void	raycast(t_player *player, t_data *data)
 		ray_distance(player, data, &ray);
 		ray.corrected = ray.distance * cos(player->angle - ray.angle);
 		ray.height_line = (BLOCK * HEIGHT) / ray.corrected;
-		draw_vertical_line(&data->scene_img, pos_screen++, &ray);
+		draw_vertical_line(&data->scene_img, pos_screen++, &ray, data);
 	}
 }

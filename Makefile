@@ -31,7 +31,6 @@ MINILIBX_DIR = minilibx-linux
 # Librairies
 LIBFT = $(LIBFT_DIR)/libft.a
 
-# Linux compile
 # Linux compile (corrigé)
 libs = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft
 includes = -I$(MINILIBX_DIR) -I$(LIBFT_DIR) -Iinclude
@@ -49,7 +48,7 @@ NAME = cub3D
 MAP_SRC = maptype.cub
 MAP_NUM ?= 4  # Map par défaut (Kanye West)
 MAP_DEST = current_map.cub
-		
+
 # Colors
 RED = \033[0;31m
 GREEN = \033[0;32m

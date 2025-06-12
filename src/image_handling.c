@@ -12,6 +12,22 @@
 
 #include "../include/raycasting.h"
 
+void	set_images(t_data *data)
+{
+	data->wallnorth_img.path = data->texture.north.path;
+	data->wallsouth_img.path = data->texture.south.path;
+	data->walleast_img.path = data->texture.east.path;
+	data->wallwest_img.path = data->texture.west.path;
+	create_image(&data->scene_img, data, WIDTH, HEIGHT);
+	create_image(&data->minimap_img, data, (WIDTH / 16) * 2, (HEIGHT / 9) * 2);
+	create_image(&data->player_img, data, data->minimap_img.width / 32,
+		data->minimap_img.width / 32);
+	create_image(&data->wallnorth_img, data, 0, 0);
+	create_image(&data->walleast_img, data, 0, 0);
+	create_image(&data->wallwest_img, data, 0, 0);
+	create_image(&data->wallsouth_img, data, 0, 0);
+}
+
 void	render_scene(t_player *player, t_data *data)
 {
 	draw_map(&data->map, data, &data->minimap_img);

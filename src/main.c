@@ -13,22 +13,6 @@
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 
-void	set_images(t_data *data)
-{
-	data->wallnorth_img.path = data->texture.north.path;
-	data->wallsouth_img.path = data->texture.south.path;
-	data->walleast_img.path = data->texture.east.path;
-	data->wallwest_img.path = data->texture.west.path;
-	create_image(&data->scene_img, data, WIDTH, HEIGHT);
-	create_image(&data->minimap_img, data, WIDTH / 8, WIDTH / 8);
-	create_image(&data->player_img, data, data->minimap_img.width / 32,
-		data->minimap_img.width / 32);
-	create_image(&data->wallnorth_img, data, 0, 0);
-	create_image(&data->walleast_img, data, 0, 0);
-	create_image(&data->wallwest_img, data, 0, 0);
-	create_image(&data->wallsouth_img, data, 0, 0);
-}
-
 bool	set_player(t_data *data)
 {
 	int		p_x;
@@ -80,20 +64,6 @@ int	initialize(t_data *data)
 	return (SUCCESS);
 }
 
-bool	validate_cub_extent(const char *filename)
-{
-	int	len;
-
-	if (!filename)
-		return (printf("Invalid filename"), false);
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (false);
-	if (ft_strcmp(filename + len - 4, ".cub") != 0)
-		return (printf("File must have a .cub extension"), false);
-	return (true);
-}
-
 bool	validate_args(int ac, char **av)
 {
 	if (ac < 2)
@@ -101,18 +71,16 @@ bool	validate_args(int ac, char **av)
 				av[0]), false);
 	if (ac > 2)
 		return (printf("Error: Too many arguments provided.\n"
-						"Usage: %s <map.cub>\n",
-						av[0]),
-				false);
-	// NOUVELLE VÉRIFICATION :
+				"Usage: %s <map.cub>\n", av[0]), false);
 	if (is_empty_or_whitespace(av[1]))
 		return (printf("Error: Empty filename provided.\nUsage: %s <map.cub>\n",
 				av[0]), false);
 	return (validate_cub_extent(av[1]));
 }
+
 int	main(int ac, char **av)
 {
-	t_data data;
+	t_data	data;
 
 	if (!validate_args(ac, av))
 		return (ERROR);
