@@ -14,11 +14,11 @@
 #include "../include/raycasting.h"
 #include "../libft/libft.h"
 
-char *space_trimer(char *line)
+char	*space_trimer(char *line)
 {
-	int start;
-	int end;
-	int len;
+	int	start;
+	int	end;
+	int	len;
 
 	if (!line)
 		return (NULL);
@@ -33,7 +33,6 @@ char *space_trimer(char *line)
 	len = end - start;
 	if (len <= 0)
 		return (ft_strdup(""));
-		
 	return (ft_substr(line, start, len));
 }
 
@@ -97,8 +96,8 @@ char	**extract_map_lines(char **lines, int start, int end)
 
 static bool	get_map_data(char **line, int start, int end, t_data *data)
 {
-	int		i;
-	int		curr_width;
+	int	i;
+	int	curr_width;
 
 	if (!line || !data)
 		return (false);
@@ -120,8 +119,8 @@ static bool	get_map_data(char **line, int start, int end, t_data *data)
 
 bool	parse_map_section(char **lines, t_data *data)
 {
-	int		start;
-	int		end;
+	int start;
+	int end;
 
 	if (!lines || !data)
 		return (printf("Invalid input to parse_map_section"), false);

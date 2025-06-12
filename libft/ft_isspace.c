@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
+#include "libft.h"
 
 int	ft_isspace(int c)
 {

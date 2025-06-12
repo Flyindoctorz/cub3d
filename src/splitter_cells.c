@@ -6,14 +6,13 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:00:34 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:01:03 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 14:01:07 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
-
+#include "libft.h"
 
 static int	count_splits(char *str, char sep)
 {

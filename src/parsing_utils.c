@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:44:28 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:11:23 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 14:03:45 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ bool	is_config_line(char *line)
 
 bool	is_map_line(char *line)
 {
-	int	i;
-	int	map_char;
-	int	total_chars;
-	bool has_content;
+	int		i;
+	int		map_char;
+	int		total_chars;
+	bool	has_content;
 
 	if (!line)
 		return (false);
@@ -93,7 +93,6 @@ bool	is_map_line(char *line)
 		}
 		i++;
 	}
-	
 	if (!has_content || total_chars == 0)
 		return (false);
 	return ((float)map_char / (float)total_chars >= 0.8);

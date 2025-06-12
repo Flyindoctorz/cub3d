@@ -61,8 +61,6 @@ char	**make_it_split(const char *content)
 	return (lines);
 }
 
-
-
 char	**read_file_lines(const char *filename)
 {
 	int		fd;

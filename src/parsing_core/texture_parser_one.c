@@ -37,9 +37,10 @@ bool	extract_texture_path(char *line, int start, t_texture_id *texture_id)
 {
 	int	end;
 	int	len;
-	
+
 	if (!line[start] || ft_isspace(line[start]) || line[start] == '#')
-		return (printf("Error: Invalid texture path start in line: %s\n", line), false);
+		return (printf("Error: Invalid texture path start in line: %s\n", line),
+			false);
 	end = start;
 	while (line[end] && !ft_isspace(line[end]) && line[end] != '\t'
 		&& line[end] != '\n' && line[end] != '#')
@@ -49,7 +50,8 @@ bool	extract_texture_path(char *line, int start, t_texture_id *texture_id)
 		return (printf("Error: Empty texture path in line: %s\n", line), false);
 	texture_id->path = ft_substr(line, start, len);
 	if (!texture_id->path)
-		return (printf("Error: Memory allocation failed for texture path\n"), false);
+		return (printf("Error: Memory allocation failed for texture path\n"),
+			false);
 	return (true);
 }
 

@@ -73,4 +73,3 @@ bool	parse_color_line(char *line, t_color *color)
 	color_to_hex(color);
 	return (true);
 }
-

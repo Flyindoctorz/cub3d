@@ -58,8 +58,9 @@ bool	where_player_at(char **map, int *p_x, int *p_y)
 {
 	int	i;
 	int	j;
-	int	count = 0;
+	int	count;
 
+	count = 0;
 	if (!map || !p_x || !p_y)
 		return (printf("incorrect parameters\n"), false);
 	i = 0;
@@ -79,7 +80,8 @@ bool	where_player_at(char **map, int *p_x, int *p_y)
 		i++;
 	}
 	if (count != 1)
-		return (printf("Error: Found %d players (need exactly 1)\n", count), false);
+		return (printf("Error: Found %d players (need exactly 1)\n", count),
+			false);
 	return (true);
 }
 
@@ -88,11 +90,12 @@ bool	validate_map(char **map)
 	int	p_x;
 	int	p_y;
 
-	
 	if (line_height(map) > MAP_MAX_SIZE)
-		return (printf("Error: Map too large (max %dx%d)\n", MAP_MAX_SIZE, MAP_MAX_SIZE), false);
+		return (printf("Error: Map too large (max %dx%d)\n", MAP_MAX_SIZE,
+				MAP_MAX_SIZE), false);
 	if (line_width(map[0]) > MAX_LINE_WIDTH)
-		return (printf("Error: Map line too long (max %d characters)\n", MAX_LINE_WIDTH), false);
+		return (printf("Error: Map line too long (max %d characters)\n",
+				MAX_LINE_WIDTH), false);
 	if (!map || !map[0])
 		return (printf("Map is empty or NULL\n"), false);
 	if (!is_valid_map(map))

@@ -104,17 +104,15 @@ bool	validate_args(int ac, char **av)
 						"Usage: %s <map.cub>\n",
 						av[0]),
 				false);
-	
 	// NOUVELLE VÉRIFICATION :
 	if (is_empty_or_whitespace(av[1]))
 		return (printf("Error: Empty filename provided.\nUsage: %s <map.cub>\n",
 				av[0]), false);
-				
 	return (validate_cub_extent(av[1]));
 }
 int	main(int ac, char **av)
 {
-	t_data	data;
+	t_data data;
 
 	if (!validate_args(ac, av))
 		return (ERROR);
