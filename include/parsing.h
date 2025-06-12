@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:15:59 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 12:15:47 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
+# endif
+
+# ifndef MAP_MAX_SIZE
+#  define MAP_MAX_SIZE 200
 # endif
 
 /* ************************** */
@@ -139,6 +143,7 @@ int			ft_strotoi(char *str, char **endptr);
 void		init_it_all(t_data *data);
 bool		parse_config_section(char **lines, int map_start, t_data *data);
 bool		validate_cub_extent(const char *filename);
+bool		is_empty_or_whitespace(char *str);
 
 /* ************************** */
 /*       PARSING CORE         */

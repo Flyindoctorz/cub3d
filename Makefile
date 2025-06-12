@@ -6,7 +6,7 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/02 14:30:00 by cgelgon           #+#    #+#              #
-#    Updated: 2025/06/11 16:54:57 by cgelgon          ###   ########.fr        #
+#    Updated: 2025/06/12 11:53:43 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ sources = src/main.c src/event_handler.c src/raycasting.c src/raycasting_utils.c
 		  src/color_parser.c src/color_parser_utils.c src/empty_it.c \
 		  src/parsing_core/parsing_core.c src/parsing_core/parsing_core_two.c \
 		  src/parsing_core/texture_parser_one.c src/parsing_core/texture_parser_two.c \
-		  src/parsing_core/utils_for_parser.c \
+		  src/parsing_core/utils_for_parser.c src/another_utils.c \
 		  src/whole_cub_parser.c \
 		  src/image_handling.c
 
@@ -49,7 +49,7 @@ NAME = cub3D
 MAP_SRC = maptype.cub
 MAP_NUM ?= 4  # Map par défaut (Kanye West)
 MAP_DEST = current_map.cub
-
+		
 # Colors
 RED = \033[0;31m
 GREEN = \033[0;32m

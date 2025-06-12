@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:45:48 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:16:10 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 10:06:23 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,20 +150,15 @@ bool	check_after_map(char **lines, int map_end)
 {
 	int	i;
 
-	printf("DEBUG: check_after_map starting from line %d\n", map_end + 1);
 	i = map_end + 1;
 	while (lines[i])
 	{
-		printf("DEBUG: checking line %d: '%s'\n", i, lines[i]);
-		
-		// Une ligne vraiment vide ou commentaire est OK
 		if (is_truly_empty_line(lines[i]) || is_comment_line(lines[i]))
 		{
 			i++;
 			continue;
 		}
 		
-		// Si ce n'est ni vide ni commentaire, c'est un problème
 		if (is_map_line(lines[i]))
 			return (printf("Error: Map continues after empty line at %d '%s'\n", i, lines[i]), false);
 		else

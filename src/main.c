@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/06/10 17:33:51 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 11:51:57 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ bool	validate_cub_extent(const char *filename)
 	return (true);
 }
 
-static bool	validate_args(int ac, char **av)
+bool	validate_args(int ac, char **av)
 {
 	if (ac < 2)
 		return (printf("Error: No map file provided.\nUsage: %s <map.cub>\n",
@@ -104,6 +104,12 @@ static bool	validate_args(int ac, char **av)
 						"Usage: %s <map.cub>\n",
 						av[0]),
 				false);
+	
+	// NOUVELLE VÉRIFICATION :
+	if (is_empty_or_whitespace(av[1]))
+		return (printf("Error: Empty filename provided.\nUsage: %s <map.cub>\n",
+				av[0]), false);
+				
 	return (validate_cub_extent(av[1]));
 }
 int	main(int ac, char **av)

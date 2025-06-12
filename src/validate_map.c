@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:43:09 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 11:56:46 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 12:17:28 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ bool	validate_map(char **map)
 	int	p_x;
 	int	p_y;
 
+	
+	if (line_height(map) > MAP_MAX_SIZE)
+		return (printf("Error: Map too large (max %dx%d)\n", MAP_MAX_SIZE, MAP_MAX_SIZE), false);
 	if (!map || !map[0])
 		return (printf("Map is empty or NULL\n"), false);
 	if (!is_valid_map(map))
