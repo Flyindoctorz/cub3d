@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 13:52:35 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/11 16:15:22 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 13:50:58 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,24 +118,6 @@ static bool	get_map_data(char **line, int start, int end, t_data *data)
 	return (true);
 }
 
-// bool	parse_map_section(char **lines, t_data *data)
-// {
-// 	int		start;
-// 	int		end;
-
-// 	if (!lines || !data)
-// 		return (printf("Invalid input to parse_map_section"), false);
-// 	start = find_map_start(lines);
-// 	if (start == -1)
-// 		return (printf("Map start not found"), false);
-// 	end = find_map_end(lines, start);
-// 	if (end == -1)
-// 		return (printf("Map end not found"), false);
-// 	if (!check_after_map(lines, end))
-// 		return (false);
-// 	return (get_map_data(lines, start, end, data));
-// }
-
 bool	parse_map_section(char **lines, t_data *data)
 {
 	int		start;
@@ -144,20 +126,11 @@ bool	parse_map_section(char **lines, t_data *data)
 	if (!lines || !data)
 		return (printf("Invalid input to parse_map_section"), false);
 	start = find_map_start(lines);
-	printf("DEBUG: map_start = %d\n", start);
 	if (start == -1)
 		return (printf("Map start not found"), false);
 	end = find_map_end(lines, start);
-	printf("DEBUG: map_end = %d\n", end);
 	if (end == -1)
-		return (printf("Map end not found"), false);
-	
-	// Afficher quelques lignes pour debug
-	printf("DEBUG: Last map line: '%s'\n", lines[end]);
-	if (lines[end + 1])
-    	printf("DEBUG: Line after map: '%s'\n", lines[end + 1]);
-	else
-    	printf("DEBUG: No line after map (end of file)\n");
+		return (printf("Invalid map content"), false);
 	if (!check_after_map(lines, end))
 		return (false);
 	return (get_map_data(lines, start, end, data));

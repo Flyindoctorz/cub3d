@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:15:41 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/12 12:15:47 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 13:28:40 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 #  define MAP_MAX_SIZE 200
 # endif
 
+# ifndef MAP_MAX_WIDTH
+#  define MAX_LINE_WIDTH 200
+# endif
 /* ************************** */
 /*        STRUCTURES          */
 /* ************************** */

@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:43:09 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/12 12:17:28 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/12 13:44:53 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,29 @@ bool	where_player_at(char **map, int *p_x, int *p_y)
 {
 	int	i;
 	int	j;
+	int	count = 0;
 
-	i = 0;
 	if (!map || !p_x || !p_y)
 		return (printf("incorrect parameters\n"), false);
+	i = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
+			if (is_valid_player(map[i][j]))
 			{
 				*p_x = j;
 				*p_y = i;
-				return (true);
+				count++;
 			}
 			j++;
 		}
 		i++;
 	}
-	return (false);
+	if (count != 1)
+		return (printf("Error: Found %d players (need exactly 1)\n", count), false);
+	return (true);
 }
 
 bool	validate_map(char **map)
@@ -89,6 +91,8 @@ bool	validate_map(char **map)
 	
 	if (line_height(map) > MAP_MAX_SIZE)
 		return (printf("Error: Map too large (max %dx%d)\n", MAP_MAX_SIZE, MAP_MAX_SIZE), false);
+	if (line_width(map[0]) > MAX_LINE_WIDTH)
+		return (printf("Error: Map line too long (max %d characters)\n", MAX_LINE_WIDTH), false);
 	if (!map || !map[0])
 		return (printf("Map is empty or NULL\n"), false);
 	if (!is_valid_map(map))
