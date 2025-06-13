@@ -53,7 +53,6 @@ bool	is_valid_map(char **map)
 	return (true);
 }
 
-// check si le joueur est dans la map
 bool	where_player_at(char **map, int *p_x, int *p_y)
 {
 	int	i;
@@ -66,8 +65,8 @@ bool	where_player_at(char **map, int *p_x, int *p_y)
 	i = 0;
 	while (map[i])
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
 			if (is_valid_player(map[i][j]))
 			{
@@ -75,13 +74,11 @@ bool	where_player_at(char **map, int *p_x, int *p_y)
 				*p_y = i;
 				count++;
 			}
-			j++;
 		}
 		i++;
 	}
 	if (count != 1)
-		return (printf("Error: Found %d players (need exactly 1)\n", count),
-			false);
+		return (printf("Error: Found %d players \n", count), false);
 	return (true);
 }
 

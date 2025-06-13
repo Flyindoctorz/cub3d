@@ -31,11 +31,29 @@ void	flood_fill(char **map, int x, int y, int *valid)
 	flood_fill(map, x, y - 1, valid);
 }
 
+bool	check_border(char **map, int i, int j, int height)
+{
+	if (map[i][j] == '0' || is_valid_player(map[i][j]))
+	{
+		if (i == 0 || i == height - 1 || j == 0
+			|| j == line_width(map[i]) - 1)
+			return (false);
+		if ((j > 0 && map[i][j - 1] == ' ') || (map[i][j + 1]
+				&& map[i][j + 1] == ' ') || (i > 0
+				&& j < line_width(map[i - 1]) && map[i - 1][j] == ' ')
+			|| (map[i + 1] && j < line_width(map[i + 1]) && map[i
+				+ 1][j] == ' '))
+			return (false);
+	}
+	return (true);
+}
+
 static bool	check_map_borders(char **map)
 {
 	int	i;
 	int	j;
 	int	height;
+	int	res;
 
 	height = line_height(map);
 	i = -1;
@@ -44,21 +62,10 @@ static bool	check_map_borders(char **map)
 		j = -1;
 		while (map[i][++j] && map[i][j] != '\n')
 		{
-			if (map[i][j] == '0' || is_valid_player(map[i][j]))
-			{
-				if (i == 0 || i == height - 1 || j == 0
-					|| j == line_width(map[i]) - 1)
-					return (false);
-				if ((j > 0 && map[i][j - 1] == ' ') || (map[i][j + 1]
-						&& map[i][j + 1] == ' ') || (i > 0
-						&& j < line_width(map[i - 1]) && map[i - 1][j] == ' ')
-					|| (map[i + 1] && j < line_width(map[i + 1]) && map[i
-						+ 1][j] == ' '))
-					return (false);
-			}
+			res = check_border(map, i, j, height);
 		}
 	}
-	return (true);
+	return (res);
 }
 
 bool	check_map_close(char **map)

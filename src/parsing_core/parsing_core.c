@@ -19,30 +19,20 @@ void	clean_parsing_data(t_data *data)
 	if (!data)
 		return ;
 	if (data->texture.north.path)
-	{
 		free(data->texture.north.path);
-		data->texture.north.path = NULL;
-	}
 	if (data->texture.south.path)
-	{
 		free(data->texture.south.path);
-		data->texture.south.path = NULL;
-	}
 	if (data->texture.west.path)
-	{
 		free(data->texture.west.path);
-		data->texture.west.path = NULL;
-	}
 	if (data->texture.east.path)
-	{
 		free(data->texture.east.path);
-		data->texture.east.path = NULL;
-	}
 	if (data->map.map)
-	{
 		free_string_array(data->map.map);
-		data->map.map = NULL;
-	}
+	data->texture.north.path = NULL;
+	data->texture.south.path = NULL;
+	data->texture.west.path = NULL;
+	data->texture.east.path = NULL;
+	data->map.map = NULL;
 }
 
 bool	parse_a_color_line(char *line, t_color *color)
