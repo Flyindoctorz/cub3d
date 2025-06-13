@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:46:28 by safuente          #+#    #+#             */
-/*   Updated: 2025/06/12 11:51:57 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/13 12:14:46 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ int	main(int ac, char **av)
 	if (!validate_args(ac, av))
 		return (ERROR);
 	if (!parse_and_config_map(av[1], &data))
-		return (printf("❌ Error: Failed to parse the map file.\n"),
+		return (printf("❌ Error:\n Failed to parse the map file.\n"),
 			clean_parsing_data(&data), ERROR);
 	printf("✅ Map parsed successfully! (%dx%d)\n", data.map.width,
 		data.map.height);
 	printf("🚀 Initializing graphics...\n");
 	if (initialize(&data) == ERROR)
-		return (printf("❌ Error: Failed to initialize graphics.\n"),
+		return (printf("❌ Error:\n Failed to initialize graphics.\n"),
 			clean_parsing_data(&data), ERROR);
 	printf("✅ Graphics initialized!\n");
 	printf("👤 Player: (%.1f, %.1f) facing %.2f rad\n", data.player.px,

@@ -6,7 +6,7 @@
 #    By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/02 14:30:00 by cgelgon           #+#    #+#              #
-#    Updated: 2025/06/12 11:53:43 by cgelgon          ###   ########.fr        #
+#    Updated: 2025/06/13 12:24:34 by cgelgon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 sources = src/main.c src/event_handler.c src/raycasting.c src/raycasting_utils.c \
 		  src/init.c src/validate_all_datas.c src/validate_textures.c src/validate_map.c \
 		  src/map_closure.c src/map_utils.c src/map_parser.c src/map_parser_utils.c \
-		  src/file_reader.c src/parsing_utils.c src/splitter_cells.c \
+		  src/file_reader.c src/parsing_utils.c src/parsing_utils_two src/splitter_cells.c \
 		  src/color_parser.c src/color_parser_utils.c src/empty_it.c \
 		  src/parsing_core/parsing_core.c src/parsing_core/parsing_core_two.c \
 		  src/parsing_core/texture_parser_one.c src/parsing_core/texture_parser_two.c \
@@ -43,11 +43,6 @@ includes = -I$(MINILIBX_DIR) -I$(LIBFT_DIR) -Iinclude
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
 NAME = cub3D
-
-# Variables pour les maps
-MAP_SRC = maptype.cub
-MAP_NUM ?= 4  # Map par défaut (Kanye West)
-MAP_DEST = current_map.cub
 
 # Colors
 RED = \033[0;31m
@@ -81,18 +76,6 @@ build_mlx:
 	@$(MAKE) -C $(MINILIBX_DIR)
 	@echo "$(GREEN)✨ minilibx built successfully!$(RESET)"
 
-# Préprocessing de la map
-preprocess:
-	@echo "$(BLUE)Preprocessing map $(MAP_NUM)...$(RESET)"
-	@chmod +x uncommenting_script.sh
-	@./uncommenting_script.sh $(MAP_SRC) $(MAP_NUM) $(MAP_DEST)
-	@echo "$(GREEN)✨ Map $(MAP_NUM) activated!$(RESET)"
-
-# Exécution avec préprocessing
-run: all preprocess
-	@echo "$(BLUE)Running with map $(MAP_NUM)...$(RESET)"
-	./$(NAME) $(MAP_DEST)
-
 # Nettoyage des fichiers objets
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"
@@ -104,7 +87,6 @@ clean:
 fclean: clean
 	@echo "$(RED)Full cleaning...$(RESET)"
 	@rm -f $(NAME)
-	@rm -f $(MAP_DEST)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@$(MAKE) -C $(MINILIBX_DIR) clean
 	@echo "$(GREEN)✨ Everything cleaned!$(RESET)"
@@ -113,13 +95,12 @@ fclean: clean
 re: fclean all
 
 # Test de fuites mémoire avec valgrind
-
-leak: all preprocess
-	@echo "$(BLUE)Running valgrind leak check with map $(MAP_NUM)...$(RESET)"
+leak: all
+	@echo "$(BLUE)Running valgrind leak check...$(RESET)"
 	@valgrind --leak-check=full --show-reachable=no \
 	--errors-for-leak-kinds=definite \
 	--suppressions=ignore.supp \
-	--track-fds=yes --trace-children=yes ./$(NAME) $(MAP_DEST)
+	--track-fds=yes --trace-children=yes ./$(NAME) map.cub
 
 # Vérification norminette
 norm:
@@ -142,25 +123,9 @@ push:
 	echo "$(YELLOW)All has been pushed with '$$commit_message' in commit$(RESET)"
 
 # Debug avec lldb
-debug: preprocess
+debug:
 	@echo "$(BLUE)Running lldb...$(RESET)"
 	@lldb ./$(NAME)
-
-# Test rapide avec différentes maps
-test1: MAP_NUM=1
-test1: run
-
-test2: MAP_NUM=2
-test2: run
-
-test3: MAP_NUM=3
-test3: run
-
-test4: MAP_NUM=4
-test4: run
-
-test5: MAP_NUM=5
-test5: run
 
 # Affichage de l'aide
 help:
@@ -169,12 +134,10 @@ help:
 	@echo "  $(GREEN)clean$(RESET)     - Remove object files"
 	@echo "  $(GREEN)fclean$(RESET)    - Remove all generated files"
 	@echo "  $(GREEN)re$(RESET)        - Rebuild everything"
-	@echo "  $(GREEN)run$(RESET)       - Build and run with default map"
-	@echo "  $(GREEN)test1-5$(RESET)   - Run with specific map (1-5)"
 	@echo "  $(GREEN)leak$(RESET)      - Run with valgrind"
 	@echo "  $(GREEN)norm$(RESET)      - Check norminette"
 	@echo "  $(GREEN)debug$(RESET)     - Run with lldb debugger"
 	@echo "  $(GREEN)push$(RESET)      - Quick git push"
 	@echo "  $(GREEN)help$(RESET)      - Show this help"
 
-.PHONY: all clean fclean re build_mlx build_libft preprocess run leak norm push debug test1 test2 test3 test4 test5 help
+.PHONY: all clean fclean re build_mlx build_libft leak norm push debug help
