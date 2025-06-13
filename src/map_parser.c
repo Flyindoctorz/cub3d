@@ -36,35 +36,6 @@ char	*space_trimer(char *line)
 	return (ft_substr(line, start, len));
 }
 
-// char	**extract_map_lines(char **lines, int start, int end)
-// {
-// 	int		i;
-// 	int		map_lines_count;
-// 	char	**map;
-
-// 	map_lines_count = count_map_lines(lines, start, end);
-// 	if (!map_lines_count)
-// 		return (NULL);
-// 	map = malloc(sizeof(char *) * (map_lines_count + 1));
-// 	if (!map)
-// 		return (NULL);
-// 	i = start;
-// 	map_lines_count = 0;
-// 	while (i <= end && lines[i])
-// 	{
-// 		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i])
-// 			&& is_map_line(lines[i]))
-// 		{
-// 			map[map_lines_count] = ft_strdup(lines[i]);
-// 			if (!map[map_lines_count++])
-// 				return (free_string_array(map), NULL);
-// 		}
-// 		i++;
-// 	}
-// 	map[map_lines_count] = NULL;
-// 	return (map);
-// }
-
 char	**extract_map_lines(char **lines, int start, int end)
 {
 	int		i;
@@ -119,8 +90,8 @@ static bool	get_map_data(char **line, int start, int end, t_data *data)
 
 bool	parse_map_section(char **lines, t_data *data)
 {
-	int start;
-	int end;
+	int	start;
+	int	end;
 
 	if (!lines || !data)
 		return (printf("Invalid input to parse_map_section"), false);
@@ -134,3 +105,33 @@ bool	parse_map_section(char **lines, t_data *data)
 		return (false);
 	return (get_map_data(lines, start, end, data));
 }
+/*
+char	**extract_map_lines(char **lines, int start, int end)
+{
+	int		i;
+	int		map_lines_count;
+	char	**map;
+
+	map_lines_count = count_map_lines(lines, start, end);
+	if (!map_lines_count)
+		return (NULL);
+	map = malloc(sizeof(char *) * (map_lines_count + 1));
+	if (!map)
+		return (NULL);
+	i = start;
+	map_lines_count = 0;
+	while (i <= end && lines[i])
+	{
+		if (!is_empty_line(lines[i]) && !is_comment_line(lines[i])
+			&& is_map_line(lines[i]))
+		{
+			map[map_lines_count] = ft_strdup(lines[i]);
+			if (!map[map_lines_count++])
+				return (free_string_array(map), NULL);
+		}
+		i++;
+	}
+	map[map_lines_count] = NULL;
+	return (map);
+}
+*/

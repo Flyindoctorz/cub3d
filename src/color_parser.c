@@ -42,6 +42,14 @@ bool	parse_rgb_component(char *line, int *pos, int *components,
 	return (true);
 }
 
+void	set_color(int components[3], t_color *color)
+{
+	color->red = components[0];
+	color->green = components[1];
+	color->blue = components[2];
+	color_to_hex(color);
+}
+
 bool	parse_color_line(char *line, t_color *color)
 {
 	int		pos;
@@ -50,7 +58,6 @@ bool	parse_color_line(char *line, t_color *color)
 
 	if (!line || !color)
 		return (printf("Error: Invalid input to parse_color\n"), false);
-	// Déterminer si c'est F ou C
 	pos = 0;
 	while (line[pos] && (line[pos] == ' ' || line[pos] == '\t'))
 		pos++;
@@ -67,9 +74,5 @@ bool	parse_color_line(char *line, t_color *color)
 		pos++;
 	if (line[pos] && line[pos] != '\n' && line[pos] != '#')
 		return (printf("Error: Extra characters after RGB values\n"), false);
-	color->red = components[0];
-	color->green = components[1];
-	color->blue = components[2];
-	color_to_hex(color);
-	return (true);
+	return (set_color(components, color), true);
 }

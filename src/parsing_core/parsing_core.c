@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parsing.h"
-#include "../include/raycasting.h"
-#include "../libft/libft.h"
+#include "../../include/parsing.h"
+#include "../../include/raycasting.h"
+#include "../../libft/libft.h"
 
 void	clean_parsing_data(t_data *data)
 {
@@ -67,17 +67,15 @@ bool	is_floor_or_ceiling_line(char *line)
 
 bool	parse_single_cubline(char *line, t_data *data)
 {
-	int i;
+	int	i;
 
 	if (is_empty_line(line) || is_comment_line(line))
 		return (true);
-
 	if (!is_config_line(line))
 		return (printf("Error: Invalid configuration line: %s\n", line), false);
 	i = 0;
 	while (line[i] && ft_isspace(line[i]))
 		i++;
-
 	if (line[i] == 'F')
 		return (parse_a_color_line(line, &data->floor));
 	else if (line[i] == 'C')

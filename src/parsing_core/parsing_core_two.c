@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/parsing.h"
-#include "../include/raycasting.h"
-#include "../libft/libft.h"
+#include "../../include/parsing.h"
+#include "../../include/raycasting.h"
+#include "../../libft/libft.h"
+#include <stdbool.h>
 
 static bool	pre_cub_parse(const char *filename, t_data *data)
 {
@@ -39,13 +40,15 @@ static bool	pre_cub_parse(const char *filename, t_data *data)
 
 bool	parse_and_config_map(const char *filename, t_data *data)
 {
-	bool	res;
-
 	if (!pre_cub_parse(filename, data))
 		return (false);
-	res = validate_all_datas(data) && validate_map(data->map.map)
-		&& validate_all_textures(&data->texture);
-	if (!res)
+	if (validate_all_datas(data) == true
+		&& validate_map(data->map.map) == true
+		&& validate_all_textures(&data->texture) == true)
+		return (true);
+	else
+	{
 		clean_parsing_data(data);
-	return (res);
+		return (false);
+	}
 }
