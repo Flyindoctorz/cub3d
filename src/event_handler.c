@@ -15,23 +15,25 @@
 
 int	close_window(t_data *data)
 {
-	mlx_destroy_image(data->mlx.mlx_ptr, data->scene_img.img);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->player_img.img);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->minimap_img.img);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->wallnorth_img.img);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->walleast_img.img);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->wallsouth_img.img);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->wallwest_img.img);
-	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
-	free(data->texture.east.path);
-	free(data->texture.west.path);
-	free(data->texture.north.path);
-	free(data->texture.south.path);
+	if (data->mlx.mlx_ptr)
+		destroy_images(data);
+	if (data->texture.east.path)
+		free(data->texture.east.path);
+	if (data->texture.west.path)
+		free(data->texture.west.path);
+	if (data->texture.north.path)
+		free(data->texture.north.path);
+	if (data->texture.south.path)
+		free(data->texture.south.path);
 	while (0 < data->map.height--)
 		free(data->map.map[data->map.height]);
-	free(data->map.map);
-	mlx_destroy_display(data->mlx.mlx_ptr);
-	free(data->mlx.mlx_ptr);
+	if (data->map.map)
+		free(data->map.map);
+	if (data->mlx.mlx_ptr)
+	{
+		mlx_destroy_display(data->mlx.mlx_ptr);
+		free(data->mlx.mlx_ptr);
+	}
 	exit(SUCCESS);
 }
 

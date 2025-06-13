@@ -192,6 +192,7 @@ void				set_images(t_data *data);
 void				draw_player(t_image *image);
 void				draw_map(t_data *data, t_image *m_map);
 void				render_scene(t_player *player, t_data *data);
+void				destroy_images(t_data *data);
 
 /* raycasting */
 

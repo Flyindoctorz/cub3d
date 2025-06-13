@@ -43,3 +43,23 @@ bool	validate_cub_extent(const char *filename)
 		return (printf("File must have a .cub extension"), false);
 	return (true);
 }
+
+void	destroy_images(t_data *data)
+{
+	if (data->scene_img.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->scene_img.img);
+	if (data->player_img.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->player_img.img);
+	if (data->minimap_img.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->minimap_img.img);
+	if (data->wallnorth_img.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->wallnorth_img.img);
+	if (data->walleast_img.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->walleast_img.img);
+	if (data->wallsouth_img.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->wallsouth_img.img);
+	if (data->wallwest_img.img)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->wallwest_img.img);
+	if (data->mlx.mlx_window)
+		mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
+}
