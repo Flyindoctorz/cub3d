@@ -6,14 +6,13 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:18:32 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/13 12:25:22 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/13 12:30:03 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 #include "../include/raycasting.h"
 #include "../libft/libft.h"
-
 
 static bool	check_map_content(char *line, int start_pos)
 {

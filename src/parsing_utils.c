@@ -6,7 +6,7 @@
 /*   By: cgelgon <cgelgon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 10:44:28 by cgelgon           #+#    #+#             */
-/*   Updated: 2025/06/12 14:03:45 by cgelgon          ###   ########.fr       */
+/*   Updated: 2025/06/13 12:31:19 by cgelgon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,39 +63,6 @@ bool	is_config_line(char *line)
 	if (line[i] == 'F' || line[i] == 'C')
 		return (true);
 	return (false);
-}
-
-bool	is_map_line(char *line)
-{
-	int		i;
-	int		map_char;
-	int		total_chars;
-	bool	has_content;
-
-	if (!line)
-		return (false);
-	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	if (line[i] == '\0' || line[i] == '\n' || line[i] == '#')
-		return (false);
-	map_char = 0;
-	total_chars = 0;
-	has_content = false;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] != ' ' && line[i] != '\t')
-		{
-			total_chars++;
-			has_content = true;
-			if (is_a_valid_char(line[i]))
-				map_char++;
-		}
-		i++;
-	}
-	if (!has_content || total_chars == 0)
-		return (false);
-	return ((float)map_char / (float)total_chars >= 0.8);
 }
 
 void	free_string_array(char **array)
