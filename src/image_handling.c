@@ -28,26 +28,31 @@ void	set_images(t_data *data)
 	create_image(&data->wallsouth_img, data, 0, 0);
 }
 
-void	render_scene(t_player *player, t_data *data)
+void	paint_map(t_data *data, double mini_x, double mini_y, t_image *m_map)
 {
-	draw_map(&data->map, data, &data->minimap_img);
-	raycast(player, data);
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
-		data->scene_img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
-		data->minimap_img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
-		data->player_img.img, data->minimap_img.width / 2.0
-		- data->player_img.width / 2.0, data->minimap_img.height / 2.0
-		- data->player_img.height / 2.0);
+	double	map_x;
+	double	map_y;
+
+	map_x = data->player.px - 1.5 + (mini_x * 3.0 / data->minimap_img.width);
+	map_y = data->player.py - 1.5 + (mini_y * 3.0 / data->minimap_img.height);
+	if (map_x > 0 && map_y > 0 && map_x < data->map.width
+		&& map_y < data->map.height)
+	{
+		if (data->map.map[(int)map_y][(int)map_x] == '1')
+			mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FF0000);
+		else if (data->map.map[(int)map_y][(int)map_x] == '0')
+			mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00000000);
+		else
+			mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
+	}
+	else
+		mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
 }
 
-void	draw_map(t_map *map, t_data *data, t_image *m_map)
+void	draw_map(t_data *data, t_image *m_map)
 {
 	double	mini_x;
 	double	mini_y;
-	double	map_x;
-	double	map_y;
 
 	mini_y = 0;
 	while (mini_y < m_map->height)
@@ -55,19 +60,7 @@ void	draw_map(t_map *map, t_data *data, t_image *m_map)
 		mini_x = 0;
 		while (mini_x < data->minimap_img.width)
 		{
-			map_x = data->player.px - 1.5 + (mini_x * 3.0 / m_map->width);
-			map_y = data->player.py - 1.5 + (mini_y * 3.0 / m_map->height);
-			if (map_x < 0 || map_y < 0 || map_x > map->width
-				|| map_y > map->height)
-				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
-			else if (map->map[(int)map_y][(int)map_x] == '1')
-				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FF0000);
-			else if (map->map[(int)map_y][(int)map_x] == '0')
-				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00000000);
-			if (map_x > 0 && map_y > 0 && map_x < map->width
-				&& map_y < map->height && (map->map[(int)map_y][(int)map_x] != '0'
-				&& map->map[(int)map_y][(int)map_x] != '1'))
-				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
+			paint_map(data, mini_x, mini_y, m_map);
 			mini_x++;
 		}
 		mini_y++;

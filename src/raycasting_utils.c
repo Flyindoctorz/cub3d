@@ -29,6 +29,20 @@ int	get_texture_pixel(t_image *texture, int x, int y)
 		+ x]);
 }
 
+void	render_scene(t_player *player, t_data *data)
+{
+	draw_map(data, &data->minimap_img);
+	raycast(player, data);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
+		data->scene_img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
+		data->minimap_img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.mlx_window,
+		data->player_img.img, data->minimap_img.width / 2.0
+		- data->player_img.width / 2.0, data->minimap_img.height / 2.0
+		- data->player_img.height / 2.0);
+}
+
 void	create_image(t_image *image, t_data *data, int width, int height)
 {
 	if (width == 0 || height == 0)
