@@ -62,8 +62,12 @@ void	draw_map(t_map *map, t_data *data, t_image *m_map)
 				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
 			else if (map->map[(int)map_y][(int)map_x] == '1')
 				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FF0000);
-			else
+			else if (map->map[(int)map_y][(int)map_x] == '0')
 				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00000000);
+			if (map_x > 0 && map_y > 0 && map_x < map->width
+				&& map_y < map->height && (map->map[(int)map_y][(int)map_x] != '0'
+				&& map->map[(int)map_y][(int)map_x] != '1'))
+				mlx_pixel_put_v2(m_map, mini_x, mini_y, 0x00FFFFFF);
 			mini_x++;
 		}
 		mini_y++;

@@ -23,6 +23,10 @@ int	close_window(t_data *data)
 	mlx_destroy_image(data->mlx.mlx_ptr, data->wallsouth_img.img);
 	mlx_destroy_image(data->mlx.mlx_ptr, data->wallwest_img.img);
 	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.mlx_window);
+	free(data->texture.east.path);
+	free(data->texture.west.path);
+	free(data->texture.north.path);
+	free(data->texture.south.path);
 	while (0 < data->map.height--)
 		free(data->map.map[data->map.height]);
 	free(data->map.map);
